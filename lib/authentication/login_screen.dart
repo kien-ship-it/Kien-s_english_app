@@ -2,9 +2,7 @@ import 'dart:developer';
 
 import 'package:english_app/authentication/signup_screen.dart';
 import 'package:english_app/authentication/survey_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class LoginScreen extends StatefulWidget {
   final String title;
@@ -21,69 +19,152 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailTextController = TextEditingController();
   TextEditingController passwordTextController = TextEditingController();
+  bool isAllFilled = false;
+  bool _obscureText = true;
+
+  @override
+  void initState() {
+    super.initState();
+    emailTextController.addListener(updateButtonState);
+    passwordTextController.addListener(updateButtonState);
+  }
+
+  void updateButtonState () {
+    setState(() {
+      isAllFilled = emailTextController.text.isNotEmpty &&
+        passwordTextController.text.isNotEmpty;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFEFF5F5),
       body: SafeArea(
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 20),
+          margin: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                "Login Screen",
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+               Text(
+                "Login",
+                style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold,
+                    shadows: [
+                      Shadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        offset: const Offset(0, 1.5),
+                        blurRadius: 5,
+                      )
+                    ]),
               ),
-              SizedBox(
-                height: 40,
+              const SizedBox(
+                height: 20,
               ),
-              TextField(
-                decoration: InputDecoration(hintText: "Email"),
-                controller: emailTextController,
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10), // Adjust border radius as needed
+                  color: Colors.white, // Set background color of the container
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 1,
+                      blurRadius: 4,
+                      offset: const Offset(0, 1), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    TextField(
+                      decoration: const InputDecoration(
+                        hintText: "Email",
+                        border: InputBorder.none, // Remove default underline border
+                        contentPadding: EdgeInsets.all(15), // Adjust padding as needed
+                      ),
+                      controller: emailTextController,
+                    ),
+                    const Divider(height: 1, color: Colors.grey), // Add a divider between email and password fields
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextField(
+                            decoration: const InputDecoration(
+                              hintText: "Password",
+                              border: InputBorder.none, // Remove default underline border
+                              contentPadding: EdgeInsets.all(15), // Adjust padding as needed
+                            ),
+                            obscureText: _obscureText,
+                            controller: passwordTextController,
+                          ),
+                        ),
+                        IconButton(
+                          icon: Icon(
+                            _obscureText ? Icons.visibility_off : Icons.visibility,
+                            color: Colors.grey,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _obscureText = !_obscureText;
+                            });
+                          },
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
-              TextField(
-                decoration: InputDecoration(hintText: "Password"),
-                obscureText: true,
-                controller: passwordTextController,
-              ),
-              SizedBox(
-                height: 30,
+              const SizedBox(
+                height: 20,
               ),
               GestureDetector(
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SurveyScreen()),
+                    MaterialPageRoute(builder: (context) => const SurveyScreen()),
                   );
                 },
-                child: Container(
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: Colors.teal,
+                    borderRadius: BorderRadius.circular(10),
+                    color: isAllFilled ? const Color(0xFFEB6440) : const Color(0xFFD6E4E5),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 1,
+                        blurRadius: 4,
+                        offset: const Offset(0, 1), // changes position of shadow
+                      ),
+                    ],
                   ),
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 160),
                   child: Text(
                     "Login",
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,
+                        color: isAllFilled ? Colors.white : Colors.grey),
                   ),
                 ),
               ),
-              SizedBox(
-                height: 50,
+              const SizedBox(
+                height: 14,
               ),
               TextButton(
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SignUpScreen()),
+                    MaterialPageRoute(builder: (context) => const SignUpScreen()),
                   );
                 },
-                child: Text("Don't have an account? Sign up now"),
+                child: const Text(
+                  "Don't have an account? Sign up now",
+                  style: TextStyle(color: Color(0xFF267BDE), fontWeight: FontWeight.w700, fontSize: 16 ),
+                ),
               )
             ],
           ),
-        ),
+        )
+
       ),
     );
   }
