@@ -133,7 +133,6 @@ class _LoginScreenState extends State<LoginScreen> {
               onTap: () async {
                 try {
                   FirebaseAuth.instance.signOut();
-
                 } on FirebaseException catch (e) {
                   log(e.toString());
                 }
