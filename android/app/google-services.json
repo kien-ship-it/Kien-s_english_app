@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "40300879119",
+    "project_id": "englishappbykien",
+    "storage_bucket": "englishappbykien.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:40300879119:android:73d3e361f81808bdb6b27a",
+        "android_client_info": {
+          "package_name": "com.example.english_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0ydZSsPEpfMnwxaq5aCRfc_7KqEW8E34"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
