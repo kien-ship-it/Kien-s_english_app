@@ -1,7 +1,7 @@
 import 'dart:developer';
 
+import 'package:english_app/features/authentication/auth.dart';
 import 'package:english_app/features/authentication/signup_screen.dart';
-import 'package:english_app/features/home/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -28,6 +28,9 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
     emailTextController.addListener(updateButtonState);
     passwordTextController.addListener(updateButtonState);
+    // print user information
+    var user = FirebaseAuth.instance.currentUser;
+    log(user.toString());
   }
 
   void updateButtonState() {
@@ -132,7 +135,8 @@ class _LoginScreenState extends State<LoginScreen> {
             GestureDetector(
               onTap: () async {
                 try {
-                  FirebaseAuth.instance.signOut();
+                  log("email: ${emailTextController.text} -- password: ${passwordTextController.text}");
+                  Auth().signUpWithEmailAndPassword(email: emailTextController.text, password: passwordTextController.text);
                 } on FirebaseException catch (e) {
                   log(e.toString());
                 }
