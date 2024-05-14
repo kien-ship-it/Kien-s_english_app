@@ -139,11 +139,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           email: emailTextController.text,
                           password: passwordTextController.text)
                       .then((value) {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HomeScreen()),
-                    );
+                    if (mounted) {
+                      showToast("Login success");
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomeScreen()),
+                      );
+                    }
                   });
                 }
               },

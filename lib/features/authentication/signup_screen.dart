@@ -173,12 +173,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             email: emailTextController.text,
                             password: passwordTextController.text)
                         .then((value) {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const HomeScreen(),
-                        ),
-                      );
+                      if (mounted) {
+                        showToast("Sign Up Successful");
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const HomeScreen(),
+                          ),
+                        );
+                      }
                     });
                   }
                 },
