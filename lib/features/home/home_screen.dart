@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+import 'package:english_app/features/authentication/auth.dart';
+import 'package:english_app/features/authentication/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,8 +12,27 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(child: Scaffold(
-      body: Center(child: Text("This is Home Screen")),
+    return SafeArea(
+        child: Scaffold(
+      appBar: AppBar(
+        title: const Text("Home"),
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            const Text("Home Screen"),
+            TextButton(
+                onPressed: () {
+                  Auth().signOut();
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginScreen()));
+                },
+                child: const Text("Logout"))
+          ],
+        ),
+      ),
     ));
   }
 }

@@ -1,5 +1,8 @@
 import 'dart:developer';
 
+import 'package:english_app/common/toast.dart';
+import 'package:english_app/features/authentication/auth.dart';
+import 'package:english_app/features/home/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -19,7 +22,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool _obscureTextConfirmPass = true;
 
   @override
-  void initState () {
+  void initState() {
     super.initState();
     emailTextController.addListener(updateButtonState);
     fullNameTextController.addListener(updateButtonState);
@@ -27,7 +30,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     confirmPassTextController.addListener(updateButtonState);
   }
 
-  void updateButtonState () {
+  void updateButtonState() {
     setState(() {
       isAllFilled = emailTextController.text.isNotEmpty &&
           fullNameTextController.text.isNotEmpty &&
@@ -46,9 +49,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-               Text(
+              Text(
                 "Sign Up",
-                style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold,
+                style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
                     shadows: [
                       Shadow(
                         color: Colors.grey.withOpacity(0.5),
@@ -62,17 +67,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 1,
-                      blurRadius: 4,
-                      offset: const Offset(0, 1),
-                    )
-                  ]
-                ),
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 1,
+                        blurRadius: 4,
+                        offset: const Offset(0, 1),
+                      )
+                    ]),
                 child: Column(
                   children: [
                     TextField(
@@ -99,8 +103,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: TextField(
                             decoration: const InputDecoration(
                               hintText: "Password",
-                              border: InputBorder.none, // Remove default underline border
-                              contentPadding: EdgeInsets.all(15), // Adjust padding as needed
+                              border: InputBorder
+                                  .none, // Remove default underline border
+                              contentPadding: EdgeInsets.all(
+                                  15), // Adjust padding as needed
                             ),
                             obscureText: _obscureTextPass,
                             controller: passwordTextController,
@@ -108,7 +114,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         IconButton(
                           icon: Icon(
-                            _obscureTextPass ? Icons.visibility_off : Icons.visibility,
+                            _obscureTextPass
+                                ? Icons.visibility_off
+                                : Icons.visibility,
                             color: Colors.grey,
                           ),
                           onPressed: () {
@@ -126,8 +134,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: TextField(
                             decoration: const InputDecoration(
                               hintText: "Confirm Password",
-                              border: InputBorder.none, // Remove default underline border
-                              contentPadding: EdgeInsets.all(15), // Adjust padding as needed
+                              border: InputBorder
+                                  .none, // Remove default underline border
+                              contentPadding: EdgeInsets.all(
+                                  15), // Adjust padding as needed
                             ),
                             obscureText: _obscureTextConfirmPass,
                             controller: confirmPassTextController,
@@ -135,12 +145,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         IconButton(
                           icon: Icon(
-                            _obscureTextConfirmPass ? Icons.visibility_off : Icons.visibility,
+                            _obscureTextConfirmPass
+                                ? Icons.visibility_off
+                                : Icons.visibility,
                             color: Colors.grey,
                           ),
                           onPressed: () {
                             setState(() {
-                              _obscureTextConfirmPass = !_obscureTextConfirmPass;
+                              _obscureTextConfirmPass =
+                                  !_obscureTextConfirmPass;
                             });
                           },
                         )
@@ -154,36 +167,52 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  log("Here!!!!!!");
-                  log("Email: ${emailTextController.text}");
-                  log("Password, ${passwordTextController.text}");
+                  if (checkValidate()) {
+                    Auth()
+                        .signUpWithEmailAndPassword(
+                            email: emailTextController.text,
+                            password: passwordTextController.text)
+                        .then((value) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomeScreen(),
+                        ),
+                      );
+                    });
+                  }
                 },
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 300),
                   curve: Curves.easeInOut,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: isAllFilled ? const Color(0xFFEB6440) : const Color(0xFFD6E4E5),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 1,
-                        blurRadius: 4,
-                        offset: const Offset(0, 1), // changes position of shadow
-                      )
-                    ]
-                  ),
-                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                      borderRadius: BorderRadius.circular(10),
+                      color: isAllFilled
+                          ? const Color(0xFFEB6440)
+                          : const Color(0xFFD6E4E5),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1,
+                          blurRadius: 4,
+                          offset:
+                              const Offset(0, 1), // changes position of shadow
+                        )
+                      ]),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   child: Center(
                     child: Text(
                       "Sign Up",
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,
-                        color: isAllFilled ? Colors.white : Colors.grey),
-                      ),
-                  ),
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: isAllFilled ? Colors.white : Colors.grey),
+                    ),
                   ),
                 ),
+              ),
               const SizedBox(
                 height: 14,
               ),
@@ -194,7 +223,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 child: const Text(
                   "Have an account? Log in now",
                   style: TextStyle(
-                      color: Color(0xFF267BDE), fontWeight: FontWeight.w700, fontSize: 16 ),
+                      color: Color(0xFF267BDE),
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16),
                 ),
               )
             ],
@@ -202,5 +233,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
       ),
     );
+  }
+
+  bool checkValidate() {
+    var result = true;
+    if (!isAllFilled) {
+      showToast("Please fill all fields");
+      result = false;
+    }
+
+    // check email by regex
+    else if (!RegExp(r"^^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
+        .hasMatch(emailTextController.text)) {
+      showToast("Please enter a valid email");
+      result = false;
+    }
+
+    // check password by regex that have at least 8 characters, at least one uppercase letter, at least one lowercase letter, and at least one number
+    else if (!RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$")
+        .hasMatch(passwordTextController.text)) {
+      showToast("Please enter a valid password");
+      result = false;
+    }
+
+    // check confirm password
+    else if (passwordTextController.text != confirmPassTextController.text) {
+      showToast("Password and confirm password does not match");
+      result = false;
+    }
+
+    return result;
   }
 }

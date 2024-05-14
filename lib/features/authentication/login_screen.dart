@@ -1,16 +1,15 @@
 import 'dart:developer';
 
+import 'package:english_app/common/toast.dart';
 import 'package:english_app/features/authentication/auth.dart';
 import 'package:english_app/features/authentication/signup_screen.dart';
+import 'package:english_app/features/home/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
-  final String title;
-
   const LoginScreen({
     super.key,
-    required this.title,
   });
 
   @override
@@ -134,14 +133,19 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             GestureDetector(
               onTap: () async {
-                try {
-                  log("email: ${emailTextController.text} -- password: ${passwordTextController.text}");
-                  Auth().signUpWithEmailAndPassword(email: emailTextController.text, password: passwordTextController.text);
-                } on FirebaseException catch (e) {
-                  log(e.toString());
+                if (checkValidate()) {
+                  Auth()
+                      .signInWithEmailAndPassword(
+                          email: emailTextController.text,
+                          password: passwordTextController.text)
+                      .then((value) {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HomeScreen()),
+                    );
+                  });
                 }
-
-                log("Username: ${emailTextController.text} -- password: ${passwordTextController.text}");
               },
               child: AnimatedContainer(
                 alignment: Alignment.center,
@@ -196,5 +200,22 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       )),
     );
+  }
+
+  bool checkValidate() {
+    var result = true;
+    if (!isAllFilled) {
+      showToast("Please fill all fields");
+      result = false;
+    }
+
+    // check email by regex
+    else if (!RegExp(r"^^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
+        .hasMatch(emailTextController.text)) {
+      showToast("Please enter a valid email");
+      result = false;
+    }
+
+    return result;
   }
 }

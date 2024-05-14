@@ -1,4 +1,7 @@
+import 'package:english_app/features/authentication/auth.dart';
+import 'package:english_app/features/home/home_screen.dart';
 import 'package:english_app/firebase_options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +29,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LoginScreen(title: 'Hello Kien'),
+      home: FirebaseAuth.instance.currentUser == null
+          ? const LoginScreen()
+          : const HomeScreen(),
     );
   }
 }
