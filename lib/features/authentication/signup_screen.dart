@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:english_app/Widgets/toast.dart';
+import 'package:english_app/Widgets/MyToast.dart';
 import 'package:english_app/services/auth.dart';
 import 'package:english_app/features/home/home_screen.dart';
 import 'package:flutter/material.dart';

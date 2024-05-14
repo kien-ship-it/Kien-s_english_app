@@ -5,6 +5,7 @@ class LessonBox extends StatelessWidget {
   final String boxDescription;
   final Color lessonBoxColor;
   final bool lightning;
+  final Function? onTap;
 
   const LessonBox({
     super.key,
@@ -12,6 +13,7 @@ class LessonBox extends StatelessWidget {
     required this.boxDescription,
     required this.lessonBoxColor,
     required this.lightning,
+    this.onTap
   });
 
   @override
@@ -79,7 +81,11 @@ class LessonBox extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  if (onTap != null) {
+                    onTap!();
+                  }
+                },
                 style: ButtonStyle(
                   backgroundColor:
                       MaterialStateProperty.all<Color>(const Color(0xFFEB6440)),

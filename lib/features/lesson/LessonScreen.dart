@@ -1,3 +1,4 @@
+import 'package:english_app/features/lesson/ALessonScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -50,7 +51,16 @@ class _LessonScreenState extends State<LessonScreen> {
               itemBuilder: (context, index) => LessonBox(
                 boxTitle: 'SAT 1000+',
                 boxDescription: '1000 most common advanced SAT vocabulary',
-                lessonBoxColor: Colors.lightBlue, lightning: false,
+                lessonBoxColor: Colors.lightBlue,
+                lightning: false,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            ALessonScreen(title: "SAT++ ${index + 1}")),
+                  );
+                },
               ),
               itemCount: 10,
             ),
