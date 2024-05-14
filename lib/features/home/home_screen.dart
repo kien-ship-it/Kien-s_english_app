@@ -1,4 +1,4 @@
-import 'package:english_app/features/authentication/auth.dart';
+import 'package:english_app/services/auth.dart';
 import 'package:english_app/features/authentication/login_screen.dart';
 import 'package:flutter/material.dart';
 

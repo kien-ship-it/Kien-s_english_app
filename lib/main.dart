@@ -1,4 +1,4 @@
-import 'package:english_app/features/authentication/auth.dart';
+import 'package:english_app/services/auth.dart';
 import 'package:english_app/features/home/home_screen.dart';
 import 'package:english_app/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
