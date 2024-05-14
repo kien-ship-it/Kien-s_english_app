@@ -6,16 +6,19 @@ class Auth {
 
   User? get currentUser => _firebaseAuth.currentUser;
 
-  Future<void> signInWithEmailAndPassword({
+  Future<bool> signInWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
+    bool result = true;
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
     } on FirebaseAuthException catch (_) {
+      result = false;
       showToast("Your email or password is incorrect");
     }
+    return result;
   }
 
   Future<void> signOut() async {
