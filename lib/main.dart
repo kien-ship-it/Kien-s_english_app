@@ -1,3 +1,4 @@
+import 'package:english_app/features/GeneralScreen.dart';
 import 'package:english_app/services/auth.dart';
 import 'package:english_app/features/home/home_screen.dart';
 import 'package:english_app/firebase_options.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
       ),
       home: FirebaseAuth.instance.currentUser == null
           ? const LoginScreen()
-          : const HomeScreen(),
+          : const GeneralScreen(),
     );
   }
 }

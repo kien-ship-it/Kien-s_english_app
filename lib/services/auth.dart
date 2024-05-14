@@ -1,4 +1,4 @@
-import 'package:english_app/common/toast.dart';
+import 'package:english_app/Widgets/toast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class Auth {

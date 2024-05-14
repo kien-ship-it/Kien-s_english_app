@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:english_app/common/toast.dart';
+import 'package:english_app/Widgets/toast.dart';
 import 'package:english_app/services/auth.dart';
 import 'package:english_app/features/authentication/signup_screen.dart';
 import 'package:english_app/features/home/home_screen.dart';

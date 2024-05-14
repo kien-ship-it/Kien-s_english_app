@@ -14,9 +14,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        backgroundColor: const Color(0xFFEFF5F5),
-        body: ListView.builder(
+      child: Container(
+        color: const Color(0xFFEFF5F5),
+        child: ListView.builder(
           itemCount: 1, // Ensures only one item in the ListView for the "Home" title
           itemBuilder: (context, index) {
             return const Column(
@@ -36,10 +36,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 SizedBox(height: 8.0), // Add some space between the title and the container
-                LessonBox(),
-                LessonBox(),
-                LessonBox(),
-                LessonBox()
+                LessonBox(
+                  boxTitle: 'SAT 1000+',
+                  boxDescription: '1000 most common advanced SAT vocabulary',
+                  lessonBoxColor: Colors.lightBlue, lightning: false,
+                ),
+                LessonBox(
+                  boxTitle: 'SAT 1000+',
+                  boxDescription: '1000 most common advanced SAT vocabulary',
+                  lessonBoxColor: Colors.lightBlue, lightning: false,
+                ),
               ],
             );
           },
