@@ -1,8 +1,11 @@
+import 'package:english_app/services/auth.dart';
 import 'package:english_app/features/home/home_screen.dart';
-import 'features/authentication/login_screen.dart';
 import 'package:english_app/firebase_options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
+import 'features/authentication/login_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +29,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomeScreen(),
+      home: FirebaseAuth.instance.currentUser == null
+          ? const LoginScreen()
+          : const HomeScreen(),
     );
   }
 }

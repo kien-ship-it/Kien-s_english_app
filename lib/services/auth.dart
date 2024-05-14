@@ -1,3 +1,4 @@
+import 'package:english_app/common/toast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class Auth {
@@ -9,8 +10,12 @@ class Auth {
     required String email,
     required String password,
   }) async {
-    await _firebaseAuth.signInWithEmailAndPassword(
-        email: email, password: password);
+    try {
+      await _firebaseAuth.signInWithEmailAndPassword(
+          email: email, password: password);
+    } on FirebaseAuthException catch (_) {
+      showToast("Your email or password is incorrect");
+    }
   }
 
   Future<void> signOut() async {
@@ -22,7 +27,11 @@ class Auth {
     required String email,
     required String password,
   }) async {
-    await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email, password: password);
+    try {
+      await _firebaseAuth.createUserWithEmailAndPassword(
+          email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      showToast(e.message.toString());
+    }
   }
 }
