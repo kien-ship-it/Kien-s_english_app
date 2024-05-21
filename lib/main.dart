@@ -1,4 +1,5 @@
 import 'package:english_app/features/GeneralScreen.dart';
+import 'package:english_app/features/user/UserScreen.dart';
 import 'package:english_app/services/auth.dart';
 import 'package:english_app/features/home/home_screen.dart';
 import 'package:english_app/firebase_options.dart';
@@ -7,6 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'features/authentication/login_screen.dart';
+import 'features/lesson/IndividualLesson/ALessonScreen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +34,7 @@ class MyApp extends StatelessWidget {
       ),
       home: FirebaseAuth.instance.currentUser == null
           ? const LoginScreen()
-          : const GeneralScreen(),
+          : const GeneralScreen()
     );
   }
 }

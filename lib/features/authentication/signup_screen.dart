@@ -21,6 +21,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool _obscureTextPass = true;
   bool _obscureTextConfirmPass = true;
 
+
   @override
   void initState() {
     super.initState();
@@ -41,14 +42,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: const Color(0xFFEFF5F5),
       body: SafeArea(
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              SizedBox(height: height/9,),
               Text(
                 "Sign Up",
                 style: TextStyle(

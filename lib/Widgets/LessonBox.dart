@@ -38,7 +38,7 @@ class LessonBox extends StatelessWidget {
                   padding: EdgeInsets.only(left: 8.0),
                   child: Text(
                     boxTitle,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 30.0,
                       fontWeight: FontWeight.bold,
                     ),
@@ -55,7 +55,7 @@ class LessonBox extends StatelessWidget {
                         color: Colors.grey.withOpacity(0.3),
                         spreadRadius: 1,
                         blurRadius: 4,
-                        offset: Offset(0, 0.5), // changes position of shadow
+                        offset: const Offset(0, 0.5), // changes position of shadow
                       ),
                     ],
                   ),
@@ -65,12 +65,12 @@ class LessonBox extends StatelessWidget {
             ),
             const SizedBox(height: 10.0),
             Padding(
-              padding: EdgeInsets.only(left: 8.0),
+              padding: const EdgeInsets.only(left: 8.0),
               child: SizedBox(
                 width: 290, // Set the width to limit the length of each line
                 child: Text(
                   boxDescription,
-                  style: TextStyle(fontSize: 16.0),
+                  style: const TextStyle(fontSize: 16.0),
                   overflow: TextOverflow.ellipsis,
                   // Display ellipsis (...) if the text overflows
                   maxLines: 2, // Limit to 2 lines

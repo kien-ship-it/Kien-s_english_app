@@ -1,4 +1,4 @@
-import 'package:english_app/features/lesson/ALessonScreen.dart';
+import 'package:english_app/features/lesson/IndividualLesson/ALessonScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -41,31 +41,32 @@ class _LessonScreenState extends State<LessonScreen> {
     var width = MediaQuery.of(context).size.width;
     return SafeArea(
         child: Container(
-      alignment: Alignment.center,
-      child: Column(
-        children: [
-          topController(width),
-          const SizedBox(height: 20),
-          Expanded(
-            child: ListView.builder(
-              itemBuilder: (context, index) => LessonBox(
-                boxTitle: 'SAT 1000+',
-                boxDescription: '1000 most common advanced SAT vocabulary',
-                lessonBoxColor: Colors.lightBlue,
-                lightning: false,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            ALessonScreen(title: "SAT++ ${index + 1}")),
-                  );
-                },
-              ),
-              itemCount: 10,
-            ),
-          ),
-        ],
+          color: const Color(0xFFEFF5F5),
+          alignment: Alignment.center,
+            child: Column(
+              children: [
+                topController(width),
+                const SizedBox(height: 20),
+                Expanded(
+                  child: ListView.builder(
+                    itemBuilder: (context, index) => LessonBox(
+                      boxTitle: 'SAT 1000+',
+                      boxDescription: '1000 most common advanced SAT vocabulary',
+                      lessonBoxColor: const Color(0xFFBFDEE2),
+                      lightning: false,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  ALessonScreen(title: "SAT++ ${index + 1}")),
+                        );
+                      },
+                    ),
+                    itemCount: 10,
+                  ),
+                ),
+              ],
       ),
     ));
   }
