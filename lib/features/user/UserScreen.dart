@@ -32,7 +32,7 @@ class _UserScreenState extends State<UserScreen> {
                 ),
               ),
               const UserBox(),
-              LogOutButton(),
+              const LogOutButton(),
             ],
           ),
       ),

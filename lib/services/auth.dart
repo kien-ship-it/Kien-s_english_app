@@ -37,4 +37,8 @@ class Auth {
       showToast(e.message.toString());
     }
   }
+
+  String getUserId() {
+    return _firebaseAuth.currentUser!.uid;
+  }
 }
