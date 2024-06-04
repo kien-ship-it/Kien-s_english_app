@@ -1,7 +1,6 @@
 import 'package:english_app/models/LessonModel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'WordModel.dart';
 
 class UserModel {
   final String id;

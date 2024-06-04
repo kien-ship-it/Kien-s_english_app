@@ -35,7 +35,7 @@ class LessonBox extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 8.0),
+                  padding: const EdgeInsets.only(left: 8.0),
                   child: Text(
                     boxTitle,
                     style: const TextStyle(
@@ -59,7 +59,7 @@ class LessonBox extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: Icon(Icons.flash_on, color: lightning ? Color(0xFFEB6440) : Colors.grey),
+                  child: Icon(Icons.flash_on, color: lightning ? const Color(0xFFEB6440) : Colors.grey),
                 ),
               ],
             ),
@@ -88,9 +88,9 @@ class LessonBox extends StatelessWidget {
                 },
                 style: ButtonStyle(
                   backgroundColor:
-                      MaterialStateProperty.all<Color>(const Color(0xFFEB6440)),
+                      WidgetStateProperty.all<Color>(const Color(0xFFEB6440)),
                   fixedSize:
-                      MaterialStateProperty.all<Size>(const Size(200.0, 45.0)),
+                      WidgetStateProperty.all<Size>(const Size(200.0, 45.0)),
                 ),
                 child: const Text(
                   "START",

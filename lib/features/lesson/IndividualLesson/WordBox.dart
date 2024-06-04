@@ -36,7 +36,7 @@ class WordBox extends StatelessWidget {
               child: ListView.separated(
                 physics: const AlwaysScrollableScrollPhysics(),
                 itemCount: 20, // Number of text lines
-                separatorBuilder: (BuildContext context, int index) => Divider(color: Colors.grey),
+                separatorBuilder: (BuildContext context, int index) => const Divider(color: Colors.grey),
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),

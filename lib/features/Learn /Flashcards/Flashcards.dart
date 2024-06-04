@@ -1,5 +1,4 @@
 import 'package:english_app/Widgets/ProgressBar.dart';
-import 'package:english_app/features/lesson/IndividualLesson/ALessonScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
 
