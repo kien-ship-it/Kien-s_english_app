@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../../models/WordModel.dart';
+
 class WordBox extends StatelessWidget {
-  const WordBox({
-    super.key,
-  });
+  final List<WordModel> words;
+
+  const WordBox({super.key, required this.words});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +15,8 @@ class WordBox extends StatelessWidget {
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 8.0),
           padding: const EdgeInsets.all(8.0),
-          height: 450, // Fixed height for the box
+          height: 450,
+          // Fixed height for the box
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10.0),
@@ -35,13 +38,14 @@ class WordBox extends StatelessWidget {
               thickness: 3,
               child: ListView.separated(
                 physics: const AlwaysScrollableScrollPhysics(),
-                itemCount: 20, // Number of text lines
-                separatorBuilder: (BuildContext context, int index) => const Divider(color: Colors.grey),
+                itemCount: words.length, // Number of text lines
+                separatorBuilder: (BuildContext context, int index) =>
+                    const Divider(color: Colors.grey),
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'Word ${index + 1}: Definition ${index + 1}',
+                      '${words[index].word}: Definition ${words[index].wordMeaning}',
                       style: const TextStyle(fontSize: 16),
                     ),
                   );
@@ -52,7 +56,8 @@ class WordBox extends StatelessWidget {
         ),
         Positioned(
           bottom: -20, // Adjust position as needed
-          left: (MediaQuery.of(context).size.width - 46) / 2, // Adjust position to center
+          left: (MediaQuery.of(context).size.width - 46) /
+              2, // Adjust position to center
           child: Container(
             width: 46,
             height: 46,

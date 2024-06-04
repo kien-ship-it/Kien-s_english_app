@@ -1,6 +1,7 @@
-
+import 'package:english_app/features/authentication/login_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../services/auth.dart';
 
 class LogOutButton extends StatelessWidget {
   const LogOutButton({super.key});
@@ -8,7 +9,9 @@ class LogOutButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 145,),
+      margin: const EdgeInsets.symmetric(
+        horizontal: 145,
+      ),
       padding: const EdgeInsets.all(7.0),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -26,8 +29,14 @@ class LogOutButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(100.0),
           onTap: () {
             // Handle log out action
-            print("Log Out tapped");
-            },
+            Auth().signOut();
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const LoginScreen(),
+              ),
+            );
+          },
           child: const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -40,7 +49,11 @@ class LogOutButton extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 6.0),
-              Icon(Icons.logout, color: Colors.red, size: 17,),
+              Icon(
+                Icons.logout,
+                color: Colors.red,
+                size: 17,
+              ),
             ],
           ),
         ),

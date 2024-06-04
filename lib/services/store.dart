@@ -1,8 +1,10 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:english_app/features/GlobalData.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:uuid/uuid.dart';
 
 import '../models/UserModel.dart';
 import 'auth.dart';
@@ -19,15 +21,12 @@ class FireStore {
   static const String _example = 'examples';
 
   // add new user
-  static Future<void> initUser(String fullName) async {
-    String uid = Auth().getUserId();
+  static Future<void> initUser(String fullName, String email) async {
     try {
-      UserModel user = UserModel(
-        id: uid,
-        fullName: fullName,
-        listLesson: [],
-      );
-      final docRef = _db.collection(_userPath).add(user.toJson());
+      String uid = Auth().getUserId();
+      final docRef = _db.collection(_userPath).doc(uid);
+      UserModel user = UserModel.init(fullName, email);
+      docRef.set(user.toJson());
     } catch (e) {
       rethrow;
     }
@@ -39,6 +38,8 @@ class FireStore {
     final docRef = _db.collection(_userPath).doc(uid);
     Map<String, dynamic> data = await _getDoc(docRef);
     UserModel user = UserModel.fromJson(data);
+    GlobalData.user = UserModel.clone(user);
+    log(GlobalData.user.toString());
     return user;
   }
 

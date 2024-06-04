@@ -1,4 +1,5 @@
 import 'package:english_app/features/Learn%20/Multiple%20Choice/MultipleChoice.dart';
+import 'package:english_app/models/LessonModel.dart';
 import 'package:flutter/material.dart';
 import '../../Learn /Flashcards/Flashcards.dart';
 import 'LearnBox.dart';
@@ -7,9 +8,9 @@ import 'AppBar/SliverTitleAppBar.dart';
 import 'WordBox.dart';
 
 class ALessonScreen extends StatefulWidget {
-  final String title;
+  final LessonModel lessonModel;
 
-  const ALessonScreen({super.key, required this.title});
+  const ALessonScreen({super.key, required this.lessonModel});
 
   @override
   State<ALessonScreen> createState() => _ALessonScreenState();
@@ -28,7 +29,7 @@ class _ALessonScreenState extends State<ALessonScreen> {
         body: CustomScrollView(
           slivers: [
             SliverPersistentHeader(
-              delegate: SliverTitleAppBar(title: widget.title),
+              delegate: SliverTitleAppBar(title: widget.lessonModel.title),
               pinned: true,
             ),
             const SliverToBoxAdapter(
@@ -52,8 +53,8 @@ class _ALessonScreenState extends State<ALessonScreen> {
                 progressColor: const Color(0xFF497174),
               ),
             ),
-            const SliverToBoxAdapter(
-              child: WordBox(),
+             SliverToBoxAdapter(
+              child: WordBox(words: widget.lessonModel.listWordModel,),
             ),
             const SliverToBoxAdapter(
               child: Padding(

@@ -32,16 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 const SizedBox(height: 8.0), // Add some space between the title and the container
-                const LessonBox(
-                  boxTitle: 'SAT 1000+',
-                  boxDescription: '1000 most common advanced SAT vocabulary',
-                  lessonBoxColor: Color(0xFFBFDEE2), lightning: false,
-                ),
-                const LessonBox(
-                  boxTitle: 'SAT 1000+',
-                  boxDescription: '1000 most common advanced SAT vocabulary',
-                  lessonBoxColor: Color(0xFFD7BFE2), lightning: false,
-                ),
               ],
             );
           },
@@ -49,4 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+}
+
+class LessonBoxList {
 }

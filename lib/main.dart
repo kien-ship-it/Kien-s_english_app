@@ -34,7 +34,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// FirebaseAuth.instance.currentUser == null
-// ? const LoginScreen()
-//     : const GeneralScreen()

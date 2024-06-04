@@ -1,8 +1,9 @@
-
 import 'package:english_app/Widgets/MyToast.dart';
 import 'package:english_app/services/auth.dart';
 import 'package:english_app/features/home/home_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../../services/store.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -19,7 +20,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool isAllFilled = false;
   bool _obscureTextPass = true;
   bool _obscureTextConfirmPass = true;
-
 
   @override
   void initState() {
@@ -43,13 +43,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFFEFF5F5),
       body: SafeArea(
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
-              SizedBox(height: height/11,),
+              SizedBox(
+                height: height / 11,
+              ),
               Text(
                 "Sign Up",
                 style: TextStyle(
@@ -175,7 +178,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             password: passwordTextController.text)
                         .then((value) {
                       if (mounted) {
-                        showToast("Sign Up Successful");
+                        showToast("Sign Up Successfully");
+                        FireStore.initUser(fullNameTextController.text,
+                            emailTextController.text);
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(

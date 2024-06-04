@@ -1,9 +1,11 @@
 import 'package:english_app/features/home/home_screen.dart';
 import 'package:english_app/features/lesson/LessonScreen.dart';
 import 'package:english_app/features/user/UserScreen.dart';
+import 'package:english_app/services/store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 import '../Widgets/CustomIcon.dart';
+import '../models/UserModel.dart';
 
 class GeneralScreen extends StatefulWidget {
   const GeneralScreen({super.key});
@@ -13,6 +15,17 @@ class GeneralScreen extends StatefulWidget {
 }
 
 class _GeneralScreenState extends State<GeneralScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getData();
+  }
+
+  Future getData() async {
+    FireStore.loadUser();
+  }
+
   var currentIndex = 0;
 
   Widget bodyParser(int index) {
