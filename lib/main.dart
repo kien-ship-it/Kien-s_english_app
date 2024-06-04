@@ -1,4 +1,6 @@
 import 'package:english_app/features/GeneralScreen.dart';
+import 'package:english_app/features/Learn%20/Multiple%20Choice/MultipleChoice.dart';
+import 'package:english_app/features/lesson/LessonScreen.dart';
 import 'package:english_app/features/user/UserScreen.dart';
 import 'package:english_app/services/auth.dart';
 import 'package:english_app/features/home/home_screen.dart';
@@ -38,3 +40,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+// FirebaseAuth.instance.currentUser == null
+// ? const LoginScreen()
+//     : const GeneralScreen()

@@ -7,18 +7,22 @@ class LearnBox extends StatelessWidget {
     required this.icon,
     required this.distanceIconText,
     required this.color,
+    required this.onTapAction,
   });
 
   final String title;
   final IconData icon;
   final double distanceIconText;
   final Color color;
+  final Function onTapAction;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: GestureDetector(
-        onTap: null,
+        onTap: () {
+          onTapAction();
+        },
         child: Container(
           height: 155,
           margin: const EdgeInsets.symmetric(horizontal: 5),

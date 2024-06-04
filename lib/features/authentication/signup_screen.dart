@@ -50,7 +50,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           margin: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
-              SizedBox(height: height/9,),
+              SizedBox(height: height/11,),
               Text(
                 "Sign Up",
                 style: TextStyle(

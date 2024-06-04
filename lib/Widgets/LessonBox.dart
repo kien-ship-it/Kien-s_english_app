@@ -21,7 +21,7 @@ class LessonBox extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 16.0, right: 16, top: 8, bottom: 8),
       child: Container(
-        height: 200, // Set a fixed height for the container
+        height: 197, // Set a fixed height for the container
         decoration: BoxDecoration(
           // color: const Color(0xFFBFDEE2),
           color: lessonBoxColor,
@@ -63,7 +63,7 @@ class LessonBox extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 10.0),
+            const SizedBox(height: 5.0),
             Padding(
               padding: const EdgeInsets.only(left: 8.0),
               child: SizedBox(

@@ -7,6 +7,6 @@ class CustomIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Icon(icon, size: 40);
+    return Icon(icon, size: 35);
   }
 }
