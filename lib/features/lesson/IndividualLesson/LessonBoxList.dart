@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 
 import '../../../Widgets/LessonBox.dart';
 import '../../../models/LessonModel.dart';
-import 'ALessonScreen.dart';
 
 class Lessonboxlist extends StatefulWidget {
   final List<LessonModel> lessons;
 
-  Lessonboxlist({super.key, required this.lessons});
+  const Lessonboxlist({super.key, required this.lessons});
 
   @override
   State<Lessonboxlist> createState() => _LessonboxlistState();

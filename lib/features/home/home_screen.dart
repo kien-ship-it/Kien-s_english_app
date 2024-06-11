@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../Widgets/LessonBox.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

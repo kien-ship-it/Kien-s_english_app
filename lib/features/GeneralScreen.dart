@@ -5,7 +5,6 @@ import 'package:english_app/services/store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 import '../Widgets/CustomIcon.dart';
-import '../models/UserModel.dart';
 
 class GeneralScreen extends StatefulWidget {
   const GeneralScreen({super.key});

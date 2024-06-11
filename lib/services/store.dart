@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:english_app/features/GlobalData.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:uuid/uuid.dart';
 
 import '../models/UserModel.dart';
 import 'auth.dart';

@@ -1,8 +1,6 @@
 import 'package:english_app/features/GlobalData.dart';
-import 'package:english_app/features/lesson/IndividualLesson/ALessonScreen.dart';
 import 'package:flutter/material.dart';
 
-import '../../Widgets/LessonBox.dart';
 import 'IndividualLesson/LessonBoxList.dart';
 
 class LessonScreen extends StatefulWidget {
