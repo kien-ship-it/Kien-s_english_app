@@ -1,9 +1,10 @@
 import 'dart:developer';
 
 import 'package:english_app/Widgets/MyToast.dart';
-import 'package:english_app/services/auth.dart';
+import 'package:english_app/features/GeneralScreen.dart';
 import 'package:english_app/features/authentication/signup_screen.dart';
 import 'package:english_app/features/home/home_screen.dart';
+import 'package:english_app/services/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -141,13 +142,15 @@ class _LoginScreenState extends State<LoginScreen> {
                               password: passwordTextController.text)
                           .then((value) {
                         if (value == true) {
-                          showToast("Login success");
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const HomeScreen()),
-                          );
-                        }
+                      if (mounted) {
+                        showToast("Login success");
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const GeneralScreen()),
+                        );
+                      }
+                    }
                       });
                     }
                   },

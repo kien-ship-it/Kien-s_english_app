@@ -1,4 +1,5 @@
 import 'package:english_app/Widgets/MyToast.dart';
+import 'package:english_app/features/GeneralScreen.dart';
 import 'package:english_app/services/auth.dart';
 import 'package:english_app/features/home/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -184,7 +185,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const HomeScreen(),
+                            builder: (context) => const GeneralScreen(),
                           ),
                         );
                       }

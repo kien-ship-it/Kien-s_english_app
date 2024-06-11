@@ -54,4 +54,21 @@ class LessonModel {
       story: '',
     );
   }
+  
+  factory LessonModel.dummy() {
+    return LessonModel(
+      title: "Default Lesson 1",
+      description: "This is a default lesson",
+      isLightning: false,
+      color: "",
+      listWordModel: [
+        WordModel(
+          word: "Hello",
+          wordType: "wordType",
+          wordMeaning: "Xin chao",
+        ),
+      ],
+      story: "",
+    );
+  }
 }

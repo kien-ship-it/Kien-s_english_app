@@ -1,6 +1,7 @@
 import 'package:english_app/features/GlobalData.dart';
 import 'package:flutter/material.dart';
 
+import 'AddANewLessonScreen.dart';
 import 'IndividualLesson/LessonBoxList.dart';
 
 class LessonScreen extends StatefulWidget {
@@ -37,22 +38,33 @@ class _LessonScreenState extends State<LessonScreen> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     return SafeArea(
-      child: Container(
-        color: const Color(0xFFEFF5F5),
-        alignment: Alignment.center,
-        child: Column(
-          children: [
-            const SizedBox(height: 30),
-            topController(width),
-            const SizedBox(height: 10),
-            Expanded(
-                child: Lessonboxlist(
-              lessons: isChooseMyLesson
-                  ? GlobalData.user.listPersonalLesson
-                  : GlobalData.user.listDefaultLesson,
-            )),
-          ],
-        ),
+      child: Stack(
+        children: [
+          Positioned(
+            child: Container(
+              color: const Color(0xFFEFF5F5),
+              alignment: Alignment.center,
+              child: Column(
+                children: [
+                  const SizedBox(height: 30),
+                  topController(width),
+                  const SizedBox(height: 10),
+                  Expanded(
+                      child: Lessonboxlist(
+                    lessons: isChooseMyLesson
+                        ? GlobalData.listPersonalLesson
+                        : GlobalData.listDefaultLesson,
+                  )),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 20,
+            right: 20,
+            child: buildAddBtn(),
+          ),
+        ],
       ),
     );
   }
@@ -80,6 +92,28 @@ class _LessonScreenState extends State<LessonScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget buildAddBtn() {
+    return ElevatedButton(
+      style: ButtonStyle(
+        backgroundColor: WidgetStateProperty.all(const Color(0xFFEB6440)),
+        fixedSize: WidgetStateProperty.all(const Size(60, 60)),
+        padding: WidgetStateProperty.all<EdgeInsets>(
+          const EdgeInsets.all(0),
+        ),
+      ),
+      onPressed: () {
+        Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const AddANewLessonScreen()))
+            .then((value) {
+          setState(() {});
+        });
+      },
+      child: const Icon(Icons.add, size: 30, color: Colors.black),
     );
   }
 }

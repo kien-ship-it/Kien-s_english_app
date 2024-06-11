@@ -22,7 +22,8 @@ class _GeneralScreenState extends State<GeneralScreen> {
   }
 
   Future getData() async {
-    FireStore.loadUser();
+    await FireStore.loadUser();
+    await FireStore.loadLesson();
   }
 
   var currentIndex = 0;
@@ -39,29 +40,12 @@ class _GeneralScreenState extends State<GeneralScreen> {
         return const HomeScreen();
     }
   }
-  // const Color(0xFFEED7CF)
-
-  Widget _buildFAB() {
-    return Visibility(
-      visible: currentIndex == 1,
-      child: FloatingActionButton(
-        backgroundColor: Colors.orange[200],
-        enableFeedback: true,
-        shape: const CircleBorder(),
-        onPressed: () {
-          // Your FAB action here
-        },
-        child: const Icon(Icons.add, size: 35, color: Colors.black87,),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         body: bodyParser(currentIndex),
-        floatingActionButton: _buildFAB(),
         bottomNavigationBar: SnakeNavigationBar.color(
           behaviour: SnakeBarBehaviour.pinned,
           height: 88,

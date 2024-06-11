@@ -1,7 +1,10 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:english_app/common/ConstantModel.dart';
 import 'package:english_app/features/GlobalData.dart';
+import 'package:english_app/models/LessonModel.dart';
+import 'package:english_app/services/Helper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
@@ -17,8 +20,6 @@ class FireStore {
   static final CollectionReference<Map<String, dynamic>> _users =
       _db.collection(_userPath);
 
-  static const String _example = 'examples';
-
   // add new user
   static Future<void> initUser(String fullName, String email) async {
     try {
@@ -26,20 +27,56 @@ class FireStore {
       final docRef = _db.collection(_userPath).doc(uid);
       UserModel user = UserModel.init(fullName, email);
       docRef.set(user.toJson());
+
+      await initLesson();
     } catch (e) {
       rethrow;
     }
   }
 
+  static Future initLesson() async {
+    String uid = Auth().getUserId();
+    final docRef = _db.collection(_userPath).doc(uid);
+    // push data to firebase
+    for (var e in Helper().buildDefaultLesson()) {
+      docRef.collection(LIST_DEFAULT_LESSON).add(e.toJson());
+    }
+  }
+
   // load user data
-  static Future<UserModel> loadUser() async {
+  static Future loadUser() async {
     String uid = Auth().getUserId();
     final docRef = _db.collection(_userPath).doc(uid);
     Map<String, dynamic> data = await _getDoc(docRef);
     UserModel user = UserModel.fromJson(data);
     GlobalData.user = UserModel.clone(user);
     log(GlobalData.user.toString());
-    return user;
+  }
+
+  static Future loadLesson() async {
+    String uid = Auth().getUserId();
+    var docRef = _users.doc(uid).collection(LIST_PERSONAL_LESSON);
+    List<Map<String, dynamic>> data = await _listDocs(docRef);
+    GlobalData.listPersonalLesson =
+        data.map<LessonModel>((e) => LessonModel.fromJson(e)).toList();
+
+    docRef = _users.doc(uid).collection(LIST_DEFAULT_LESSON);
+    data = await _listDocs(docRef);
+    GlobalData.listDefaultLesson =
+        data.map<LessonModel>((e) => LessonModel.fromJson(e)).toList();
+  }
+
+  // add an new lesson
+  static Future<void> addLesson(LessonModel lesson) async {
+    // add local
+    GlobalData.listPersonalLesson.add(lesson);
+
+    // add cloud
+    String uid = Auth().getUserId();
+
+    final docRef = _users.doc(uid).collection(LIST_PERSONAL_LESSON).doc();
+
+    await _addDoc(docRef, lesson.toJson());
   }
 
   // ##### Utility ##### //
