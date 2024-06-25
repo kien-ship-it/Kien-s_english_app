@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:english_app/GlobalData.dart';
 import 'package:english_app/common/ConstantModel.dart';
-import 'package:english_app/features/GlobalData.dart';
 import 'package:english_app/models/LessonModel.dart';
 import 'package:english_app/services/Helper.dart';
 import 'package:firebase_auth/firebase_auth.dart';

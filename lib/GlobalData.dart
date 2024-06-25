@@ -1,6 +1,6 @@
 import 'package:english_app/models/UserModel.dart';
 
-import '../models/LessonModel.dart';
+import 'models/LessonModel.dart';
 
 class GlobalData {
   static UserModel user = UserModel.empty();
