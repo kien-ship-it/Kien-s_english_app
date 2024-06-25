@@ -1,11 +1,12 @@
-import 'package:english_app/features/Learn%20/AI%20Story/AIStory.dart';
-import 'package:english_app/features/Learn%20/Multiple%20Choice/MultipleChoice.dart';
-import 'package:english_app/models/LessonModel.dart';
 import 'package:flutter/material.dart';
-import '../../Learn /Flashcards/Flashcards.dart';
-import 'LearnBox.dart';
+
 import '../../../Widgets/ProgressBar.dart';
+import '../../../models/LessonModel.dart';
+import '../../learn/AI Story/AIStory.dart';
+import '../../learn/Flashcards/Flashcards.dart';
+import '../../learn/Multiple Choice/MultipleChoice.dart';
 import 'AppBar/SliverTitleAppBar.dart';
+import 'LearnBox.dart';
 import 'WordBox.dart';
 
 class ALessonScreen extends StatefulWidget {
