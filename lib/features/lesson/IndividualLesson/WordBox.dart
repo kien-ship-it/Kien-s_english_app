@@ -45,7 +45,7 @@ class WordBox extends StatelessWidget {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      '${words[index].word}: Definition ${words[index].wordMeaning}',
+                      '${words[index].word} (${words[index].wordType}): ${words[index].wordMeaning}',
                       style: const TextStyle(fontSize: 16),
                     ),
                   );

@@ -67,7 +67,12 @@ class FireStore {
   }
 
   // add an new lesson
-  static Future<void> addLesson(LessonModel lesson) async {
+  static Future<bool> addLesson(LessonModel lesson) async {
+    // check duplicate
+    if (GlobalData.isExistLesson(lesson.id)) {
+      return false;
+    }
+
     // add local
     GlobalData.listPersonalLesson.add(lesson);
 
@@ -77,6 +82,8 @@ class FireStore {
     final docRef = _users.doc(uid).collection(LIST_PERSONAL_LESSON).doc();
 
     await _addDoc(docRef, lesson.toJson());
+
+    return true;
   }
 
   // ##### Utility ##### //

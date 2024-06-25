@@ -1,7 +1,9 @@
+import 'package:uuid/uuid.dart';
 
 import 'WordModel.dart';
 
 class LessonModel {
+  String? id;
   final String title;
   final String description;
   final bool isLightning;
@@ -10,13 +12,32 @@ class LessonModel {
   final String story;
 
   LessonModel({
+    this.id,
     required this.title,
     required this.description,
     required this.isLightning,
     required this.color,
     required this.listWordModel,
     required this.story,
-  });
+  }) {
+    id = const Uuid().v4();
+  }
+
+  void addNewWord(WordModel wordModel) {
+    if (isExistedWord(wordModel.word)) return;
+    listWordModel.add(wordModel);
+  }
+
+  bool isExistedWord(String word) {
+    var res = false;
+    for (var element in listWordModel) {
+      if (element.word.toLowerCase() == word.toLowerCase()) {
+        res = true;
+        break;
+      }
+    }
+    return res;
+  }
 
   factory LessonModel.fromJson(Map<String, dynamic> json) {
     List<WordModel> listWordModel = [];
@@ -24,6 +45,7 @@ class LessonModel {
       listWordModel.add(WordModel.fromJson(element));
     });
     return LessonModel(
+      id: json['id'],
       title: json['title'],
       description: json['description'],
       isLightning: json['isLightning'],
@@ -35,6 +57,7 @@ class LessonModel {
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'title': title,
       'description': description,
       'isLightning': isLightning,
@@ -46,17 +69,18 @@ class LessonModel {
 
   factory LessonModel.empty() {
     return LessonModel(
-      title: '',
-      description: '',
+      title: 'Empty Title',
+      description: 'Empty Description',
       isLightning: false,
       color: "",
       listWordModel: [],
       story: '',
     );
   }
-  
+
   factory LessonModel.dummy() {
     return LessonModel(
+      id: '1',
       title: "Default Lesson 1",
       description: "This is a default lesson",
       isLightning: false,
@@ -69,6 +93,18 @@ class LessonModel {
         ),
       ],
       story: "",
+    );
+  }
+
+  factory LessonModel.copyWith(LessonModel lesson, {String? id}) {
+    return LessonModel(
+      id: id ?? lesson.id,
+      title: lesson.title,
+      description: lesson.description,
+      isLightning: lesson.isLightning,
+      color: lesson.color,
+      listWordModel: lesson.listWordModel,
+      story: lesson.story,
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:english_app/features/user/UserScreen.dart';
 import 'package:english_app/services/store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
+
 import '../Widgets/CustomIcon.dart';
 
 class GeneralScreen extends StatefulWidget {
@@ -16,7 +17,6 @@ class GeneralScreen extends StatefulWidget {
 class _GeneralScreenState extends State<GeneralScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getData();
   }

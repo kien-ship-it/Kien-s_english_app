@@ -1,3 +1,4 @@
+import 'package:english_app/GlobalData.dart';
 import 'package:flutter/material.dart';
 
 import 'LogoutButton.dart';
@@ -29,8 +30,10 @@ class _UserScreenState extends State<UserScreen> {
                   style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
                 ),
               ),
-              const UserBox(),
-              const LogOutButton(),
+            UserBox(
+              userModel: GlobalData.user,
+            ),
+            const LogOutButton(),
             ],
           ),
       ),

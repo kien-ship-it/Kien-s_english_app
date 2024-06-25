@@ -50,10 +50,11 @@ class _LessonScreenState extends State<LessonScreen> {
                   topController(width),
                   const SizedBox(height: 10),
                   Expanded(
-                      child: Lessonboxlist(
+                      child: LessonBoxList(
                     lessons: isChooseMyLesson
                         ? GlobalData.listPersonalLesson
                         : GlobalData.listDefaultLesson,
+                    isDefaultLesson: !isChooseMyLesson,
                   )),
                 ],
               ),
@@ -111,7 +112,8 @@ class _LessonScreenState extends State<LessonScreen> {
         style: ButtonStyle(
           backgroundColor: WidgetStateProperty.all(const Color(0xFFEB6440)),
           fixedSize: WidgetStateProperty.all(const Size(60, 60)),
-          padding: WidgetStateProperty.all<EdgeInsets>(const EdgeInsets.all(0),
+          padding: WidgetStateProperty.all<EdgeInsets>(
+            const EdgeInsets.all(0),
           ),
         ),
         onPressed: () {

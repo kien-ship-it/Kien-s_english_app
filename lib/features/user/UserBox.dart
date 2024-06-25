@@ -1,8 +1,12 @@
+import 'package:english_app/models/UserModel.dart';
 import 'package:flutter/material.dart';
 
 class UserBox extends StatelessWidget {
+  final UserModel userModel;
+
   const UserBox({
     super.key,
+    required this.userModel,
   });
 
   @override
@@ -37,17 +41,17 @@ class UserBox extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Le Duc Kien",
-                  style: TextStyle(
+                Text(
+                  userModel.fullName,
+                  style: const TextStyle(
                     fontSize: 27,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(height: 0),
-                const Text(
-                  "ldkientzs@gmail.com",
-                  style: TextStyle(
+                Text(
+                  userModel.email,
+                  style: const TextStyle(
                     fontSize: 14,
                     color: Colors.black,
                   ),
@@ -74,8 +78,11 @@ class UserBox extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 3,),
-                    const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
+                    const SizedBox(
+                      width: 3,
+                    ),
+                    const Icon(Icons.arrow_forward_ios,
+                        size: 16, color: Colors.grey),
                   ],
                 )
               ],

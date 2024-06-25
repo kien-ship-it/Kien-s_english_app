@@ -1,19 +1,22 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Widgets/LessonBox.dart';
 import '../../../models/LessonModel.dart';
 
-class Lessonboxlist extends StatefulWidget {
+class LessonBoxList extends StatefulWidget {
   final List<LessonModel> lessons;
+  bool isDefaultLesson;
 
-  const Lessonboxlist({super.key, required this.lessons});
+  LessonBoxList({
+    super.key,
+    required this.lessons,
+    this.isDefaultLesson = false,
+  });
 
-  @override
-  State<Lessonboxlist> createState() => _LessonboxlistState();
+  State<LessonBoxList> createState() => _LessonBoxListState();
 }
 
-class _LessonboxlistState extends State<Lessonboxlist> {
+class _LessonBoxListState extends State<LessonBoxList> {
   @override
   Widget build(BuildContext context) {
     return widget.lessons.isEmpty
@@ -30,10 +33,11 @@ class _LessonboxlistState extends State<Lessonboxlist> {
                   (context, index) {
                     final item = widget.lessons[index];
                     return LessonBox(
-                      lessonModel: item,
-                    );
+                        lessonModel: item,
+                        isDefaultLesson: widget.isDefaultLesson);
                   },
-                  childCount: widget.lessons.length, // 4 items + 1 for the blank space
+                  childCount:
+                      widget.lessons.length, // 4 items + 1 for the blank space
                 ),
               ),
             ],

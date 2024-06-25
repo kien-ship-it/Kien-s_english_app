@@ -1,13 +1,25 @@
+import 'package:english_app/Widgets/MyToast.dart';
 import 'package:english_app/models/LessonModel.dart';
 import 'package:flutter/material.dart';
 
 import '../features/lesson/IndividualLesson/ALessonScreen.dart';
+import '../services/store.dart';
 
-class LessonBox extends StatelessWidget {
+class LessonBox extends StatefulWidget {
   final LessonModel lessonModel;
+  final bool isDefaultLesson;
 
-  const LessonBox({super.key, required this.lessonModel});
+  LessonBox({
+    Key? key,
+    required this.lessonModel,
+    this.isDefaultLesson = false,
+  }) : super(key: key);
 
+  @override
+  _LessonBoxState createState() => _LessonBoxState();
+}
+
+class _LessonBoxState extends State<LessonBox> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,7 +40,7 @@ class LessonBox extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0),
                   child: Text(
-                    lessonModel.title,
+                    widget.lessonModel.title,
                     style: const TextStyle(
                       fontSize: 30.0,
                       fontWeight: FontWeight.bold,
@@ -52,7 +64,7 @@ class LessonBox extends StatelessWidget {
                     ],
                   ),
                   child: Icon(Icons.flash_on,
-                      color: lessonModel.isLightning
+                      color: widget.lessonModel.isLightning
                           ? const Color(0xFFEB6440)
                           : Colors.grey),
                 ),
@@ -64,7 +76,7 @@ class LessonBox extends StatelessWidget {
               child: SizedBox(
                 width: 290, // Set the width to limit the length of each line
                 child: Text(
-                  lessonModel.description,
+                  widget.lessonModel.description,
                   style: const TextStyle(fontSize: 16.0),
                   overflow: TextOverflow.ellipsis,
                   // Display ellipsis (...) if the text overflows
@@ -76,15 +88,26 @@ class LessonBox extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ALessonScreen(
-                        lessonModel: lessonModel,
+                onPressed: () async {
+                  if (widget.isDefaultLesson) {
+                    // call API to add lesson
+                    FireStore.addLesson(widget.lessonModel).then((value) {
+                      if (value) {
+                        showToast("Success");
+                      } else {
+                        showToast("Failed");
+                      }
+                    });
+                  } else {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ALessonScreen(
+                          lessonModel: widget.lessonModel,
+                        ),
                       ),
-                    ),
-                  );
+                    );
+                  }
                 },
                 style: ButtonStyle(
                   backgroundColor:
@@ -92,9 +115,9 @@ class LessonBox extends StatelessWidget {
                   fixedSize:
                       WidgetStateProperty.all<Size>(const Size(200.0, 45.0)),
                 ),
-                child: const Text(
-                  "START",
-                  style: TextStyle(
+                child: Text(
+                  widget.isDefaultLesson ? "ADD" : "START",
+                  style: const TextStyle(
                     fontSize: 17,
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
