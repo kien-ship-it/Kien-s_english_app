@@ -1,4 +1,5 @@
 import 'package:english_app/features/GeneralScreen.dart';
+import 'package:english_app/features/Learn%20/AI%20Story/AIStory.dart';
 import 'package:english_app/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
       ),
       home: FirebaseAuth.instance.currentUser == null
           ? const LoginScreen()
-          : const GeneralScreen()
+          : const GeneralScreen(),
     );
   }
 }

@@ -24,7 +24,7 @@ class _FlashcardsState extends State<Flashcards> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  padding: const EdgeInsets.only(top: 20, bottom: 13, left: 30),
+                  padding: const EdgeInsets.only(top: 20, bottom: 0, left: 30),
                   child: ProgressBar(
                     paddingProgressBar: 30,
                     progressValue: 4 / 24,
@@ -78,7 +78,7 @@ class _FlashcardsState extends State<Flashcards> {
                 ),
                 Container(
                   margin: const EdgeInsets.only(
-                      left: 30, right: 30, bottom: 25, top: 25),
+                      left: 30, right: 30, bottom: 25, top: 0),
                   padding: const EdgeInsets.symmetric(
                       horizontal: 20.0, vertical: 10.0),
                   decoration: BoxDecoration(

@@ -49,6 +49,7 @@ class _GeneralScreenState extends State<GeneralScreen> {
         bottomNavigationBar: SnakeNavigationBar.color(
           behaviour: SnakeBarBehaviour.pinned,
           height: 88,
+          backgroundColor: Colors.white,
           snakeShape: SnakeShape.indicator,
 
           selectedItemColor: const Color(0xFFEB6440),

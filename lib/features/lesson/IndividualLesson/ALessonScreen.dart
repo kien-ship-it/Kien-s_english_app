@@ -1,3 +1,4 @@
+import 'package:english_app/features/Learn%20/AI%20Story/AIStory.dart';
 import 'package:english_app/features/Learn%20/Multiple%20Choice/MultipleChoice.dart';
 import 'package:english_app/models/LessonModel.dart';
 import 'package:flutter/material.dart';
@@ -92,7 +93,7 @@ class _ALessonScreenState extends State<ALessonScreen> {
                       onTapAction: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const Flashcards()),
+                          MaterialPageRoute(builder: (context) => const AIStory()),
                         );
                       },
                     ),

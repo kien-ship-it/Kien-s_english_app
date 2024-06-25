@@ -96,24 +96,35 @@ class _LessonScreenState extends State<LessonScreen> {
   }
 
   Widget buildAddBtn() {
-    return ElevatedButton(
-      style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.all(const Color(0xFFEB6440)),
-        fixedSize: WidgetStateProperty.all(const Size(60, 60)),
-        padding: WidgetStateProperty.all<EdgeInsets>(
-          const EdgeInsets.all(0),
-        ),
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(35),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.4), // Shadow color with opacity
+            spreadRadius: 2, // Spread value
+            blurRadius: 3, // Blur value
+          ),
+        ],
       ),
-      onPressed: () {
-        Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const AddANewLessonScreen()))
-            .then((value) {
-          setState(() {});
-        });
-      },
-      child: const Icon(Icons.add, size: 30, color: Colors.black),
+      child: ElevatedButton(
+        style: ButtonStyle(
+          backgroundColor: WidgetStateProperty.all(const Color(0xFFEB6440)),
+          fixedSize: WidgetStateProperty.all(const Size(60, 60)),
+          padding: WidgetStateProperty.all<EdgeInsets>(const EdgeInsets.all(0),
+          ),
+        ),
+        onPressed: () {
+          Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AddANewLessonScreen()))
+              .then((value) {
+            setState(() {});
+          });
+        },
+        child: const Icon(Icons.add, size: 30, color: Colors.black),
+      ),
     );
   }
 }
