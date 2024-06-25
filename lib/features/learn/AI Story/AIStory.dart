@@ -198,12 +198,12 @@ class WordMenu extends StatelessWidget {
       decoration: const BoxDecoration(
         color: Color(0xFFF9F9F9),
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(40.0),
-          topRight: Radius.circular(40.0),
+          topLeft: Radius.circular(35.0),
+          topRight: Radius.circular(35.0),
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black12,
+            color: Colors.black26,
             spreadRadius: 4,
             blurRadius: 3,
             offset: Offset(0, 3),
