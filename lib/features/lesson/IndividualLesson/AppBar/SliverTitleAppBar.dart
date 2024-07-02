@@ -12,11 +12,8 @@ class SliverTitleAppBar extends SliverPersistentHeaderDelegate {
 
     // Calculate the scale for the title
     double titleScale = 1 - (shrinkOffset / maxExtent);
-    double titleSize = 40.0 * titleScale.clamp(0.5, 1.0);
+    double titleSize = 35.0 * titleScale.clamp(0.5, 1.0);
     double titleOffset = (40.0 * (1 - titleScale)).clamp(0.0, 20.0);
-
-    // Calculate opacity for the description
-    double descriptionOpacity = 1.0 - (shrinkOffset / minExtent).clamp(0.0, 1.0);
 
     return Stack(
       children: [

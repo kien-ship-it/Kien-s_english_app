@@ -1,7 +1,6 @@
 import 'package:english_app/GlobalData.dart';
+import 'package:english_app/features/lesson/AddNewLesson/AddNewLesson.dart';
 import 'package:flutter/material.dart';
-
-import 'AddANewLessonScreen.dart';
 import 'IndividualLesson/LessonBoxList.dart';
 
 class LessonScreen extends StatefulWidget {
@@ -120,7 +119,7 @@ class _LessonScreenState extends State<LessonScreen> {
           Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const AddANewLessonScreen()))
+                      builder: (context) => const Addnewlesson()))
               .then((value) {
             setState(() {});
           });

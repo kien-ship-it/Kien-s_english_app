@@ -1,5 +1,4 @@
 import 'package:uuid/uuid.dart';
-
 import 'WordModel.dart';
 
 class LessonModel {
@@ -28,15 +27,12 @@ class LessonModel {
     listWordModel.add(wordModel);
   }
 
+  void removeWord(WordModel wordModel) {
+    listWordModel.remove(wordModel);
+  }
+
   bool isExistedWord(String word) {
-    var res = false;
-    for (var element in listWordModel) {
-      if (element.word.toLowerCase() == word.toLowerCase()) {
-        res = true;
-        break;
-      }
-    }
-    return res;
+    return listWordModel.any((element) => element.word.toLowerCase() == word.toLowerCase());
   }
 
   factory LessonModel.fromJson(Map<String, dynamic> json) {
@@ -96,15 +92,23 @@ class LessonModel {
     );
   }
 
-  factory LessonModel.copyWith(LessonModel lesson, {String? id}) {
+  factory LessonModel.copyWith(LessonModel lesson, {
+    String? id,
+    bool? isLightning,
+    String? color,
+    List<WordModel>? listWordModel,
+    String? story,
+    String? title,
+    String? description,
+  }) {
     return LessonModel(
       id: id ?? lesson.id,
-      title: lesson.title,
-      description: lesson.description,
-      isLightning: lesson.isLightning,
-      color: lesson.color,
-      listWordModel: lesson.listWordModel,
-      story: lesson.story,
+      title: title ?? lesson.title,
+      description: description ?? lesson.description,
+      isLightning: isLightning ?? lesson.isLightning,
+      color: color ?? lesson.color,
+      listWordModel: listWordModel ?? lesson.listWordModel,
+      story: story ?? lesson.story,
     );
   }
 }

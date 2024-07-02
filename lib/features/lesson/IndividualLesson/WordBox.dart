@@ -40,7 +40,7 @@ class WordBox extends StatelessWidget {
                 physics: const AlwaysScrollableScrollPhysics(),
                 itemCount: words.length, // Number of text lines
                 separatorBuilder: (BuildContext context, int index) =>
-                    const Divider(color: Colors.grey),
+                    const Divider(color: Colors.black12),
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
