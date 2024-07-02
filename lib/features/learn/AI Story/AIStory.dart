@@ -1,10 +1,10 @@
-import 'dart:developer';
-
 import 'package:english_app/GlobalData.dart';
 import 'package:english_app/models/LessonModel.dart';
 import 'package:english_app/services/AIService.dart';
 import 'package:english_app/services/store.dart';
 import 'package:flutter/material.dart';
+
+import 'CustomRichText.dart';
 
 class AIStory extends StatefulWidget {
   final LessonModel lessonModel;
@@ -30,7 +30,6 @@ class _AIStoryState extends State<AIStory> {
 
   Future handleStory() async {
     if (myStory.isEmpty) {
-      log("Here");
       setState(() {
         isLoading = true;
       });
@@ -109,13 +108,16 @@ class _AIStoryState extends State<AIStory> {
               child: ParagraphContainer(),
             ),
             isLoading
-                ? const CircularProgressIndicator()
+                ? Positioned(child: CircularProgressIndicator())
                 : Positioned(
                     top: 165.0,
                     left: 0,
                     right: 0,
                     bottom: 160.0,
-                    child: Text(myStory)),
+                    child: KeywordText(
+                      lessonModel: widget.lessonModel,
+                    ),
+                  )
             // const Positioned(
             //   bottom: 0,
             //   left: 0,
@@ -140,86 +142,6 @@ class ParagraphContainer extends StatelessWidget {
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(40.0),
           topRight: Radius.circular(40.0),
-        ),
-      ),
-    );
-  }
-}
-
-class ScrollableParagraph extends StatelessWidget {
-  const ScrollableParagraph({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 40.0),
-      child: SingleChildScrollView(
-        child: RichText(
-          textAlign: TextAlign.justify,
-          text: const TextSpan(
-            style: TextStyle(color: Colors.black, fontSize: 18),
-            children: [
-              TextSpan(
-                text: 'Professor Hernandez peered into the telescope, a frown '
-                    'creasing her brow. '
-                    'The data she was collecting appeared to be an ',
-              ),
-              TextSpan(
-                text: 'aberration',
-                style: TextStyle(
-                    color: Color(0xFFEB6440), fontWeight: FontWeight.bold),
-              ),
-              TextSpan(
-                text: ', a deviation from the expected pattern. '
-                    'The faint celestial object shouldn\'t have been there '
-                    'according to established astronomical models. '
-                    'Her initial excitement was replaced with a ',
-              ),
-              TextSpan(
-                text: 'dubious',
-                style: TextStyle(
-                  color: Color(0xFFEB6440),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              TextSpan(
-                text: ' feeling. Could this be a breakthrough, or an error in '
-                    'the instrument?\n\n'
-                    'Professor Hernandez was known for her ',
-              ),
-              TextSpan(
-                text: 'diligence',
-                style: TextStyle(
-                    color: Color(0xFFEB6440), fontWeight: FontWeight.bold),
-              ),
-              TextSpan(
-                text: '. She meticulously reviewed the data, then spent days '
-                    'recalibrating the telescope. '
-                    'Finally, she felt confident enough to share her findings '
-                    'with a colleague, Dr. Reyes. '
-                    'Dr. Reyes, known for his ',
-              ),
-              TextSpan(
-                text: 'benevolent',
-                style: TextStyle(
-                    color: Color(0xFFEB6440), fontWeight: FontWeight.bold),
-              ),
-              TextSpan(
-                text: ' nature, listened patiently as Professor Hernandez '
-                    'explained the anomaly. '
-                    'He then offered to collaborate on further observations, '
-                    'hoping to ',
-              ),
-              TextSpan(
-                text: 'conciliate ',
-                style: TextStyle(
-                    color: Color(0xFFEB6440), fontWeight: FontWeight.bold),
-              ),
-              TextSpan(
-                text: 'any conflicting data and get to the truth.',
-              ),
-            ],
-          ),
         ),
       ),
     );
