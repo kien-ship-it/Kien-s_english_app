@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:english_app/GlobalData.dart';
+import 'package:english_app/Widgets/MyToast.dart';
 import 'package:english_app/common/ConstantModel.dart';
 import 'package:english_app/models/LessonModel.dart';
 import 'package:english_app/services/Helper.dart';
@@ -79,11 +80,29 @@ class FireStore {
     // add cloud
     String uid = Auth().getUserId();
 
-    final docRef = _users.doc(uid).collection(LIST_PERSONAL_LESSON).doc();
+    final docRef =
+        _users.doc(uid).collection(LIST_PERSONAL_LESSON).doc(lesson.id);
 
     await _addDoc(docRef, lesson.toJson());
 
     return true;
+  }
+
+  // update story for an specific lesson
+  static Future<void> updateStory(String lessonId, String story) async {
+    log("lessonId: $lessonId");
+    // update local
+    GlobalData.addStoryToLessonById(lessonId, story);
+
+    // cloud
+    try {
+      String uid = Auth().getUserId();
+      final docRef =
+          _users.doc(uid).collection(LIST_PERSONAL_LESSON).doc(lessonId);
+      _setDoc(docRef, {'story': story});
+    } catch (e) {
+      showToast(e.toString());
+    }
   }
 
   // ##### Utility ##### //

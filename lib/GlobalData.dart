@@ -13,4 +13,24 @@ class GlobalData {
     }
     return listPersonalLesson.any((element) => element.id == lessonId);
   }
+
+  static void addStoryToLessonById(String id, String story) {
+    for (int i = 0; i < listPersonalLesson.length; i++) {
+      LessonModel e = listPersonalLesson[i];
+      if (e.id == id) {
+        var modifiedLesson = e.copyWith(story: story);
+        listPersonalLesson[i] = modifiedLesson;
+        break;
+      }
+    }
+  }
+
+  static LessonModel getLatestLesson(String id) {
+    for (LessonModel e in listPersonalLesson) {
+      if (e.id == id) {
+        return e;
+      }
+    }
+    return LessonModel.empty();
+  }
 }

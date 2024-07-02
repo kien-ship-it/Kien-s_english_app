@@ -1,13 +1,54 @@
+import 'dart:developer';
+
+import 'package:english_app/GlobalData.dart';
+import 'package:english_app/models/LessonModel.dart';
+import 'package:english_app/services/AIService.dart';
+import 'package:english_app/services/store.dart';
 import 'package:flutter/material.dart';
 
 class AIStory extends StatefulWidget {
-  const AIStory({super.key});
+  final LessonModel lessonModel;
+
+  const AIStory({super.key, required this.lessonModel});
 
   @override
   State<AIStory> createState() => _AIStoryState();
 }
 
 class _AIStoryState extends State<AIStory> {
+  var myStory = "";
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.lessonModel.id != null) {
+      myStory = GlobalData.getLatestLesson(widget.lessonModel.id ?? "").story;
+    }
+    handleStory();
+  }
+
+  Future handleStory() async {
+    if (myStory.isEmpty) {
+      log("Here");
+      setState(() {
+        isLoading = true;
+      });
+      // call api to generate story
+      myStory = await AIService.generateStory(widget.lessonModel.listWordModel);
+
+      // assign story
+      if (widget.lessonModel.id != null) {
+        FireStore.updateStory(widget.lessonModel.id ?? "", myStory);
+      }
+      setState(() {
+        isLoading = false;
+      });
+    } else {
+      myStory = widget.lessonModel.story;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -63,22 +104,24 @@ class _AIStoryState extends State<AIStory> {
               top: 165.0,
               left: 0,
               right: 0,
-              bottom: 100.0, // Ensure space for the word box
+              bottom: 100.0,
+              // Ensure space for the word box
               child: ParagraphContainer(),
             ),
-            const Positioned(
-              top: 165.0,
-              left: 0,
-              right: 0,
-              bottom: 160.0,
-              child: ScrollableParagraph(),
-            ),
-            const Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: WordMenu(),
-            ),
+            isLoading
+                ? const CircularProgressIndicator()
+                : Positioned(
+                    top: 165.0,
+                    left: 0,
+                    right: 0,
+                    bottom: 160.0,
+                    child: Text(myStory)),
+            // const Positioned(
+            //   bottom: 0,
+            //   left: 0,
+            //   right: 0,
+            //   child: WordMenu(),
+            // ),
           ],
         ),
       ),
@@ -89,7 +132,7 @@ class _AIStoryState extends State<AIStory> {
 class ParagraphContainer extends StatelessWidget {
   const ParagraphContainer({super.key});
 
-  @override 
+  @override
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
@@ -124,8 +167,7 @@ class ScrollableParagraph extends StatelessWidget {
               TextSpan(
                 text: 'aberration',
                 style: TextStyle(
-                    color: Color(0xFFEB6440),
-                    fontWeight: FontWeight.bold),
+                    color: Color(0xFFEB6440), fontWeight: FontWeight.bold),
               ),
               TextSpan(
                 text: ', a deviation from the expected pattern. '
@@ -136,8 +178,8 @@ class ScrollableParagraph extends StatelessWidget {
               TextSpan(
                 text: 'dubious',
                 style: TextStyle(
-                    color: Color(0xFFEB6440),
-                    fontWeight: FontWeight.bold,
+                  color: Color(0xFFEB6440),
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               TextSpan(
@@ -148,8 +190,7 @@ class ScrollableParagraph extends StatelessWidget {
               TextSpan(
                 text: 'diligence',
                 style: TextStyle(
-                    color: Color(0xFFEB6440),
-                    fontWeight: FontWeight.bold),
+                    color: Color(0xFFEB6440), fontWeight: FontWeight.bold),
               ),
               TextSpan(
                 text: '. She meticulously reviewed the data, then spent days '
@@ -161,8 +202,7 @@ class ScrollableParagraph extends StatelessWidget {
               TextSpan(
                 text: 'benevolent',
                 style: TextStyle(
-                    color: Color(0xFFEB6440),
-                    fontWeight: FontWeight.bold),
+                    color: Color(0xFFEB6440), fontWeight: FontWeight.bold),
               ),
               TextSpan(
                 text: ' nature, listened patiently as Professor Hernandez '
@@ -173,12 +213,10 @@ class ScrollableParagraph extends StatelessWidget {
               TextSpan(
                 text: 'conciliate ',
                 style: TextStyle(
-                    color: Color(0xFFEB6440),
-                    fontWeight: FontWeight.bold),
+                    color: Color(0xFFEB6440), fontWeight: FontWeight.bold),
               ),
               TextSpan(
-                text: 'any conflicting data and get to the truth.'
-                ,
+                text: 'any conflicting data and get to the truth.',
               ),
             ],
           ),
@@ -194,22 +232,22 @@ class WordMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0, bottom: 30),
+      padding:
+          const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0, bottom: 30),
       decoration: const BoxDecoration(
-        color: Color(0xFFF9F9F9),
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(35.0),
-          topRight: Radius.circular(35.0),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black26,
-            spreadRadius: 4,
-            blurRadius: 3,
-            offset: Offset(0, 3),
+          color: Color(0xFFF9F9F9),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(35.0),
+            topRight: Radius.circular(35.0),
           ),
-        ]
-      ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              spreadRadius: 4,
+              blurRadius: 3,
+              offset: Offset(0, 3),
+            ),
+          ]),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -235,6 +273,7 @@ class WordMenu extends StatelessWidget {
                 _buildWordChip('Diligence'),
                 _buildWordChip('Benevolent'),
                 _buildWordChip('Conciliate'),
+                _buildWordChip('Aberration'),
               ],
             ),
           ),
@@ -246,17 +285,15 @@ class WordMenu extends StatelessWidget {
   Widget _buildWordChip(String word) {
     return Chip(
       label: Text(word),
-      labelStyle: const
-      TextStyle(
-          color: Colors.black87,
-          fontSize: 15.0,
-          fontWeight: FontWeight.w400,
+      labelStyle: const TextStyle(
+        color: Colors.black87,
+        fontSize: 15.0,
+        fontWeight: FontWeight.w400,
       ),
       backgroundColor: const Color(0xFFE8E8E8),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(100.0),
-        side: const BorderSide(width: 1, color: Colors.white)
-      ),
+          borderRadius: BorderRadius.circular(100.0),
+          side: const BorderSide(width: 1, color: Colors.white)),
     );
   }
 }

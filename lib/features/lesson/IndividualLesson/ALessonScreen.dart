@@ -23,7 +23,8 @@ class _ALessonScreenState extends State<ALessonScreen> {
   Widget build(BuildContext context) {
     double progressValue = 0.7;
     double paddingProgressBar = 30;
-    double progressWidth = (MediaQuery.of(context).size.width - 2 * paddingProgressBar);
+    double progressWidth =
+        (MediaQuery.of(context).size.width - 2 * paddingProgressBar);
 
     return SafeArea(
       child: Scaffold(
@@ -55,8 +56,10 @@ class _ALessonScreenState extends State<ALessonScreen> {
                 progressColor: const Color(0xFF497174),
               ),
             ),
-             SliverToBoxAdapter(
-              child: WordBox(words: widget.lessonModel.listWordModel,),
+            SliverToBoxAdapter(
+              child: WordBox(
+                words: widget.lessonModel.listWordModel,
+              ),
             ),
             const SliverToBoxAdapter(
               child: Padding(
@@ -67,45 +70,54 @@ class _ALessonScreenState extends State<ALessonScreen> {
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
                   ),
-                  ),
+                ),
               ),
-              ),
-             SliverToBoxAdapter(
+            ),
+            SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    LearnBox(title: "Flashcard",
+                    LearnBox(
+                      title: "Flashcard",
                       icon: Icons.collections_bookmark,
                       distanceIconText: 13,
                       color: const Color(0xFFEB6440),
                       onTapAction: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const Flashcards()),
+                          MaterialPageRoute(
+                              builder: (context) => const Flashcards()),
                         );
                       },
                     ),
-                    LearnBox(title: "AI Story",
+                    LearnBox(
+                      title: "AI Story",
                       icon: Icons.ac_unit_outlined,
                       distanceIconText: 13,
                       color: const Color(0xFF497174),
                       onTapAction: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const AIStory()),
+                          MaterialPageRoute(
+                              builder: (context) => AIStory(
+                                    lessonModel: widget.lessonModel,
+                                  )),
                         );
                       },
                     ),
-                    LearnBox(title: "Multiple Choice",
+                    LearnBox(
+                      title: "Multiple Choice",
                       icon: Icons.format_list_bulleted,
                       distanceIconText: 6,
                       color: const Color(0xFFEB6440),
                       onTapAction: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const MultipleChoice()),
+                          MaterialPageRoute(
+                              builder: (context) => const MultipleChoice()),
                         );
                       },
                     )
@@ -113,8 +125,10 @@ class _ALessonScreenState extends State<ALessonScreen> {
                 ),
               ),
             ),
-             const SliverToBoxAdapter(
-              child: SizedBox(height: 30,),
+            const SliverToBoxAdapter(
+              child: SizedBox(
+                height: 30,
+              ),
             )
           ],
         ),
@@ -122,6 +136,3 @@ class _ALessonScreenState extends State<ALessonScreen> {
     );
   }
 }
-
-
-

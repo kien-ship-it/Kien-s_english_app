@@ -23,6 +23,26 @@ class LessonModel {
     id = const Uuid().v4();
   }
 
+  LessonModel copyWith({
+    String? id,
+    String? title,
+    String? description,
+    bool? isLightning,
+    String? color,
+    List<WordModel>? listWordModel,
+    String? story,
+  }) {
+    return LessonModel(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      isLightning: isLightning ?? this.isLightning,
+      color: color ?? this.color,
+      listWordModel: listWordModel ?? this.listWordModel,
+      story: story ?? this.story,
+    );
+  }
+
   bool addNewWord(WordModel wordModel) {
     if (isExistedWord(wordModel.word)) return false;
     listWordModel.add(wordModel);

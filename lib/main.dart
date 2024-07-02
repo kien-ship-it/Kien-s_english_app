@@ -1,12 +1,15 @@
+import 'package:english_app/common/ConstantModel.dart';
 import 'package:english_app/features/GeneralScreen.dart';
 import 'package:english_app/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gemini/flutter_gemini.dart';
 
 import 'features/authentication/login_screen.dart';
 
 Future<void> main() async {
+  Gemini.init(apiKey: API_KEY);
   WidgetsFlutterBinding.ensureInitialized();
 
   // setup firebase
