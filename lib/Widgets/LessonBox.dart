@@ -9,11 +9,11 @@ class LessonBox extends StatefulWidget {
   final LessonModel lessonModel;
   final bool isDefaultLesson;
 
-  LessonBox({
-    Key? key,
+  const LessonBox({
+    super.key,
     required this.lessonModel,
     this.isDefaultLesson = false,
-  }) : super(key: key);
+  });
 
   @override
   _LessonBoxState createState() => _LessonBoxState();

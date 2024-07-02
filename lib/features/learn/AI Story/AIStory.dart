@@ -252,7 +252,7 @@ class WordMenu extends StatelessWidget {
           fontSize: 15.0,
           fontWeight: FontWeight.w400,
       ),
-      backgroundColor: Color(0xFFE8E8E8),
+      backgroundColor: const Color(0xFFE8E8E8),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(100.0),
         side: const BorderSide(width: 1, color: Colors.white)

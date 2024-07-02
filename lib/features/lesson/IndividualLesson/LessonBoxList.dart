@@ -13,6 +13,7 @@ class LessonBoxList extends StatefulWidget {
     this.isDefaultLesson = false,
   });
 
+  @override
   State<LessonBoxList> createState() => _LessonBoxListState();
 }
 

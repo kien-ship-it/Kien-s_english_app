@@ -1,4 +1,5 @@
 import 'package:uuid/uuid.dart';
+
 import 'WordModel.dart';
 
 class LessonModel {
@@ -22,9 +23,10 @@ class LessonModel {
     id = const Uuid().v4();
   }
 
-  void addNewWord(WordModel wordModel) {
-    if (isExistedWord(wordModel.word)) return;
+  bool addNewWord(WordModel wordModel) {
+    if (isExistedWord(wordModel.word)) return false;
     listWordModel.add(wordModel);
+    return true;
   }
 
   void removeWord(WordModel wordModel) {

@@ -1,18 +1,20 @@
+import 'dart:developer';
+
+import 'package:english_app/Widgets/MyToast.dart';
 import 'package:english_app/features/lesson/AddNewLesson/topIcons.dart';
-import 'package:english_app/services/DictionaryService.dart';
 import 'package:english_app/models/LessonModel.dart';
-import 'package:flutter/material.dart';
 import 'package:english_app/models/WordModel.dart';
+import 'package:english_app/services/DictionaryService.dart';
+import 'package:flutter/material.dart';
 
-
-class Addnewlesson extends StatefulWidget {
-  const Addnewlesson({super.key});
+class AddNewLesson extends StatefulWidget {
+  const AddNewLesson({super.key});
 
   @override
-  State<Addnewlesson> createState() => _AddnewlessonState();
+  State<AddNewLesson> createState() => _AddNewLessonState();
 }
 
-class _AddnewlessonState extends State<Addnewlesson> {
+class _AddNewLessonState extends State<AddNewLesson> {
   TextEditingController inputWordController = TextEditingController();
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
@@ -22,20 +24,23 @@ class _AddnewlessonState extends State<Addnewlesson> {
   FocusNode descriptionFocusNode = FocusNode();
   bool isEditingTitleOrDescription = false;
 
-  Future<void> addWord() async {
-    final word = inputWordController.text.trim();
+  Future<bool> addWord() async {
+    String word = inputWordController.text.trim().toLowerCase();
+    word = "${word[0].toUpperCase()}${word.substring(1)}";
+    // upper case 1st character
     if (word.isNotEmpty) {
       try {
         final wordModel = await DictionaryService.getWord(word);
         setState(() {
-          lesson.addNewWord(wordModel);
           inputWordController.clear();
         });
+        return lesson.addNewWord(wordModel);
       } catch (e) {
         // Handle error, show toast or snackbar
-        print("Error fetching word definition: $e");
+        log("Error fetching word definition: $e");
       }
     }
+    return false;
   }
 
   void removeWord(WordModel word) {
@@ -56,7 +61,8 @@ class _AddnewlessonState extends State<Addnewlesson> {
 
   void _handleFocusChange() {
     setState(() {
-      isEditingTitleOrDescription = titleFocusNode.hasFocus || descriptionFocusNode.hasFocus;
+      isEditingTitleOrDescription =
+          titleFocusNode.hasFocus || descriptionFocusNode.hasFocus;
     });
   }
 
@@ -107,13 +113,16 @@ class _AddnewlessonState extends State<Addnewlesson> {
                           ),
                           onChanged: (value) {
                             setState(() {
-                              lesson = LessonModel.copyWith(lesson, title: value);
+                              lesson =
+                                  LessonModel.copyWith(lesson, title: value);
                             });
                           },
                         ),
                       ),
                     ),
-                    const SizedBox(height: 3,),
+                    const SizedBox(
+                      height: 3,
+                    ),
                     Center(
                       child: Container(
                           margin: const EdgeInsets.only(top: 0),
@@ -134,54 +143,64 @@ class _AddnewlessonState extends State<Addnewlesson> {
                             ),
                             onChanged: (value) {
                               setState(() {
-                                lesson = LessonModel.copyWith(lesson, description: value);
+                                lesson = LessonModel.copyWith(lesson,
+                                    description: value);
                               });
                             },
-                          )
-                      ),
+                          )),
                     ),
                   ],
                 ),
               ),
-              Positioned( //Paragraph box
+              Positioned(
+                  //Paragraph box
                   top: 180.0,
                   left: 0,
                   right: 0,
                   bottom: 0,
-                  child: ParagraphContainer(wordDefinitions: lesson.listWordModel)
-              ),
-              if (!isEditingTitleOrDescription) Positioned( //Add word box
-                bottom: 30,
-                left: 20,
-                right: 20,
-                child: Container(
-                  height: 50,
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.all(10.0),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      color: const Color(0xFFFFE3C9),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.4),
-                          spreadRadius: 1,
-                          blurRadius: 2,
-                          offset: const Offset(0, 2),
-                        )
-                      ]
-                  ),
-                  child: TextField(
-                    textAlignVertical: TextAlignVertical.center,
-                    controller: inputWordController,
-                    decoration: const InputDecoration(
-                      hintText: "Add",
-                      border: InputBorder.none,
-                      prefixIcon: Icon(Icons.add),
+                  child: ParagraphContainer(
+                      wordDefinitions: lesson.listWordModel)),
+              if (!isEditingTitleOrDescription)
+                Positioned(
+                  //Add word box
+                  bottom: 30,
+                  left: 20,
+                  right: 20,
+                  child: Container(
+                    height: 50,
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        color: const Color(0xFFFFE3C9),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.4),
+                            spreadRadius: 1,
+                            blurRadius: 2,
+                            offset: const Offset(0, 2),
+                          )
+                        ]),
+                    child: TextField(
+                      textAlignVertical: TextAlignVertical.center,
+                      controller: inputWordController,
+                      decoration: const InputDecoration(
+                        hintText: "Add",
+                        border: InputBorder.none,
+                        prefixIcon: Icon(Icons.add),
+                      ),
+                      onSubmitted: (_) async {
+                        addWord().then((value) {
+                          if (value) {
+                            //
+                          } else {
+                            showToast("Please choose another word");
+                          }
+                        });
+                      },
                     ),
-                    onSubmitted: (_) => addWord(),
                   ),
                 ),
-              ),
             ],
           ),
         ),
@@ -260,10 +279,8 @@ class WordDefinitionList extends StatelessWidget {
   final List<WordModel> wordDefinitions;
   final Function(WordModel) onRemove;
 
-  const WordDefinitionList({
-    required this.wordDefinitions,
-    required this.onRemove,
-    super.key});
+  const WordDefinitionList(
+      {required this.wordDefinitions, required this.onRemove, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -272,8 +289,9 @@ class WordDefinitionList extends StatelessWidget {
       child: Column(
         children: wordDefinitions
             .map((word) => WordDefinitionPreviewBox(
-          word: word, onRemove: () => onRemove(word),
-        ))
+                  word: word,
+                  onRemove: () => onRemove(word),
+                ))
             .toList(),
       ),
     );
@@ -284,11 +302,8 @@ class WordDefinitionPreviewBox extends StatelessWidget {
   final WordModel word;
   final VoidCallback onRemove; // Add the onRemove parameter
 
-  const WordDefinitionPreviewBox({
-    required this.word,
-    required this.onRemove,
-    super.key
-  });
+  const WordDefinitionPreviewBox(
+      {required this.word, required this.onRemove, super.key});
 
   @override
   Widget build(BuildContext context) {
