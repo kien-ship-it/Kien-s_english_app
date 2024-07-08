@@ -1,8 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:english_app/GlobalData.dart';
 import 'package:english_app/features/lesson/AddNewLesson/AddNewLesson.dart';
-import 'package:flutter/material.dart';
+import 'package:english_app/features/lesson/IndividualLesson/LessonBoxList.dart';
+import 'package:english_app/models/LessonModel.dart';
+import 'package:english_app/services/AIService.dart';
 
-import 'IndividualLesson/LessonBoxList.dart';
+import 'learn/AI Story/AIStory.dart';
 
 class LessonScreen extends StatefulWidget {
   const LessonScreen({super.key});
@@ -18,14 +21,12 @@ class _LessonScreenState extends State<LessonScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        customButton("My lessons", width, isSelected: isChooseMyLesson,
-            onTap: () {
+        customButton("My lessons", width, isSelected: isChooseMyLesson, onTap: () {
           setState(() {
             isChooseMyLesson = true;
           });
         }),
-        customButton("Lessons", width, isSelected: !isChooseMyLesson,
-            onTap: () {
+        customButton("Lessons", width, isSelected: !isChooseMyLesson, onTap: () {
           setState(() {
             isChooseMyLesson = false;
           });
@@ -50,12 +51,24 @@ class _LessonScreenState extends State<LessonScreen> {
                   topController(width),
                   const SizedBox(height: 10),
                   Expanded(
-                      child: LessonBoxList(
-                    lessons: isChooseMyLesson
-                        ? GlobalData.listPersonalLesson
-                        : GlobalData.listDefaultLesson,
-                    isDefaultLesson: !isChooseMyLesson,
-                  )),
+                    child: LessonBoxList(
+                      lessons: isChooseMyLesson
+                          ? GlobalData.listPersonalLesson
+                          : GlobalData.listDefaultLesson,
+                      isDefaultLesson: !isChooseMyLesson,
+                      onTapLesson: (LessonModel lesson) async {
+                        if (lesson.story.isEmpty) {
+                          await AIService.generateStory(lesson);
+                        }
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AIStory(lessonModel: lesson),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -70,8 +83,7 @@ class _LessonScreenState extends State<LessonScreen> {
     );
   }
 
-  Widget customButton(String title, double width,
-      {required bool isSelected, required Function onTap}) {
+  Widget customButton(String title, double width, {required bool isSelected, required Function onTap}) {
     return GestureDetector(
       onTap: () => onTap(),
       child: Column(
@@ -110,17 +122,15 @@ class _LessonScreenState extends State<LessonScreen> {
       ),
       child: ElevatedButton(
         style: ButtonStyle(
-          backgroundColor: WidgetStateProperty.all(const Color(0xFFEB6440)),
-          fixedSize: WidgetStateProperty.all(const Size(60, 60)),
-          padding: WidgetStateProperty.all<EdgeInsets>(
-            const EdgeInsets.all(0),
-          ),
+          backgroundColor: MaterialStateProperty.all(const Color(0xFFEB6440)),
+          fixedSize: MaterialStateProperty.all(const Size(60, 60)),
+          padding: MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.all(0)),
         ),
         onPressed: () {
           Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const AddNewLesson()))
-              .then((value) {
+            context,
+            MaterialPageRoute(builder: (context) => const AddNewLesson()),
+          ).then((value) {
             setState(() {});
           });
         },

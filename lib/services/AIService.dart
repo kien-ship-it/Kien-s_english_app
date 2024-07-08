@@ -1,19 +1,30 @@
 import 'package:flutter_gemini/flutter_gemini.dart';
-
-import '../models/WordModel.dart';
+import '../models/LessonModel.dart';
 
 class AIService {
-  static Future<String> generateStory(List<WordModel> words) async {
+  static Future<String> generateStory(LessonModel lesson) async {
+    if (lesson.story.isNotEmpty) {
+      return lesson.story;
+    }
+
     var story = "";
 
-    // call API to get story
+    // Call API to get story
     final gemini = Gemini.instance;
 
     var res = await gemini.text(
-        "I'm learning english, please help me to generate a simple story about 150 words"
-        "based on below words: ${words.map((e) => e.word).join(", ")}");
+      "Generate a interesting story with the following words, "
+          "make sure to write with enough context so the audience can "
+          "deduce and differentiate the meaning of the words. "
+          "Maximum word count is 100. The audience are english learners "
+          "who just encountered the words the first time, "
+          "make them easy to understand and interesting to read."
+          "Here are the words: "
+          "${lesson.listWordModel.map((e) => e.word).join(", ")}",
+    );
 
     story = res?.output ?? "";
+    lesson.updateStory(story);  // Save the generated story to the lesson
     return story;
   }
 }

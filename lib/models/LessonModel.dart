@@ -9,7 +9,7 @@ class LessonModel {
   final bool isLightning;
   final String color;
   final List<WordModel> listWordModel;
-  final String story;
+  String story;
 
   LessonModel({
     this.id,
@@ -132,5 +132,10 @@ class LessonModel {
       listWordModel: listWordModel ?? lesson.listWordModel,
       story: story ?? lesson.story,
     );
+  }
+
+  // Method to update the story
+  void updateStory(String newStory) {
+    story = newStory;
   }
 }

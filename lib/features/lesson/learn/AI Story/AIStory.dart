@@ -1,10 +1,9 @@
-import 'package:english_app/GlobalData.dart';
-import 'package:english_app/models/LessonModel.dart';
-import 'package:english_app/services/AIService.dart';
-import 'package:english_app/services/store.dart';
 import 'package:flutter/material.dart';
 
-import 'CustomRichText.dart';
+import '../../../../GlobalData.dart';
+import '../../../../models/LessonModel.dart';
+import '../../../../services/AIService.dart';
+import '../../../../services/FirestoreService.dart';
 
 class AIStory extends StatefulWidget {
   final LessonModel lessonModel;
@@ -16,7 +15,7 @@ class AIStory extends StatefulWidget {
 }
 
 class _AIStoryState extends State<AIStory> {
-  var myStory = "";
+  String myStory = "";
   bool isLoading = false;
 
   @override
@@ -33,13 +32,15 @@ class _AIStoryState extends State<AIStory> {
       setState(() {
         isLoading = true;
       });
-      // call api to generate story
-      myStory = await AIService.generateStory(widget.lessonModel.listWordModel);
+
+      // call API to generate story
+      myStory = await AIService.generateStory(widget.lessonModel.listWordModel as LessonModel);
 
       // assign story
       if (widget.lessonModel.id != null) {
-        FireStore.updateStory(widget.lessonModel.id ?? "", myStory);
+        await FirestoreService().createOrUpdateStory(widget.lessonModel.id ?? "", myStory);
       }
+
       setState(() {
         isLoading = false;
       });
@@ -99,31 +100,21 @@ class _AIStoryState extends State<AIStory> {
                 ),
               ),
             ),
-            const Positioned(
+            Positioned(
               top: 165.0,
-              left: 0,
-              right: 0,
+              left: 16.0,
+              right: 16.0,
               bottom: 100.0,
-              // Ensure space for the word box
-              child: ParagraphContainer(),
+              child: isLoading
+                  ? Center(child: CircularProgressIndicator())
+                  : ParagraphContainer(content: myStory),
             ),
-            isLoading
-                ? Positioned(child: CircularProgressIndicator())
-                : Positioned(
-                    top: 165.0,
-                    left: 0,
-                    right: 0,
-                    bottom: 160.0,
-                    child: KeywordText(
-                      lessonModel: widget.lessonModel,
-                    ),
-                  )
-            // const Positioned(
-            //   bottom: 0,
-            //   left: 0,
-            //   right: 0,
-            //   child: WordMenu(),
-            // ),
+            Positioned(
+              bottom: 20.0,
+              left: 16.0,
+              right: 16.0,
+              child: WordMenu(),
+            ),
           ],
         ),
       ),
@@ -132,7 +123,9 @@ class _AIStoryState extends State<AIStory> {
 }
 
 class ParagraphContainer extends StatelessWidget {
-  const ParagraphContainer({super.key});
+  final String content;
+
+  const ParagraphContainer({super.key, required this.content});
 
   @override
   Widget build(BuildContext context) {
@@ -144,32 +137,34 @@ class ParagraphContainer extends StatelessWidget {
           topRight: Radius.circular(40.0),
         ),
       ),
+      padding: const EdgeInsets.all(16.0),
+      child: SingleChildScrollView(
+        child: Text(content, style: const TextStyle(fontSize: 18.0)),
+      ),
     );
   }
 }
 
 class WordMenu extends StatelessWidget {
-  const WordMenu({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding:
-          const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0, bottom: 30),
+      padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0, bottom: 30.0),
       decoration: const BoxDecoration(
-          color: Color(0xFFF9F9F9),
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(35.0),
-            topRight: Radius.circular(35.0),
+        color: Color(0xFFF9F9F9),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(35.0),
+          topRight: Radius.circular(35.0),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            spreadRadius: 4,
+            blurRadius: 3,
+            offset: Offset(0, 3),
           ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              spreadRadius: 4,
-              blurRadius: 3,
-              offset: Offset(0, 3),
-            ),
-          ]),
+        ],
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -214,8 +209,9 @@ class WordMenu extends StatelessWidget {
       ),
       backgroundColor: const Color(0xFFE8E8E8),
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(100.0),
-          side: const BorderSide(width: 1, color: Colors.white)),
+        borderRadius: BorderRadius.circular(100.0),
+        side: const BorderSide(width: 1, color: Colors.white),
+      ),
     );
   }
 }

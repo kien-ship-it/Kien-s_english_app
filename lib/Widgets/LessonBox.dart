@@ -1,29 +1,23 @@
-import 'package:english_app/Widgets/MyToast.dart';
-import 'package:english_app/models/LessonModel.dart';
 import 'package:flutter/material.dart';
-
+import 'package:english_app/models/LessonModel.dart';
 import '../features/lesson/IndividualLesson/ALessonScreen.dart';
 import '../services/store.dart';
+import '../Widgets/MyToast.dart';
 
-class LessonBox extends StatefulWidget {
+class LessonBox extends StatelessWidget {
   final LessonModel lessonModel;
   final bool isDefaultLesson;
 
   const LessonBox({
-    super.key,
+    Key? key,
     required this.lessonModel,
     this.isDefaultLesson = false,
-  });
+  }) : super(key: key);
 
-  @override
-  _LessonBoxState createState() => _LessonBoxState();
-}
-
-class _LessonBoxState extends State<LessonBox> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 16.0, right: 16, top: 8, bottom: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Container(
         height: 197, // Set a fixed height for the container
         decoration: BoxDecoration(
@@ -40,7 +34,7 @@ class _LessonBoxState extends State<LessonBox> {
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0),
                   child: Text(
-                    widget.lessonModel.title,
+                    lessonModel.title,
                     style: const TextStyle(
                       fontSize: 30.0,
                       fontWeight: FontWeight.bold,
@@ -58,15 +52,16 @@ class _LessonBoxState extends State<LessonBox> {
                         color: Colors.grey.withOpacity(0.3),
                         spreadRadius: 1,
                         blurRadius: 4,
-                        offset:
-                            const Offset(0, 0.5), // changes position of shadow
+                        offset: const Offset(0, 0.5), // changes position of shadow
                       ),
                     ],
                   ),
-                  child: Icon(Icons.flash_on,
-                      color: widget.lessonModel.isLightning
-                          ? const Color(0xFFEB6440)
-                          : Colors.grey),
+                  child: Icon(
+                    Icons.flash_on,
+                    color: lessonModel.isLightning
+                        ? const Color(0xFFEB6440)
+                        : Colors.grey,
+                  ),
                 ),
               ],
             ),
@@ -76,7 +71,7 @@ class _LessonBoxState extends State<LessonBox> {
               child: SizedBox(
                 width: 290, // Set the width to limit the length of each line
                 child: Text(
-                  widget.lessonModel.description,
+                  lessonModel.description,
                   style: const TextStyle(fontSize: 16.0),
                   overflow: TextOverflow.ellipsis,
                   // Display ellipsis (...) if the text overflows
@@ -89,34 +84,34 @@ class _LessonBoxState extends State<LessonBox> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () async {
-                  if (widget.isDefaultLesson) {
-                    // call API to add lesson
-                    FireStore.addLesson(widget.lessonModel).then((value) {
-                      if (value) {
-                        showToast("Success");
-                      } else {
-                        showToast("Failed");
-                      }
-                    });
+                  if (isDefaultLesson) {
+                    // Call API to add lesson
+                    bool success = await FireStore.addLesson(lessonModel);
+                    if (success) {
+                      showToast("Success");
+                    } else {
+                      showToast("Failed");
+                    }
                   } else {
+                    // Navigate to ALessonScreen with lessonModel
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ALessonScreen(
-                          lessonModel: widget.lessonModel,
-                        ),
+                        builder: (context) => ALessonScreen(lessonModel: lessonModel),
                       ),
                     );
                   }
                 },
                 style: ButtonStyle(
-                  backgroundColor:
-                      WidgetStateProperty.all<Color>(const Color(0xFFEB6440)),
-                  fixedSize:
-                      WidgetStateProperty.all<Size>(const Size(200.0, 45.0)),
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                    const Color(0xFFEB6440),
+                  ),
+                  fixedSize: MaterialStateProperty.all<Size>(
+                    const Size(200.0, 45.0),
+                  ),
                 ),
                 child: Text(
-                  widget.isDefaultLesson ? "ADD" : "START",
+                  isDefaultLesson ? "ADD" : "START",
                   style: const TextStyle(
                     fontSize: 17,
                     color: Colors.black,

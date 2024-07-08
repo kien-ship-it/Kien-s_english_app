@@ -2,7 +2,7 @@ import 'package:english_app/models/LessonModel.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import '../../../models/WordModel.dart';
+import '../../../../models/WordModel.dart';
 
 class KeywordText extends StatefulWidget {
   final LessonModel lessonModel;

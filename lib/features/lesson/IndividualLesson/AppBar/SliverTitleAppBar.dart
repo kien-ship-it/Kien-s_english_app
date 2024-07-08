@@ -26,14 +26,14 @@ class SliverTitleAppBar extends SliverPersistentHeaderDelegate {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
-                icon: const Icon(Icons.arrow_back),
+                icon: const Icon(Icons.arrow_back, size: 30,),
                 onPressed: () {
                   Navigator.pop(context);
                 },
               ),
               const SizedBox(width: 40), // Reserve space for the title to be centered
               IconButton(
-                icon: const Icon(Icons.more_vert),
+                icon: const Icon(Icons.remove_circle_outline_outlined),
                 onPressed: () {
                   // Handle options action
                 },

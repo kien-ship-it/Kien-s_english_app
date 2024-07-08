@@ -11,6 +11,23 @@ class FirestoreService {
     await _db.collection('users').doc(user.id).set(user.toJson());
   }
 
+  // Create or Update a Story
+  Future<void> createOrUpdateStory(String docId, String story) async {
+    DocumentReference docRef = _db.collection('lessons').doc(docId);
+
+    return _db.runTransaction((transaction) async {
+      DocumentSnapshot snapshot = await transaction.get(docRef);
+
+      if (snapshot.exists) {
+        // Update the existing document
+        transaction.update(docRef, {'story': story});
+      } else {
+        // Create a new document
+        transaction.set(docRef, {'story': story});
+      }
+    });
+  }
+
   // Read a User by ID
   Future<UserModel?> getUser(String id) async {
     DocumentSnapshot doc = await _db.collection('users').doc(id).get();
@@ -58,5 +75,9 @@ class FirestoreService {
       await userRef
           .update({'listLesson': lessons.map((e) => e.toJson()).toList()});
     }
+  }
+  // Example method to get a document reference
+  DocumentReference getDocumentRef(String docId) {
+    return _db.collection('lessons').doc(docId);
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../Widgets/ProgressBar.dart';
+import '../../../../Widgets/ProgressBar.dart';
 
 class MultipleChoice extends StatefulWidget {
   const MultipleChoice({super.key});
