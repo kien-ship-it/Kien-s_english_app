@@ -45,8 +45,8 @@ class WordMenu extends StatelessWidget {
             children: [
               Text(
                 selectedWord,
-                style: TextStyle(
-                  fontSize: 16.0,
+                      style: const TextStyle(
+                        fontSize: 16.0,
                   fontWeight: FontWeight.bold,
                   color: Colors.black87,
                 ),
@@ -54,16 +54,16 @@ class WordMenu extends StatelessWidget {
               const SizedBox(height: 5.0),
               Text(
                 wordMeaning,
-                style: TextStyle(
-                  fontSize: 14.0,
+                      style: const TextStyle(
+                        fontSize: 14.0,
                   fontWeight: FontWeight.w400,
                   color: Colors.black54,
                 ),
               ),
             ],
           )
-              : Center(
-            child: Text(
+              : const Center(
+                  child: Text(
               'Tap a word to see its meaning',
               style: TextStyle(
                 fontSize: 14.0,

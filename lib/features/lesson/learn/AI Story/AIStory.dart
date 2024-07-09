@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+
 import '../../../../GlobalData.dart';
 import '../../../../models/LessonModel.dart';
 import '../../../../services/AIService.dart';
-import '../../../../services/FirestoreService.dart';
+import '../../../../services/store.dart';
 import 'CustomRichText.dart';
 
 class AIStory extends StatefulWidget {
@@ -30,31 +31,23 @@ class _AIStoryState extends State<AIStory> {
     handleStory(); // Ensure this is awaited if needed
   }
 
-  Future<void> handleStory() async {
+  Future handleStory() async {
     if (myStory.isEmpty) {
       setState(() {
         isLoading = true;
       });
+      // call api to generate story
+      myStory = await AIService.generateStory(widget.lessonModel);
 
-      // call API to generate story
-      try {
-        myStory = await AIService.generateStory(widget.lessonModel);
-
-        // assign story
-        if (widget.lessonModel.id != null) {
-          await FirestoreService().createOrUpdateStory(widget.lessonModel.id ?? "", myStory);
-        }
-      } catch (e) {
-        // Handle error here
-      } finally {
-        setState(() {
-          isLoading = false;
-        });
+      // assign story
+      if (widget.lessonModel.id != null) {
+        FireStore.updateStory(widget.lessonModel.id ?? "", myStory);
       }
-    } else {
       setState(() {
-        myStory = widget.lessonModel.story;
+        isLoading = false;
       });
+    } else {
+      myStory = widget.lessonModel.story;
     }
   }
 
@@ -125,7 +118,7 @@ class _AIStoryState extends State<AIStory> {
               right: 0.0,
               bottom: 100.0,
               child: isLoading
-                  ? Center(child: CircularProgressIndicator())
+                  ? const Center(child: CircularProgressIndicator())
                   : ParagraphContainer(
                 child: KeywordText(
                   lessonModel: widget.lessonModel,
@@ -139,7 +132,7 @@ class _AIStoryState extends State<AIStory> {
               right: 0.0,
               child: AnimatedOpacity(
                 opacity: isWordMenuVisible ? 1.0 : 0.0,
-                duration: Duration(milliseconds: 300),
+                duration: const Duration(milliseconds: 300),
                 child: Visibility(
                   visible: isWordMenuVisible,
                   child: WordMenu(

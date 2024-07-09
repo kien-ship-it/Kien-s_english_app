@@ -1,18 +1,19 @@
-import 'package:flutter/material.dart';
 import 'package:english_app/models/LessonModel.dart';
+import 'package:flutter/material.dart';
+
+import '../Widgets/MyToast.dart';
 import '../features/lesson/IndividualLesson/ALessonScreen.dart';
 import '../services/store.dart';
-import '../Widgets/MyToast.dart';
 
 class LessonBox extends StatelessWidget {
   final LessonModel lessonModel;
   final bool isDefaultLesson;
 
   const LessonBox({
-    Key? key,
+    super.key,
     required this.lessonModel,
     this.isDefaultLesson = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -103,10 +104,10 @@ class LessonBox extends StatelessWidget {
                   }
                 },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
+                  backgroundColor: WidgetStateProperty.all<Color>(
                     const Color(0xFFEB6440),
                   ),
-                  fixedSize: MaterialStateProperty.all<Size>(
+                  fixedSize: WidgetStateProperty.all<Size>(
                     const Size(200.0, 45.0),
                   ),
                 ),

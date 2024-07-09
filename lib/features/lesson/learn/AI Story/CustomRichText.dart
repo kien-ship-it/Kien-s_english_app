@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+
 import '../../../../models/LessonModel.dart';
 import '../../../../models/WordModel.dart';
 
@@ -54,7 +55,10 @@ class _KeywordTextState extends State<KeywordText> {
       child: RichText(
         textAlign: TextAlign.justify,
         text: TextSpan(
-          style: TextStyle(color: Colors.black, fontSize: 20,),
+          style: const TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+          ),
           children: textSpans,
         ),
       ),

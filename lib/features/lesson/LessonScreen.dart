@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:english_app/GlobalData.dart';
 import 'package:english_app/features/lesson/AddNewLesson/AddNewLesson.dart';
 import 'package:english_app/features/lesson/IndividualLesson/LessonBoxList.dart';
 import 'package:english_app/models/LessonModel.dart';
 import 'package:english_app/services/AIService.dart';
+import 'package:flutter/material.dart';
 
 import 'learn/AI Story/AIStory.dart';
 
@@ -122,9 +122,9 @@ class _LessonScreenState extends State<LessonScreen> {
       ),
       child: ElevatedButton(
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(const Color(0xFFEB6440)),
-          fixedSize: MaterialStateProperty.all(const Size(60, 60)),
-          padding: MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.all(0)),
+          backgroundColor: WidgetStateProperty.all(const Color(0xFFEB6440)),
+          fixedSize: WidgetStateProperty.all(const Size(60, 60)),
+          padding: WidgetStateProperty.all<EdgeInsets>(const EdgeInsets.all(0)),
         ),
         onPressed: () {
           Navigator.push(
