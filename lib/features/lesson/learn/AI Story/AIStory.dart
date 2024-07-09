@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-
 import '../../../../GlobalData.dart';
 import '../../../../models/LessonModel.dart';
 import '../../../../services/AIService.dart';
 import '../../../../services/FirestoreService.dart';
+import 'CustomRichText.dart';
 
 class AIStory extends StatefulWidget {
   final LessonModel lessonModel;
@@ -17,6 +17,9 @@ class AIStory extends StatefulWidget {
 class _AIStoryState extends State<AIStory> {
   String myStory = "";
   bool isLoading = false;
+  String selectedWord = "";
+  String wordMeaning = "";
+  bool isWordMenuVisible = false;
 
   @override
   void initState() {
@@ -24,29 +27,45 @@ class _AIStoryState extends State<AIStory> {
     if (widget.lessonModel.id != null) {
       myStory = GlobalData.getLatestLesson(widget.lessonModel.id ?? "").story;
     }
-    handleStory();
+    handleStory(); // Ensure this is awaited if needed
   }
 
-  Future handleStory() async {
+  Future<void> handleStory() async {
     if (myStory.isEmpty) {
       setState(() {
         isLoading = true;
       });
 
       // call API to generate story
-      myStory = await AIService.generateStory(widget.lessonModel.listWordModel as LessonModel);
+      try {
+        myStory = await AIService.generateStory(widget.lessonModel);
 
-      // assign story
-      if (widget.lessonModel.id != null) {
-        await FirestoreService().createOrUpdateStory(widget.lessonModel.id ?? "", myStory);
+        // assign story
+        if (widget.lessonModel.id != null) {
+          await FirestoreService().createOrUpdateStory(widget.lessonModel.id ?? "", myStory);
+        }
+      } catch (e) {
+        // Handle error here
+      } finally {
+        setState(() {
+          isLoading = false;
+        });
       }
-
-      setState(() {
-        isLoading = false;
-      });
     } else {
-      myStory = widget.lessonModel.story;
+      setState(() {
+        myStory = widget.lessonModel.story;
+      });
     }
+  }
+
+  void onKeywordTap(String keyword) {
+    setState(() {
+      selectedWord = keyword;
+      wordMeaning = widget.lessonModel.listWordModel
+          .firstWhere((wordModel) => wordModel.word.toLowerCase() == keyword.toLowerCase())
+          .wordMeaning;
+      isWordMenuVisible = true;
+    });
   }
 
   @override
@@ -102,18 +121,33 @@ class _AIStoryState extends State<AIStory> {
             ),
             Positioned(
               top: 165.0,
-              left: 16.0,
-              right: 16.0,
+              left: 0.0,
+              right: 0.0,
               bottom: 100.0,
               child: isLoading
                   ? Center(child: CircularProgressIndicator())
-                  : ParagraphContainer(content: myStory),
+                  : ParagraphContainer(
+                child: KeywordText(
+                  lessonModel: widget.lessonModel,
+                  onKeywordTap: onKeywordTap,
+                ),
+              ),
             ),
             Positioned(
-              bottom: 20.0,
-              left: 16.0,
-              right: 16.0,
-              child: WordMenu(),
+              bottom: 0.0,
+              left: 0.0,
+              right: 0.0,
+              child: AnimatedOpacity(
+                opacity: isWordMenuVisible ? 1.0 : 0.0,
+                duration: Duration(milliseconds: 300),
+                child: Visibility(
+                  visible: isWordMenuVisible,
+                  child: WordMenu(
+                    selectedWord: selectedWord,
+                    wordMeaning: wordMeaning,
+                  ),
+                ),
+              ),
             ),
           ],
         ),
@@ -123,9 +157,9 @@ class _AIStoryState extends State<AIStory> {
 }
 
 class ParagraphContainer extends StatelessWidget {
-  final String content;
+  final Widget child;
 
-  const ParagraphContainer({super.key, required this.content});
+  const ParagraphContainer({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -139,17 +173,22 @@ class ParagraphContainer extends StatelessWidget {
       ),
       padding: const EdgeInsets.all(16.0),
       child: SingleChildScrollView(
-        child: Text(content, style: const TextStyle(fontSize: 18.0)),
+        child: child,
       ),
     );
   }
 }
 
 class WordMenu extends StatelessWidget {
+  final String selectedWord;
+  final String wordMeaning;
+
+  const WordMenu({super.key, required this.selectedWord, required this.wordMeaning});
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0, bottom: 30.0),
+      padding: const EdgeInsets.all(16.0),
       decoration: const BoxDecoration(
         color: Color(0xFFF9F9F9),
         borderRadius: BorderRadius.only(
@@ -168,10 +207,10 @@ class WordMenu extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Center(
+          Center(
             child: Text(
-              'Words',
-              style: TextStyle(
+              selectedWord.isNotEmpty ? 'Word: $selectedWord' : '',
+              style: const TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.w400,
                 color: Colors.black87,
@@ -179,38 +218,13 @@ class WordMenu extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10.0),
-          Center(
-            child: Wrap(
-              spacing: 8.0,
-              runSpacing: 4.0,
-              alignment: WrapAlignment.center,
-              children: [
-                _buildWordChip('Aberration'),
-                _buildWordChip('Dubious'),
-                _buildWordChip('Diligence'),
-                _buildWordChip('Benevolent'),
-                _buildWordChip('Conciliate'),
-                _buildWordChip('Aberration'),
-              ],
-            ),
-          ),
+          selectedWord.isNotEmpty
+              ? Text(
+            'Meaning: $wordMeaning',
+            style: const TextStyle(fontSize: 16.0, color: Colors.black54),
+          )
+              : Container(),
         ],
-      ),
-    );
-  }
-
-  Widget _buildWordChip(String word) {
-    return Chip(
-      label: Text(word),
-      labelStyle: const TextStyle(
-        color: Colors.black87,
-        fontSize: 15.0,
-        fontWeight: FontWeight.w400,
-      ),
-      backgroundColor: const Color(0xFFE8E8E8),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(100.0),
-        side: const BorderSide(width: 1, color: Colors.white),
       ),
     );
   }

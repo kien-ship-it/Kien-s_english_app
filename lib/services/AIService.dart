@@ -16,7 +16,7 @@ class AIService {
       "Generate a interesting story with the following words, "
           "make sure to write with enough context so the audience can "
           "deduce and differentiate the meaning of the words. "
-          "Maximum word count is 100. The audience are english learners "
+          "Maximum word count is 150. The audience are english learners "
           "who just encountered the words the first time, "
           "make them easy to understand and interesting to read."
           "Here are the words: "

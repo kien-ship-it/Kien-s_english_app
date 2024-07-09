@@ -1,13 +1,13 @@
-import 'package:english_app/models/LessonModel.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
+import '../../../../models/LessonModel.dart';
 import '../../../../models/WordModel.dart';
 
 class KeywordText extends StatefulWidget {
   final LessonModel lessonModel;
+  final ValueChanged<String> onKeywordTap;
 
-  const KeywordText({super.key, required this.lessonModel});
+  const KeywordText({super.key, required this.lessonModel, required this.onKeywordTap});
 
   @override
   State<KeywordText> createState() => _KeywordTextState();
@@ -35,11 +35,10 @@ class _KeywordTextState extends State<KeywordText> {
         textSpans.add(
           TextSpan(
             text: keyword,
-            style:
-                const TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+            style: const TextStyle(color: Colors.orange, fontWeight: FontWeight.bold),
             recognizer: TapGestureRecognizer()
               ..onTap = () {
-                _showKeywordInfo(context, keyword);
+                widget.onKeywordTap(keyword);
               },
           ),
         );
@@ -53,31 +52,12 @@ class _KeywordTextState extends State<KeywordText> {
 
     return Center(
       child: RichText(
+        textAlign: TextAlign.justify,
         text: TextSpan(
-          style: TextStyle(color: Colors.black, fontSize: 18),
+          style: TextStyle(color: Colors.black, fontSize: 20,),
           children: textSpans,
         ),
       ),
-    );
-  }
-
-  void _showKeywordInfo(BuildContext context, String keyword) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(keyword),
-          content: Text(keywordInfo[keyword]!),
-          actions: <Widget>[
-            TextButton(
-              child: Text('Close'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
     );
   }
 
@@ -93,7 +73,7 @@ class _KeywordTextState extends State<KeywordText> {
   String buildRegExp(List<WordModel> listWordModel) {
     String regExp = r'\b(';
     regExp += listWordModel
-        .map((wordModel) => wordModel.word.toLowerCase())
+        .map((wordModel) => RegExp.escape(wordModel.word.toLowerCase()))
         .join('|');
     regExp += r')\b';
     return regExp;

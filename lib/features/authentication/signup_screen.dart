@@ -252,7 +252,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
 
     // check email by regex
-    else if (!RegExp(r"^^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
+    else if (!RegExp(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
         .hasMatch(emailTextController.text)) {
       showToast("Please enter a valid email");
       result = false;
