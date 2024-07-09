@@ -1,20 +1,23 @@
 import 'package:english_app/models/LessonModel.dart';
 import 'package:flutter/material.dart';
 
-import '../Widgets/MyToast.dart';
-import '../features/lesson/IndividualLesson/ALessonScreen.dart';
-import '../services/store.dart';
-
-class LessonBox extends StatelessWidget {
+class LessonBox extends StatefulWidget {
   final LessonModel lessonModel;
   final bool isDefaultLesson;
+  final Function(LessonModel) onTapLesson;
 
   const LessonBox({
     super.key,
     required this.lessonModel,
     this.isDefaultLesson = false,
+    required this.onTapLesson,
   });
 
+  @override
+  State<LessonBox> createState() => _LessonBoxState();
+}
+
+class _LessonBoxState extends State<LessonBox> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -35,7 +38,7 @@ class LessonBox extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0),
                   child: Text(
-                    lessonModel.title,
+                    widget.lessonModel.title,
                     style: const TextStyle(
                       fontSize: 30.0,
                       fontWeight: FontWeight.bold,
@@ -53,13 +56,14 @@ class LessonBox extends StatelessWidget {
                         color: Colors.grey.withOpacity(0.3),
                         spreadRadius: 1,
                         blurRadius: 4,
-                        offset: const Offset(0, 0.5), // changes position of shadow
+                        offset:
+                            const Offset(0, 0.5), // changes position of shadow
                       ),
                     ],
                   ),
                   child: Icon(
                     Icons.flash_on,
-                    color: lessonModel.isLightning
+                    color: widget.lessonModel.isLightning
                         ? const Color(0xFFEB6440)
                         : Colors.grey,
                   ),
@@ -72,7 +76,7 @@ class LessonBox extends StatelessWidget {
               child: SizedBox(
                 width: 290, // Set the width to limit the length of each line
                 child: Text(
-                  lessonModel.description,
+                  widget.lessonModel.description,
                   style: const TextStyle(fontSize: 16.0),
                   overflow: TextOverflow.ellipsis,
                   // Display ellipsis (...) if the text overflows
@@ -85,23 +89,7 @@ class LessonBox extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () async {
-                  if (isDefaultLesson) {
-                    // Call API to add lesson
-                    bool success = await FireStore.addLesson(lessonModel);
-                    if (success) {
-                      showToast("Success");
-                    } else {
-                      showToast("Failed");
-                    }
-                  } else {
-                    // Navigate to ALessonScreen with lessonModel
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ALessonScreen(lessonModel: lessonModel),
-                      ),
-                    );
-                  }
+                  widget.onTapLesson(widget.lessonModel);
                 },
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.all<Color>(
@@ -112,7 +100,7 @@ class LessonBox extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  isDefaultLesson ? "ADD" : "START",
+                  widget.isDefaultLesson ? "ADD" : "START",
                   style: const TextStyle(
                     fontSize: 17,
                     color: Colors.black,

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -102,6 +103,24 @@ class FireStore {
       _setDoc(docRef, {'story': story});
     } catch (e) {
       showToast(e.toString());
+    }
+  }
+
+  // remove lesson by id
+  static Future<bool> removeLessonById(String lessonId) async {
+    log("id: $lessonId");
+    // remove local
+    GlobalData.removeLessonById(lessonId);
+
+    // remove cloud
+    try {
+      String uid = Auth().getUserId();
+      final docRef =
+          _users.doc(uid).collection(LIST_PERSONAL_LESSON).doc(lessonId);
+      await docRef.delete();
+      return true;
+    } catch (e) {
+      return false;
     }
   }
 

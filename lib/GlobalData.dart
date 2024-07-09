@@ -33,4 +33,13 @@ class GlobalData {
     }
     return LessonModel.empty();
   }
+
+  static void removeLessonById(String id) {
+    for (var i = 0; i < listPersonalLesson.length; i++) {
+      if (listPersonalLesson[i].id == id) {
+        listPersonalLesson.removeAt(i);
+        break;
+      }
+    }
+  }
 }

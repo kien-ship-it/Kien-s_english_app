@@ -8,16 +8,21 @@ import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 import '../Widgets/CustomIcon.dart';
 
 class GeneralScreen extends StatefulWidget {
-  const GeneralScreen({super.key});
+  final int? settingIndex;
+
+  const GeneralScreen({super.key, this.settingIndex});
 
   @override
   State<GeneralScreen> createState() => _GeneralScreenState();
 }
 
 class _GeneralScreenState extends State<GeneralScreen> {
+  var currentIndex = 0;
+
   @override
   void initState() {
     super.initState();
+    currentIndex = widget.settingIndex ?? 0;
     getData();
   }
 
@@ -26,7 +31,6 @@ class _GeneralScreenState extends State<GeneralScreen> {
     await FireStore.loadLesson();
   }
 
-  var currentIndex = 0;
 
   Widget bodyParser(int index) {
     switch (index) {

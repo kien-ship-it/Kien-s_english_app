@@ -1,13 +1,18 @@
+import 'package:english_app/services/store.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../Widgets/MyToast.dart';
 import 'BackgroundWave.dart';
 
 class SliverTitleAppBar extends SliverPersistentHeaderDelegate {
   final String title;
+  final String id;
 
-  SliverTitleAppBar({required this.title});
+  SliverTitleAppBar({required this.title, required this.id});
 
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
     double topPadding = MediaQuery.of(context).padding.top + 16;
 
     // Calculate the scale for the title
@@ -26,16 +31,29 @@ class SliverTitleAppBar extends SliverPersistentHeaderDelegate {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
-                icon: const Icon(Icons.arrow_back, size: 30,),
-                onPressed: () {
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    size: 30,
+                  ),
+                  onPressed: () {
                   Navigator.pop(context);
-                },
-              ),
-              const SizedBox(width: 40), // Reserve space for the title to be centered
+                  }),
+              const SizedBox(width: 40),
+              // Reserve space for the title to be centered
               IconButton(
-                icon: const Icon(Icons.remove_circle_outline_outlined),
-                onPressed: () {
+                icon: const Icon(
+                  Icons.delete_outline,
+                  color: Colors.red,
+                ),
+                onPressed: () async {
                   // Handle options action
+                  FireStore.removeLessonById(id).then((value) {
+                    if (value) {
+                      Navigator.pop(context);
+                    } else {
+                      showToast("Something went wrong");
+                    }
+                  });
                 },
               ),
             ],
@@ -57,23 +75,9 @@ class SliverTitleAppBar extends SliverPersistentHeaderDelegate {
                     color: Colors.black,
                   ),
                 ),
-                const SizedBox(height: 2,),
-                // AnimatedOpacity(
-                //   duration: const Duration(milliseconds: 100),
-                //   opacity: descriptionOpacity,
-                //   child: const SizedBox(
-                //     width: 280,
-                //     child: Text(
-                //       "1000 most common advanced SAT vocabulary",
-                //       style: TextStyle(
-                //         fontSize: 16.0,
-                //         color: Colors.black87,
-                //       ),
-                //       textAlign: TextAlign.center,
-                //
-                //     ),
-                //   ),
-                // ),
+                const SizedBox(
+                  height: 2,
+                ),
               ],
             ),
           ),

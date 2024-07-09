@@ -21,18 +21,21 @@ class ALessonScreen extends StatefulWidget {
 class _ALessonScreenState extends State<ALessonScreen> {
   @override
   Widget build(BuildContext context) {
+    ScrollController scrollController = ScrollController();
     double progressValue = 0.7;
     double paddingProgressBar = 30;
     double progressWidth =
         (MediaQuery.of(context).size.width - 2 * paddingProgressBar);
-
     return SafeArea(
       child: Scaffold(
         backgroundColor: const Color(0xFFEFF5F5),
         body: CustomScrollView(
+          controller: scrollController,
           slivers: [
             SliverPersistentHeader(
-              delegate: SliverTitleAppBar(title: widget.lessonModel.title),
+              delegate: SliverTitleAppBar(
+                  title: widget.lessonModel.title,
+                  id: widget.lessonModel.id ?? ""),
               pinned: true,
             ),
             const SliverToBoxAdapter(

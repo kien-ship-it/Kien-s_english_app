@@ -1,5 +1,3 @@
-import 'package:uuid/uuid.dart';
-
 import 'WordModel.dart';
 
 class LessonModel {
@@ -19,9 +17,7 @@ class LessonModel {
     required this.color,
     required this.listWordModel,
     required this.story,
-  }) {
-    id = const Uuid().v4();
-  }
+  });
 
   LessonModel copyWith({
     String? id,

@@ -2,10 +2,11 @@ import 'package:english_app/GlobalData.dart';
 import 'package:english_app/features/lesson/AddNewLesson/AddNewLesson.dart';
 import 'package:english_app/features/lesson/IndividualLesson/LessonBoxList.dart';
 import 'package:english_app/models/LessonModel.dart';
-import 'package:english_app/services/AIService.dart';
 import 'package:flutter/material.dart';
 
-import 'learn/AI Story/AIStory.dart';
+import '../../Widgets/MyToast.dart';
+import '../../services/store.dart';
+import 'IndividualLesson/ALessonScreen.dart';
 
 class LessonScreen extends StatefulWidget {
   const LessonScreen({super.key});
@@ -21,12 +22,14 @@ class _LessonScreenState extends State<LessonScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        customButton("My lessons", width, isSelected: isChooseMyLesson, onTap: () {
+        customButton("My lessons", width, isSelected: isChooseMyLesson,
+            onTap: () {
           setState(() {
             isChooseMyLesson = true;
           });
         }),
-        customButton("Lessons", width, isSelected: !isChooseMyLesson, onTap: () {
+        customButton("Lessons", width, isSelected: !isChooseMyLesson,
+            onTap: () {
           setState(() {
             isChooseMyLesson = false;
           });
@@ -57,15 +60,24 @@ class _LessonScreenState extends State<LessonScreen> {
                           : GlobalData.listDefaultLesson,
                       isDefaultLesson: !isChooseMyLesson,
                       onTapLesson: (LessonModel lesson) async {
-                        if (lesson.story.isEmpty) {
-                          await AIService.generateStory(lesson);
+                        if (!isChooseMyLesson) {
+                          // Call API to add lesson
+                          bool success = await FireStore.addLesson(lesson);
+                          if (success) {
+                            showToast("Success");
+                          } else {
+                            showToast("Failed");
+                          }
+                        } else {
+                          // Navigate to ALessonScreen with lessonModel
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  ALessonScreen(lessonModel: lesson),
+                            ),
+                          ).then((value) => setState(() {}));
                         }
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => AIStory(lessonModel: lesson),
-                          ),
-                        );
                       },
                     ),
                   ),
@@ -83,7 +95,8 @@ class _LessonScreenState extends State<LessonScreen> {
     );
   }
 
-  Widget customButton(String title, double width, {required bool isSelected, required Function onTap}) {
+  Widget customButton(String title, double width,
+      {required bool isSelected, required Function onTap}) {
     return GestureDetector(
       onTap: () => onTap(),
       child: Column(

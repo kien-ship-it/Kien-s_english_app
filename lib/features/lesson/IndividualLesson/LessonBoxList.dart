@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../Widgets/LessonBox.dart';
 import '../../../models/LessonModel.dart';
 
@@ -23,28 +24,27 @@ class _LessonBoxListState extends State<LessonBoxList> {
   Widget build(BuildContext context) {
     return widget.lessons.isEmpty
         ? const Center(
-      child: Text(
-        "Empty List",
-        style: TextStyle(fontSize: 24),
-      ),
-    )
+            child: Text(
+              "Empty List",
+              style: TextStyle(fontSize: 24),
+            ),
+          )
         : CustomScrollView(
-      slivers: [
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-                (context, index) {
-              final item = widget.lessons[index];
-              return GestureDetector(
-                onTap: () => widget.onTapLesson(item),
-                child: LessonBox(
-                    lessonModel: item,
-                    isDefaultLesson: widget.isDefaultLesson),
-              );
-            },
-            childCount: widget.lessons.length,
-          ),
-        ),
-      ],
-    );
+            slivers: [
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) {
+                    final item = widget.lessons[index];
+                    return LessonBox(
+                      lessonModel: item,
+                      isDefaultLesson: widget.isDefaultLesson,
+                      onTapLesson: widget.onTapLesson,
+                    );
+                  },
+                  childCount: widget.lessons.length,
+                ),
+              ),
+            ],
+          );
   }
 }
