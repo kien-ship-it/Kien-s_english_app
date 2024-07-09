@@ -42,4 +42,13 @@ class GlobalData {
       }
     }
   }
+
+  static void updateLesson(LessonModel lesson) {
+    for (var i = 0; i < listPersonalLesson.length; i++) {
+      if (listPersonalLesson[i].id == lesson.id) {
+        listPersonalLesson[i] = lesson;
+        break;
+      }
+    }
+  }
 }

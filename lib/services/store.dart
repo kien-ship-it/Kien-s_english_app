@@ -89,7 +89,7 @@ class FireStore {
     return true;
   }
 
-  // update story for an specific lesson
+  // update story for a specific lesson
   static Future<void> updateStory(String lessonId, String story) async {
     log("lessonId: $lessonId");
     // update local
@@ -101,6 +101,22 @@ class FireStore {
       final docRef =
           _users.doc(uid).collection(LIST_PERSONAL_LESSON).doc(lessonId);
       _setDoc(docRef, {'story': story});
+    } catch (e) {
+      showToast(e.toString());
+    }
+  }
+
+  // update lesson
+  static Future<void> updateLesson(LessonModel newModel) async {
+    // update local
+    GlobalData.updateLesson(newModel);
+
+    // cloud
+    try {
+      String uid = Auth().getUserId();
+      final docRef =
+          _users.doc(uid).collection(LIST_PERSONAL_LESSON).doc(newModel.id);
+      _setDoc(docRef, newModel.toJson());
     } catch (e) {
       showToast(e.toString());
     }

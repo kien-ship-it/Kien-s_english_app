@@ -1,3 +1,4 @@
+import 'package:english_app/features/lesson/AddNewLesson/AddNewLesson.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Widgets/ProgressBar.dart';
@@ -62,6 +63,15 @@ class _ALessonScreenState extends State<ALessonScreen> {
             SliverToBoxAdapter(
               child: WordBox(
                 words: widget.lessonModel.listWordModel,
+                onTapLesson: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AddNewLesson(
+                              lessonModel: widget.lessonModel,
+                            )),
+                  ).then((value) => setState(() {}));
+                },
               ),
             ),
             const SliverToBoxAdapter(

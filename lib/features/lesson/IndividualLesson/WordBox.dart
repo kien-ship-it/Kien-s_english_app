@@ -4,8 +4,9 @@ import '../../../models/WordModel.dart';
 
 class WordBox extends StatelessWidget {
   final List<WordModel> words;
+  final Function() onTapLesson;
 
-  const WordBox({super.key, required this.words});
+  const WordBox({super.key, required this.words, required this.onTapLesson});
 
   @override
   Widget build(BuildContext context) {
@@ -73,10 +74,15 @@ class WordBox extends StatelessWidget {
                 ),
               ],
             ),
-            child: const Icon(
-              Icons.edit,
-              color: Colors.black,
-              size: 26,
+            child: GestureDetector(
+              onTap: () {
+                onTapLesson();
+              },
+              child: const Icon(
+                Icons.edit,
+                color: Colors.black,
+                size: 26,
+              ),
             ),
           ),
         ),

@@ -8,7 +8,9 @@ import 'package:english_app/services/DictionaryService.dart';
 import 'package:flutter/material.dart';
 
 class AddNewLesson extends StatefulWidget {
-  const AddNewLesson({super.key});
+  final LessonModel? lessonModel;
+
+  const AddNewLesson({super.key, this.lessonModel});
 
   @override
   State<AddNewLesson> createState() => _AddNewLessonState();
@@ -52,6 +54,10 @@ class _AddNewLessonState extends State<AddNewLesson> {
   @override
   void initState() {
     super.initState();
+    if (widget.lessonModel != null) {
+      lesson = LessonModel.copyWith(lesson);
+    }
+
     titleController.text = lesson.title;
     descriptionController.text = lesson.description;
 

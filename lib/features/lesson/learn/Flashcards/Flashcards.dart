@@ -1,6 +1,6 @@
 import 'package:english_app/Widgets/ProgressBar.dart';
-import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
+import 'package:flutter/material.dart';
 
 class Flashcards extends StatefulWidget {
   const Flashcards({super.key});
@@ -35,47 +35,7 @@ class _FlashcardsState extends State<Flashcards> {
                     backgroundColor: const Color(0xFFEED7CF),
                   ),
                 ),
-                FlipCard(
-                  key: cardKey,
-                  direction: FlipDirection.HORIZONTAL,
-                  speed: 300,
-                  front: Container(
-                    alignment: Alignment.center,
-                    width: (MediaQuery.of(context).size.width -
-                        2 * paddingProgressBar),
-                    height: MediaQuery.of(context).size.height * 0.7,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      color: const Color(0xFFDEE2E2),
-                    ),
-                    child: const Text(
-                      "Aberration",
-                      style: TextStyle(
-                        fontSize: 35.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  back: Container(
-                    alignment: Alignment.center,
-                    width: (MediaQuery.of(context).size.width -
-                        2 * paddingProgressBar),
-                    height: MediaQuery.of(context).size.height * 0.7,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      color: const Color(0xFFDEE2E2),
-                    ),
-                    child: const Text(
-                      "Definition",
-                      style: TextStyle(
-                        fontSize: 35.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ),
+                buildFlipCard("word", "meaning", paddingProgressBar),
                 Container(
                   margin: const EdgeInsets.only(
                       left: 30, right: 30, bottom: 25, top: 0),
@@ -158,6 +118,48 @@ class _FlashcardsState extends State<Flashcards> {
             ),
           ),
         ]),
+      ),
+    );
+  }
+
+  Widget buildFlipCard(String word, String meaning, double paddingProgressBar) {
+    return FlipCard(
+      key: cardKey,
+      direction: FlipDirection.HORIZONTAL,
+      speed: 300,
+      front: Container(
+        alignment: Alignment.center,
+        width: (MediaQuery.of(context).size.width - 2 * paddingProgressBar),
+        height: MediaQuery.of(context).size.height * 0.7,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          color: const Color(0xFFDEE2E2),
+        ),
+        child: Text(
+          word,
+          style: const TextStyle(
+            fontSize: 35.0,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+      ),
+      back: Container(
+        alignment: Alignment.center,
+        width: (MediaQuery.of(context).size.width - 2 * paddingProgressBar),
+        height: MediaQuery.of(context).size.height * 0.7,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          color: const Color(0xFFDEE2E2),
+        ),
+        child: Text(
+          meaning,
+          style: const TextStyle(
+            fontSize: 35.0,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
       ),
     );
   }
