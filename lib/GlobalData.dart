@@ -18,7 +18,7 @@ class GlobalData {
     for (int i = 0; i < listPersonalLesson.length; i++) {
       LessonModel e = listPersonalLesson[i];
       if (e.id == id) {
-        var modifiedLesson = e.copyWith(story: story);
+        var modifiedLesson = LessonModel.copyWith(e, story: story);
         listPersonalLesson[i] = modifiedLesson;
         break;
       }
@@ -50,5 +50,23 @@ class GlobalData {
         break;
       }
     }
+  }
+
+  static void updateLatestOpenedDateById(String lessonId, String date) {
+    for (var i = 0; i < listPersonalLesson.length; i++) {
+      if (listPersonalLesson[i].id == lessonId) {
+        listPersonalLesson[i].latestOpenedDate = date;
+        break;
+      }
+    }
+  }
+
+  static List<LessonModel> getListPersonalLessonSortByTime() {
+    List<LessonModel> result = [];
+    for (var e in listPersonalLesson) {
+      result.add(e);
+    }
+    result.sort((a, b) => b.latestOpenedDate.compareTo(a.latestOpenedDate));
+    return result;
   }
 }

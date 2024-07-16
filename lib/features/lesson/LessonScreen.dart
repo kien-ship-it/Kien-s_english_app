@@ -76,7 +76,12 @@ class _LessonScreenState extends State<LessonScreen> {
                               builder: (context) =>
                                   ALessonScreen(lessonModel: lesson),
                             ),
-                          ).then((value) => setState(() {}));
+                          ).then((value) => setState(() {
+                                // update time
+                                FireStore.updateLatestOpenedDateById(
+                                    lesson.id ?? "",
+                                    DateTime.now().toIso8601String());
+                              }));
                         }
                       },
                     ),

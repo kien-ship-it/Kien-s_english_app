@@ -1,5 +1,8 @@
+import 'package:english_app/models/LessonModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../../GlobalData.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -9,35 +12,48 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<LessonModel> listLesson = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    listLesson = GlobalData.getListPersonalLessonSortByTime();
+  }
+
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
     return SafeArea(
-      child: Container(
-        color: const Color(0xFFEFF5F5),
-        child: ListView.builder(
-          itemCount: 1,
-          // Ensures only one item in the ListView for the "Home" title
-          itemBuilder: (context, index) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  margin: const EdgeInsets.fromLTRB(16.0, 20.0, 16.0, 0),
-                  // Added margin
+      child: ListView(
+        children: [
+          Container(
+            margin: const EdgeInsets.fromLTRB(16.0, 20.0, 16.0, 0),
+            // Added margin
+            padding: const EdgeInsets.all(8.0),
+            // Internal padding
+            child: const Text(
+              "Home",
+              textAlign: TextAlign.left, // Align text to the left
+              style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
+            ),
+          ),
+          const SizedBox(height: 8.0),
+          SizedBox(
+            height: height * 5 / 6,
+            child: ListView.builder(
+              itemBuilder: (context, index) {
+                // decorate
+                return Container(
+                  margin: const EdgeInsets.all(16.0),
                   padding: const EdgeInsets.all(8.0),
-                  // Internal padding
-                  child: const Text(
-                    "Home",
-                    textAlign: TextAlign.left, // Align text to the left
-                    style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                const SizedBox(height: 8.0),
-                // Add some space between the title and the container
-              ],
-            );
-          },
-        ),
+                  child: Text(listLesson[index].title),
+                );
+              },
+              itemCount: listLesson.length,
+            ),
+          )
+        ],
       ),
     );
   }

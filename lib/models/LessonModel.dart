@@ -10,6 +10,7 @@ class LessonModel {
   final String color;
   final List<WordModel> listWordModel;
   String story;
+  late String latestOpenedDate;
 
   LessonModel({
     this.id,
@@ -19,26 +20,10 @@ class LessonModel {
     required this.color,
     required this.listWordModel,
     required this.story,
-  });
-
-  LessonModel copyWith({
-    String? id,
-    String? title,
-    String? description,
-    bool? isLightning,
-    String? color,
-    List<WordModel>? listWordModel,
-    String? story,
+    this.latestOpenedDate = "",
   }) {
-    return LessonModel(
-      id: id ?? this.id,
-      title: title ?? this.title,
-      description: description ?? this.description,
-      isLightning: isLightning ?? this.isLightning,
-      color: color ?? this.color,
-      listWordModel: listWordModel ?? this.listWordModel,
-      story: story ?? this.story,
-    );
+    latestOpenedDate = DateTime.now().toString();
+    id ??= const Uuid().v4();
   }
 
   bool addNewWord(WordModel wordModel) {
@@ -52,7 +37,8 @@ class LessonModel {
   }
 
   bool isExistedWord(String word) {
-    return listWordModel.any((element) => element.word.toLowerCase() == word.toLowerCase());
+    return listWordModel
+        .any((element) => element.word.toLowerCase() == word.toLowerCase());
   }
 
   factory LessonModel.fromJson(Map<String, dynamic> json) {
@@ -68,6 +54,7 @@ class LessonModel {
       color: json['color'],
       listWordModel: listWordModel,
       story: json['story'],
+      latestOpenedDate: json['latestOpenedDate'],
     );
   }
 
@@ -80,6 +67,7 @@ class LessonModel {
       'color': color,
       'listWordModel': listWordModel.map((e) => e.toJson()).toList(),
       'story': story,
+      'latestOpenedDate': latestOpenedDate
     };
   }
 
@@ -92,6 +80,7 @@ class LessonModel {
       listWordModel: [],
       story: '',
       id: const Uuid().v4(),
+      latestOpenedDate: DateTime.now().toIso8601String(),
     );
   }
 
@@ -110,10 +99,12 @@ class LessonModel {
         ),
       ],
       story: "",
+      latestOpenedDate: DateTime.now().toIso8601String(),
     );
   }
 
-  factory LessonModel.copyWith(LessonModel lesson, {
+  factory LessonModel.copyWith(
+    LessonModel lesson, {
     String? id,
     bool? isLightning,
     String? color,
@@ -121,6 +112,7 @@ class LessonModel {
     String? story,
     String? title,
     String? description,
+    String? latestOpenedDate,
   }) {
     return LessonModel(
       id: id ?? lesson.id,
@@ -130,6 +122,7 @@ class LessonModel {
       color: color ?? lesson.color,
       listWordModel: listWordModel ?? lesson.listWordModel,
       story: story ?? lesson.story,
+      latestOpenedDate: latestOpenedDate ?? lesson.latestOpenedDate,
     );
   }
 
