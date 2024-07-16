@@ -54,10 +54,10 @@ class _AddNewLessonState extends State<AddNewLesson> {
   @override
   void initState() {
     super.initState();
-    if (widget.lessonModel != null) {
-      lesson = LessonModel.copyWith(lesson);
-    }
-
+    // if (widget.lessonModel != null) {
+    //   lesson = LessonModel.copyWith(lesson);
+    // }
+    //
     titleController.text = lesson.title;
     descriptionController.text = lesson.description;
 

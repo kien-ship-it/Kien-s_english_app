@@ -70,23 +70,31 @@ class FireStore {
 
   // add an new lesson
   static Future<bool> addLesson(LessonModel lesson) async {
-    // check duplicate
+    // Check for duplicates
     if (GlobalData.isExistLesson(lesson.id)) {
+      log('Lesson with ID ${lesson.id} already exists');
       return false;
     }
 
-    // add local
-    GlobalData.listPersonalLesson.add(lesson);
+    try {
+      // Add local
+      GlobalData.listPersonalLesson.add(lesson);
 
-    // add cloud
-    String uid = Auth().getUserId();
+      // Add cloud
+      String uid = Auth().getUserId();
+      if (uid == null) {
+        log('User ID is null. User might not be authenticated.');
+        return false;
+      }
 
-    final docRef =
-        _users.doc(uid).collection(LIST_PERSONAL_LESSON).doc(lesson.id);
+      final docRef = _users.doc(uid).collection(LIST_PERSONAL_LESSON).doc(lesson.id);
 
-    await _addDoc(docRef, lesson.toJson());
-
-    return true;
+      await _addDoc(docRef, lesson.toJson());
+      return true;
+    } catch (e) {
+      log('Failed to add lesson: $e');
+      return false;
+    }
   }
 
   // update story for a specific lesson
