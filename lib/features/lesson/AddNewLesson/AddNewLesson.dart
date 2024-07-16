@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 class AddNewLesson extends StatefulWidget {
   final LessonModel? lessonModel;
 
-  const AddNewLesson({super.key, this.lessonModel});
+  const AddNewLesson({Key? key, this.lessonModel}) : super(key: key);
 
   @override
   State<AddNewLesson> createState() => _AddNewLessonState();
@@ -20,7 +20,7 @@ class _AddNewLessonState extends State<AddNewLesson> {
   TextEditingController inputWordController = TextEditingController();
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
-  LessonModel lesson = LessonModel.empty();
+  late LessonModel lesson;
   List<WordModel> wordDefinitions = [];
   FocusNode titleFocusNode = FocusNode();
   FocusNode descriptionFocusNode = FocusNode();
@@ -52,15 +52,18 @@ class _AddNewLessonState extends State<AddNewLesson> {
   }
 
   @override
+  @override
   void initState() {
     super.initState();
-    // if (widget.lessonModel != null) {
-    //   lesson = LessonModel.copyWith(lesson);
-    // }
-    //
+    if (widget.lessonModel != null) {
+      lesson = LessonModel.copyWith(widget.lessonModel!,
+          listWordModel: List.from(widget.lessonModel!.listWordModel));
+    } else {
+      lesson = LessonModel.empty();
+    }
+
     titleController.text = lesson.title;
     descriptionController.text = lesson.description;
-
     titleFocusNode.addListener(_handleFocusChange);
     descriptionFocusNode.addListener(_handleFocusChange);
   }
