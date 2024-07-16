@@ -1,16 +1,35 @@
-import 'package:english_app/Widgets/ProgressBar.dart';
-import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flip_card/flip_card.dart';
+
+import '../../../../Widgets/ProgressBar.dart';
+import '../../../../models/WordModel.dart';
 
 class Flashcards extends StatefulWidget {
-  const Flashcards({super.key});
+  final List<WordModel> listWordModel;
+
+  Flashcards({Key? key, required this.listWordModel}) : super(key: key);
 
   @override
   _FlashcardsState createState() => _FlashcardsState();
 }
 
 class _FlashcardsState extends State<Flashcards> {
-  final GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
+  late PageController _pageController;
+  int currentIndex = 0;
+  List<GlobalKey<FlipCardState>> cardKeys = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(initialPage: currentIndex);
+    cardKeys = List.generate(widget.listWordModel.length, (_) => GlobalKey<FlipCardState>());
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,16 +37,16 @@ class _FlashcardsState extends State<Flashcards> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: const Color(0xFFEFF5F5),
-        body: Stack(children: [
-          Center(
-            child: Column(
+        body: Stack(
+          children: [
+            Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
                   padding: const EdgeInsets.only(top: 20, bottom: 0, left: 30),
                   child: ProgressBar(
                     paddingProgressBar: 30,
-                    progressValue: 4 / 24,
+                    progressValue: (currentIndex + 1) / widget.listWordModel.length,
                     progressWidth: (MediaQuery.of(context).size.width -
                         2 * paddingProgressBar -
                         30),
@@ -35,7 +54,65 @@ class _FlashcardsState extends State<Flashcards> {
                     backgroundColor: const Color(0xFFEED7CF),
                   ),
                 ),
-                buildFlipCard("word", "meaning", paddingProgressBar),
+                Expanded(
+                  child: PageView.builder(
+                    controller: _pageController,
+                    itemCount: widget.listWordModel.length,
+                    onPageChanged: (index) {
+                      setState(() {
+                        currentIndex = index;
+                      });
+                    },
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 30),
+                        child: FlipCard(
+                          key: cardKeys[index],
+                          direction: FlipDirection.HORIZONTAL,
+                          speed: 300,
+                          front: Container(
+                            alignment: Alignment.center,
+                            width: (MediaQuery.of(context).size.width -
+                                2 * paddingProgressBar),
+                            height:
+                            MediaQuery.of(context).size.height * 0.7,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              color: const Color(0xFFDEE2E2),
+                            ),
+                            child: Text(
+                              widget.listWordModel[index].word,
+                              style: const TextStyle(
+                                fontSize: 35.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          back: Container(
+                            alignment: Alignment.center,
+                            width: (MediaQuery.of(context).size.width -
+                                2 * paddingProgressBar),
+                            height:
+                            MediaQuery.of(context).size.height * 0.7,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              color: const Color(0xFFDEE2E2),
+                            ),
+                            child: Text(
+                              widget.listWordModel[index].wordMeaning,
+                              style: const TextStyle(
+                                fontSize: 35.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
                 Container(
                   margin: const EdgeInsets.only(
                       left: 30, right: 30, bottom: 25, top: 0),
@@ -62,12 +139,16 @@ class _FlashcardsState extends State<Flashcards> {
                           size: 30,
                         ),
                         onPressed: () {
-                          // Implement your back button action here
+                          if (currentIndex > 0) {
+                            _pageController.previousPage(
+                              duration: Duration(milliseconds: 300),
+                              curve: Curves.ease,
+                            );
+                          }
                         },
                       ),
                       const SizedBox(
-                        // Changed from VerticalDivider
-                        height: 50, // Specify the height
+                        height: 50,
                         child: VerticalDivider(
                           color: Colors.black54,
                           thickness: 2,
@@ -80,12 +161,11 @@ class _FlashcardsState extends State<Flashcards> {
                           size: 30,
                         ),
                         onPressed: () {
-                          cardKey.currentState?.toggleCard();
+                          cardKeys[currentIndex].currentState?.toggleCard();
                         },
                       ),
                       const SizedBox(
-                        // Changed from VerticalDivider
-                        height: 50, // Specify the height
+                        height: 50,
                         child: VerticalDivider(
                           color: Colors.black54,
                           thickness: 2,
@@ -98,7 +178,12 @@ class _FlashcardsState extends State<Flashcards> {
                           size: 30,
                         ),
                         onPressed: () {
-                          // Implement your forward button action here
+                          if (currentIndex < widget.listWordModel.length - 1) {
+                            _pageController.nextPage(
+                              duration: Duration(milliseconds: 300),
+                              curve: Curves.ease,
+                            );
+                          }
                         },
                       ),
                     ],
@@ -106,59 +191,17 @@ class _FlashcardsState extends State<Flashcards> {
                 ),
               ],
             ),
-          ),
-          Positioned(
-            top: 14,
-            left: 10,
-            child: IconButton(
-              icon: const Icon(Icons.close, color: Colors.black, size: 30),
-              onPressed: () {
-                Navigator.of(context).pop(context);
-              },
+            Positioned(
+              top: 14,
+              left: 10,
+              child: IconButton(
+                icon: const Icon(Icons.close, color: Colors.black, size: 30),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
             ),
-          ),
-        ]),
-      ),
-    );
-  }
-
-  Widget buildFlipCard(String word, String meaning, double paddingProgressBar) {
-    return FlipCard(
-      key: cardKey,
-      direction: FlipDirection.HORIZONTAL,
-      speed: 300,
-      front: Container(
-        alignment: Alignment.center,
-        width: (MediaQuery.of(context).size.width - 2 * paddingProgressBar),
-        height: MediaQuery.of(context).size.height * 0.7,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          color: const Color(0xFFDEE2E2),
-        ),
-        child: Text(
-          word,
-          style: const TextStyle(
-            fontSize: 35.0,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-        ),
-      ),
-      back: Container(
-        alignment: Alignment.center,
-        width: (MediaQuery.of(context).size.width - 2 * paddingProgressBar),
-        height: MediaQuery.of(context).size.height * 0.7,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          color: const Color(0xFFDEE2E2),
-        ),
-        child: Text(
-          meaning,
-          style: const TextStyle(
-            fontSize: 35.0,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
+          ],
         ),
       ),
     );

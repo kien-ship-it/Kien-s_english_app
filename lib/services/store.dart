@@ -71,16 +71,16 @@ class FireStore {
   // add an new lesson
   static Future<bool> addLesson(LessonModel lesson) async {
     // Check if lesson ID is null or empty
-    if (lesson.id == null || lesson.id!.isEmpty) {
-      log('Lesson ID cannot be null or empty');
-      return false;
-    }
-
-    // Check for duplicates locally
-    if (GlobalData.isExistLesson(lesson.id!)) {
-      log('Lesson with ID ${lesson.id} already exists locally');
-      return false;
-    }
+    // if (lesson.id == null || lesson.id!.isEmpty) {
+    //   log('Lesson ID cannot be null or empty');
+    //   return false;
+    // }
+    //
+    // // Check for duplicates locally
+    // if (GlobalData.isExistLesson(lesson.id!)) {
+    //   log('Lesson with ID ${lesson.id} already exists locally');
+    //   return false;
+    // }
 
     try {
       // Add locally

@@ -14,12 +14,13 @@ class AIService {
 
     var res = await gemini.text(
       "Generate a interesting story with the following words, "
-          "make sure to write with enough context so the audience can "
+          "make sure to write with enough context around the words "
+          "so the audience can "
           "deduce and differentiate the meaning of the words. "
-          "Maximum word count is 150. The audience are english learners "
-          "who just encountered the words the first time, "
-          "make them easy to understand and interesting to read."
-          "Here are the words: "
+          "Maximum word count is 120. The audience are english learners "
+          "who just encountered the words the first time,"
+          "make the story easy to understand and interesting to read."
+          "Here are the words (the story MUST contain all the words): "
           "${lesson.listWordModel.map((e) => e.word).join(", ")}",
     );
 

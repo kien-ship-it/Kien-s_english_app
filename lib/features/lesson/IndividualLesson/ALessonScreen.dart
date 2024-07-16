@@ -102,7 +102,7 @@ class _ALessonScreenState extends State<ALessonScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const Flashcards()),
+                              builder: (context) => Flashcards(listWordModel: widget.lessonModel.listWordModel,)),
                         );
                       },
                     ),
