@@ -9,10 +9,12 @@ class TopIcons extends StatelessWidget {
     super.key,
     required this.lesson,
     required this.mounted,
+    required this.isCreateMode,
   });
 
   final LessonModel lesson;
   final bool mounted;
+  final bool isCreateMode;
 
   @override
   Widget build(BuildContext context) {
@@ -39,23 +41,30 @@ class TopIcons extends StatelessWidget {
                     blurRadius: 1,
                     offset: const Offset(1, 1),
                   )
-                ]
-            ),
+                ]),
             width: 40,
             height: 40,
             child: IconButton(
               icon: const Icon(Icons.done, color: Colors.white),
               onPressed: () async {
-                await FireStore.addLesson(lesson).then((value) {
-                  if (value) {
-                    showToast("Successful");
-                  } else {
-                    showToast("Failed");
-                  }
-                  if (mounted) {
-                    Navigator.pop(context);
-                  }
-                });
+                if (isCreateMode) {
+                  await FireStore.addLesson(lesson).then((value) {
+                    if (value) {
+                      showToast("Successful");
+                    } else {
+                      showToast("Failed");
+                    }
+                    if (mounted) {
+                      Navigator.pop(context);
+                    }
+                  });
+                } else {
+                  await FireStore.updateLesson(lesson).then((value) {
+                    if (mounted) {
+                      Navigator.pop(context);
+                    }
+                  });
+                }
               },
             ),
           ),

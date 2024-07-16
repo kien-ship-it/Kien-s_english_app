@@ -1,3 +1,4 @@
+import 'package:english_app/GlobalData.dart';
 import 'package:english_app/features/lesson/AddNewLesson/AddNewLesson.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +21,15 @@ class ALessonScreen extends StatefulWidget {
 }
 
 class _ALessonScreenState extends State<ALessonScreen> {
+  var myLesson = LessonModel.empty();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    myLesson = LessonModel.copyWith(widget.lessonModel);
+  }
+
   @override
   Widget build(BuildContext context) {
     ScrollController scrollController = ScrollController();
@@ -35,8 +45,7 @@ class _ALessonScreenState extends State<ALessonScreen> {
           slivers: [
             SliverPersistentHeader(
               delegate: SliverTitleAppBar(
-                  title: widget.lessonModel.title,
-                  id: widget.lessonModel.id ?? ""),
+                  title: myLesson.title, id: myLesson.id ?? ""),
               pinned: true,
             ),
             const SliverToBoxAdapter(
@@ -62,15 +71,20 @@ class _ALessonScreenState extends State<ALessonScreen> {
             ),
             SliverToBoxAdapter(
               child: WordBox(
-                words: widget.lessonModel.listWordModel,
+                words: myLesson.listWordModel,
                 onTapLesson: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => AddNewLesson(
-                              lessonModel: widget.lessonModel,
+                              lessonModel: myLesson,
                             )),
-                  ).then((value) => setState(() {}));
+                  ).then((value) {
+                    setState(() {
+                      myLesson = GlobalData.getLatestLesson(myLesson.id ?? "");
+                      scrollController.jumpTo(20);
+                    });
+                  });
                 },
               ),
             ),
@@ -102,7 +116,9 @@ class _ALessonScreenState extends State<ALessonScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Flashcards(listWordModel: widget.lessonModel.listWordModel,)),
+                              builder: (context) => Flashcards(
+                                    listWordModel: myLesson.listWordModel,
+                                  )),
                         );
                       },
                     ),
@@ -116,7 +132,7 @@ class _ALessonScreenState extends State<ALessonScreen> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => AIStory(
-                                    lessonModel: widget.lessonModel,
+                                    lessonModel: myLesson,
                                   )),
                         );
                       },

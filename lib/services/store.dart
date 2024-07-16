@@ -70,30 +70,20 @@ class FireStore {
 
   // add an new lesson
   static Future<bool> addLesson(LessonModel lesson) async {
-    // Check if lesson ID is null or empty
-    // if (lesson.id == null || lesson.id!.isEmpty) {
-    //   log('Lesson ID cannot be null or empty');
-    //   return false;
-    // }
-    //
-    // // Check for duplicates locally
-    // if (GlobalData.isExistLesson(lesson.id!)) {
-    //   log('Lesson with ID ${lesson.id} already exists locally');
-    //   return false;
-    // }
+    // Check for duplicates locally
+    if (GlobalData.isExistLesson(lesson.id)) {
+      log('Lesson with ID ${lesson.id} already exists locally');
+      return false;
+    }
 
     try {
       // Add locally
       GlobalData.listPersonalLesson.add(lesson);
 
-      // Add to Firestore
+      // Add to Firebase
       String uid = Auth().getUserId();
-      if (uid == null) {
-        log('User ID is null. User might not be authenticated.');
-        return false;
-      }
-
-      final docRef = _users.doc(uid).collection(LIST_PERSONAL_LESSON).doc(lesson.id);
+      final docRef =
+          _users.doc(uid).collection(LIST_PERSONAL_LESSON).doc(lesson.id);
       await _addDoc(docRef, lesson.toJson());
 
       return true;
@@ -102,7 +92,6 @@ class FireStore {
       return false;
     }
   }
-
 
   // update story for a specific lesson
   static Future<void> updateStory(String lessonId, String story) async {
@@ -132,6 +121,7 @@ class FireStore {
       final docRef =
           _users.doc(uid).collection(LIST_PERSONAL_LESSON).doc(newModel.id);
       _setDoc(docRef, newModel.toJson());
+      showToast("Update successfully");
     } catch (e) {
       showToast(e.toString());
     }

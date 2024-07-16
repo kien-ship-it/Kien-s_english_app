@@ -55,7 +55,8 @@ class _AIStoryState extends State<AIStory> {
     setState(() {
       selectedWord = keyword;
       wordMeaning = widget.lessonModel.listWordModel
-          .firstWhere((wordModel) => wordModel.word.toLowerCase() == keyword.toLowerCase())
+          .firstWhere((wordModel) =>
+              wordModel.word.toLowerCase() == keyword.toLowerCase())
           .wordMeaning;
       isWordMenuVisible = true;
     });
@@ -120,11 +121,11 @@ class _AIStoryState extends State<AIStory> {
               child: isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : ParagraphContainer(
-                child: KeywordText(
-                  lessonModel: widget.lessonModel,
-                  onKeywordTap: onKeywordTap,
-                ),
-              ),
+                      child: KeywordText(
+                        lessonModel: widget.lessonModel,
+                        onKeywordTap: onKeywordTap,
+                      ),
+                    ),
             ),
             Positioned(
               bottom: 0.0,
@@ -176,7 +177,8 @@ class WordMenu extends StatelessWidget {
   final String selectedWord;
   final String wordMeaning;
 
-  const WordMenu({super.key, required this.selectedWord, required this.wordMeaning});
+  const WordMenu(
+      {super.key, required this.selectedWord, required this.wordMeaning});
 
   @override
   Widget build(BuildContext context) {
@@ -213,9 +215,9 @@ class WordMenu extends StatelessWidget {
           const SizedBox(height: 10.0),
           selectedWord.isNotEmpty
               ? Text(
-            'Meaning: $wordMeaning',
-            style: const TextStyle(fontSize: 16.0, color: Colors.black54),
-          )
+                  'Meaning: $wordMeaning',
+                  style: const TextStyle(fontSize: 16.0, color: Colors.black54),
+                )
               : Container(),
         ],
       ),

@@ -10,17 +10,19 @@ import 'package:flutter/material.dart';
 class AddNewLesson extends StatefulWidget {
   final LessonModel? lessonModel;
 
-  const AddNewLesson({Key? key, this.lessonModel}) : super(key: key);
+  const AddNewLesson({super.key, this.lessonModel});
 
   @override
   State<AddNewLesson> createState() => _AddNewLessonState();
 }
 
 class _AddNewLessonState extends State<AddNewLesson> {
+  var isCreateMode = true;
   TextEditingController inputWordController = TextEditingController();
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   late LessonModel lesson;
+
   List<WordModel> wordDefinitions = [];
   FocusNode titleFocusNode = FocusNode();
   FocusNode descriptionFocusNode = FocusNode();
@@ -52,13 +54,15 @@ class _AddNewLessonState extends State<AddNewLesson> {
   }
 
   @override
-  @override
   void initState() {
     super.initState();
+    // edit lesson
     if (widget.lessonModel != null) {
-      lesson = LessonModel.copyWith(widget.lessonModel!,
-          listWordModel: List.from(widget.lessonModel!.listWordModel));
-    } else {
+      lesson = LessonModel.copyWith(widget.lessonModel!);
+      isCreateMode = false;
+    }
+    // add an new lesson
+    else {
       lesson = LessonModel.empty();
     }
 
@@ -95,7 +99,8 @@ class _AddNewLessonState extends State<AddNewLesson> {
           backgroundColor: const Color(0xFFB1DCDF),
           body: Stack(
             children: [
-              TopIcons(lesson: lesson, mounted: mounted),
+              TopIcons(
+                  lesson: lesson, mounted: mounted, isCreateMode: isCreateMode),
               Positioned(
                 top: 50.0,
                 left: 16.0,

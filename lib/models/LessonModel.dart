@@ -91,6 +91,7 @@ class LessonModel {
       color: "",
       listWordModel: [],
       story: '',
+      id: const Uuid().v4(),
     );
   }
 

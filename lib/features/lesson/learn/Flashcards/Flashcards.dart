@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../Widgets/ProgressBar.dart';
 import '../../../../models/WordModel.dart';
@@ -7,7 +7,7 @@ import '../../../../models/WordModel.dart';
 class Flashcards extends StatefulWidget {
   final List<WordModel> listWordModel;
 
-  Flashcards({Key? key, required this.listWordModel}) : super(key: key);
+  const Flashcards({super.key, required this.listWordModel});
 
   @override
   _FlashcardsState createState() => _FlashcardsState();
@@ -141,7 +141,7 @@ class _FlashcardsState extends State<Flashcards> {
                         onPressed: () {
                           if (currentIndex > 0) {
                             _pageController.previousPage(
-                              duration: Duration(milliseconds: 300),
+                              duration: const Duration(milliseconds: 300),
                               curve: Curves.ease,
                             );
                           }
@@ -180,7 +180,7 @@ class _FlashcardsState extends State<Flashcards> {
                         onPressed: () {
                           if (currentIndex < widget.listWordModel.length - 1) {
                             _pageController.nextPage(
-                              duration: Duration(milliseconds: 300),
+                              duration: const Duration(milliseconds: 300),
                               curve: Curves.ease,
                             );
                           }

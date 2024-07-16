@@ -1,6 +1,7 @@
 import 'package:english_app/services/store.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../Widgets/ConfirmDialog.dart';
 import '../../../../Widgets/MyToast.dart';
 import 'BackgroundWave.dart';
 
@@ -36,7 +37,7 @@ class SliverTitleAppBar extends SliverPersistentHeaderDelegate {
                     size: 30,
                   ),
                   onPressed: () {
-                  Navigator.pop(context);
+                    Navigator.pop(context);
                   }),
               const SizedBox(width: 40),
               // Reserve space for the title to be centered
@@ -45,15 +46,25 @@ class SliverTitleAppBar extends SliverPersistentHeaderDelegate {
                   Icons.delete_outline,
                   color: Colors.red,
                 ),
-                onPressed: () async {
-                  // Handle options action
-                  FireStore.removeLessonById(id).then((value) {
-                    if (value) {
-                      Navigator.pop(context);
-                    } else {
-                      showToast("Something went wrong");
-                    }
-                  });
+                onPressed: () {
+                  // show confirm dialog
+                  showDialog(
+                    context: context,
+                    builder: (context) => ConfirmDialog(
+                      confirmFunction: () async {
+                        // Handle options action
+                        FireStore.removeLessonById(id).then(
+                          (value) {
+                            if (value) {
+                              Navigator.pop(context);
+                            } else {
+                              showToast("Something went wrong");
+                            }
+                          },
+                        );
+                      },
+                    ),
+                  );
                 },
               ),
             ],
