@@ -6,7 +6,7 @@ class LessonModel {
   String? id;
   final String title;
   final String description;
-  final bool isLightning;
+  final bool isFavorite;
   final String color;
   final List<WordModel> listWordModel;
   String story;
@@ -16,7 +16,7 @@ class LessonModel {
     this.id,
     required this.title,
     required this.description,
-    required this.isLightning,
+    required this.isFavorite,
     required this.color,
     required this.listWordModel,
     required this.story,
@@ -50,7 +50,7 @@ class LessonModel {
       id: json['id'],
       title: json['title'],
       description: json['description'],
-      isLightning: json['isLightning'],
+      isFavorite: json['isLightning'],
       color: json['color'],
       listWordModel: listWordModel,
       story: json['story'],
@@ -63,7 +63,7 @@ class LessonModel {
       'id': id,
       'title': title,
       'description': description,
-      'isLightning': isLightning,
+      'isLightning': isFavorite,
       'color': color,
       'listWordModel': listWordModel.map((e) => e.toJson()).toList(),
       'story': story,
@@ -75,7 +75,7 @@ class LessonModel {
     return LessonModel(
       title: 'Empty Title',
       description: 'Empty Description',
-      isLightning: false,
+      isFavorite: false,
       color: "",
       listWordModel: [],
       story: '',
@@ -89,7 +89,7 @@ class LessonModel {
       id: '1',
       title: "Default Lesson 1",
       description: "This is a default lesson",
-      isLightning: false,
+      isFavorite: false,
       color: "",
       listWordModel: [
         WordModel(
@@ -118,7 +118,7 @@ class LessonModel {
       id: id ?? lesson.id,
       title: title ?? lesson.title,
       description: description ?? lesson.description,
-      isLightning: isLightning ?? lesson.isLightning,
+      isFavorite: isLightning ?? lesson.isFavorite,
       color: color ?? lesson.color,
       listWordModel: listWordModel ?? lesson.listWordModel,
       story: story ?? lesson.story,

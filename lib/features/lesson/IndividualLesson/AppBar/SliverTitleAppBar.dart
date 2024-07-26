@@ -78,16 +78,18 @@ class SliverTitleAppBar extends SliverPersistentHeaderDelegate {
             alignment: Alignment.center,
             child: Column(
               children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: titleSize,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                Container(
+                  alignment: Alignment.center,
+                  width: 280,
+                  child: Text(
+                    title,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: titleSize,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 2,
                 ),
               ],
             ),

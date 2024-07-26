@@ -37,11 +37,15 @@ class _LessonBoxState extends State<LessonBox> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0),
-                  child: Text(
-                    widget.lessonModel.title,
-                    style: const TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
+                  child: Container(
+                    width: 260,
+                    child: Text(
+                      widget.lessonModel.title,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
@@ -62,11 +66,13 @@ class _LessonBoxState extends State<LessonBox> {
                     ],
                   ),
                   child: Icon(
-                    Icons.flash_on,
-                    color: widget.lessonModel.isLightning
+                    widget.lessonModel.isFavorite
+                        ? Icons.favorite
+                        : Icons.favorite_border,
+                    color: widget.lessonModel.isFavorite
                         ? const Color(0xFFEB6440)
                         : Colors.grey,
-                  ),
+                  )
                 ),
               ],
             ),

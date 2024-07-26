@@ -9,7 +9,7 @@ class Helper {
       LessonModel(
           title: "Default Lesson 1",
           description: "This is a default lesson",
-          isLightning: false,
+          isFavorite: false,
           color: "",
           listWordModel: [
             WordModel(
@@ -22,7 +22,7 @@ class Helper {
       LessonModel(
           title: "Default Lesson 2",
           description: "This is a default lesson",
-          isLightning: false,
+          isFavorite: false,
           color: "",
           listWordModel: [
             WordModel(
