@@ -99,10 +99,10 @@ class _AIStoryState extends State<AIStory> {
                   constraints: const BoxConstraints(
                     maxWidth: 200.0,
                   ),
-                  child: const Text(
-                    'A Doubtful Discovery',
+                  child: Text(
+                    widget.lessonModel.title,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 33.0,
                       fontWeight: FontWeight.bold,
                     ),

@@ -46,6 +46,7 @@ dependencies:
 
   http: any
   flutter_gemini: ^2.0.4
+  google_generative_ai: ^0.4.3
 dev_dependencies:
   flutter_lints: ^4.0.0
   flutter_test:
