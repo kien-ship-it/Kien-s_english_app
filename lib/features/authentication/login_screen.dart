@@ -143,6 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           email: emailTextController.text,
                           password: passwordTextController.text)
                       .then((value) {
+                    Navigator.pop(context);
                     if (value == true) {
                       if (mounted) {
                         showToast("Login success");

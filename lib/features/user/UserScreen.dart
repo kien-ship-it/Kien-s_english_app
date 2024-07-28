@@ -1,7 +1,9 @@
 import 'package:english_app/GlobalData.dart';
 import 'package:flutter/material.dart';
 
-import 'LogoutButton.dart';
+import '../../Widgets/FloatButton.dart';
+import '../../services/auth.dart';
+import '../authentication/login_screen.dart';
 import 'UserBox.dart';
 
 class UserScreen extends StatefulWidget {
@@ -12,32 +14,47 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
-
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        color: const Color(0xFFEFF5F5),
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                margin: const EdgeInsets.fromLTRB(16.0, 20.0, 16.0, 0), // Added margin
-                padding: const EdgeInsets.all(8.0), // Internal padding
-                child: const Text(
-                  "Profile",
-                  textAlign: TextAlign.left, // Align text to the left
-                  style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
-                ),
-              ),
-            UserBox(
+    return Container(
+      padding: const EdgeInsets.all(20),
+      color: const Color(0xFFEFF5F5),
+      child: Stack(
+        children: [
+          const Positioned(
+            top: 0,
+            child: const Text(
+              "Profile",
+              textAlign: TextAlign.left,
+              style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Positioned(
+            top: 70,
+            child: UserBox(
               userModel: GlobalData.user,
             ),
-            const LogOutButton(),
-            ],
           ),
+          Positioned(
+            right: 0,
+            bottom: 20,
+            child: myCustomBtn(
+              onTap: () {
+                Auth().signOut();
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LoginScreen(),
+                  ),
+                );
+              },
+              color: const Color(0xFFFFFFFF),
+              icon: Icons.logout,
+              iconColor: Colors.red,
+            ),
+          ),
+        ],
       ),
-      );
+    );
   }
 }
-
