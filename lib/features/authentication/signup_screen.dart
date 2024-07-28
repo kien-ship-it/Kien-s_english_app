@@ -172,21 +172,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
               GestureDetector(
                 onTap: () {
                   if (checkValidate()) {
+                    showLoadingAnim(context);
                     Auth()
                         .signUpWithEmailAndPassword(
                             email: emailTextController.text,
                             password: passwordTextController.text)
                         .then((value) {
-                      if (mounted) {
-                        showToast("Sign Up Successfully");
-                        FireStore.initUser(fullNameTextController.text,
-                            emailTextController.text);
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const GeneralScreen(),
-                          ),
-                        );
+                      Navigator.pop(context);
+                      if (value) {
+                        // hide dialog
+                        if (mounted) {
+                          FireStore.initUser(fullNameTextController.text,
+                              emailTextController.text);
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const GeneralScreen(),
+                            ),
+                          );
+                        }
                       }
                     });
                   }

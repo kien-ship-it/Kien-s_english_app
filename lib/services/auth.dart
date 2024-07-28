@@ -26,16 +26,19 @@ class Auth {
   }
 
   // signUp with email and password
-  Future<void> signUpWithEmailAndPassword({
+  Future<bool> signUpWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
+    bool result = true;
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
     } on FirebaseAuthException catch (e) {
-      showToast(e.message.toString());
+      showToast("Please try again");
+      result = false;
     }
+    return result;
   }
 
   String getUserId() {

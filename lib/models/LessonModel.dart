@@ -106,7 +106,7 @@ class LessonModel {
   factory LessonModel.copyWith(
     LessonModel lesson, {
     String? id,
-    bool? isLightning,
+    bool? isFavorite,
     String? color,
     List<WordModel>? listWordModel,
     String? story,
@@ -118,7 +118,7 @@ class LessonModel {
       id: id ?? lesson.id,
       title: title ?? lesson.title,
       description: description ?? lesson.description,
-      isFavorite: isLightning ?? lesson.isFavorite,
+      isFavorite: isFavorite ?? lesson.isFavorite,
       color: color ?? lesson.color,
       listWordModel: listWordModel ?? lesson.listWordModel,
       story: story ?? lesson.story,
