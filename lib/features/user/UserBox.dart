@@ -1,5 +1,6 @@
 import 'package:english_app/models/UserModel.dart';
 import 'package:flutter/material.dart';
+import 'package:gif_view/gif_view.dart';
 
 class UserBox extends StatelessWidget {
   final UserModel userModel;
@@ -30,11 +31,10 @@ class UserBox extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const CircleAvatar(
-            radius: 43,
-            backgroundColor: Colors.amber,
-            backgroundImage: NetworkImage(
-                'https://t3.ftcdn.net/jpg/02/99/04/20/360_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg'),
+          GifView.asset(
+            "assets/images/avatar_anim.gif",
+            height: 100,
+            width: 100,
           ),
           const SizedBox(width: 20),
           Container(

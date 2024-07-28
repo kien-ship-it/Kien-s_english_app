@@ -49,13 +49,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(18),
-                    // boxShadow: const [
-                    //   BoxShadow(
-                    //     color: Colors.black12,
-                    //     blurRadius: 4.0,
-                    //     offset: Offset(0, 1),
-                    //   ),
-                    // ],
                     border: Border.all(color: Colors.grey.shade300, width: 2.5),
                   ),
                   height: 325,
@@ -244,13 +237,18 @@ Widget homeLessonWidget(String title, VoidCallback onTap) {
               width: 50,
               height: 50,
               decoration: BoxDecoration(
-                color: const Color(0xFFEB6440),
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(100),
+                // add border
+                border: Border.all(color: const Color(0xFFEB6440), width: 2.5),
               ),
               child: const Text(
                 textAlign: TextAlign.center,
                 ">",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFFEB6440)),
               )),
         )
       ],

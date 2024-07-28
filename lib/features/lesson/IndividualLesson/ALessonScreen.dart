@@ -1,4 +1,5 @@
 import 'package:english_app/GlobalData.dart';
+import 'package:english_app/common/ConstantModel.dart';
 import 'package:english_app/features/lesson/AddNewLesson/AddNewLesson.dart';
 import 'package:flutter/material.dart';
 
@@ -22,19 +23,19 @@ class ALessonScreen extends StatefulWidget {
 
 class _ALessonScreenState extends State<ALessonScreen> {
   var myLesson = LessonModel.empty();
+  ScrollController scrollController = ScrollController();
+  double progressValue = 0;
+  double paddingProgressBar = 30;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     myLesson = LessonModel.copyWith(widget.lessonModel);
+    progressValue = myLesson.listWordModel.length / MAX_WORDS;
   }
 
   @override
   Widget build(BuildContext context) {
-    ScrollController scrollController = ScrollController();
-    double progressValue = 0.7;
-    double paddingProgressBar = 30;
     double progressWidth =
         (MediaQuery.of(context).size.width - 2 * paddingProgressBar);
     return SafeArea(
@@ -48,13 +49,13 @@ class _ALessonScreenState extends State<ALessonScreen> {
                   title: myLesson.title, id: myLesson.id ?? ""),
               pinned: true,
             ),
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: Padding(
-                padding: EdgeInsets.only(bottom: 0, left: 35),
+                padding: const EdgeInsets.only(bottom: 0, left: 35),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "Progress: 17/20",
+                    "Number of words: ${myLesson.listWordModel.length}",
                     textAlign: TextAlign.left,
                   ),
                 ),

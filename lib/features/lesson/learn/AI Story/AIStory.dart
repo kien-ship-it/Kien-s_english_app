@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gif_view/gif_view.dart';
 
 import '../../../../GlobalData.dart';
 import '../../../../models/LessonModel.dart';
@@ -119,7 +120,7 @@ class _AIStoryState extends State<AIStory> {
               right: 0.0,
               bottom: 100.0,
               child: isLoading
-                  ? const Center(child: CircularProgressIndicator())
+                  ? GifView.asset("assets/images/loading_anim.gif")
                   : ParagraphContainer(
                       child: KeywordText(
                         lessonModel: widget.lessonModel,
