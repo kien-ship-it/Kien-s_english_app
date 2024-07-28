@@ -20,7 +20,9 @@ class AIService {
           "Maximum word count is 120. The audience are english learners "
           "who just encountered the words the first time,"
           "make the story easy to understand and interesting to read."
-          "Here are the words (the story MUST contain all the words): "
+          "Do not make the given words a name of a character in the story or "
+          "put them in double quotation mark."
+          "Here are the words (the story must contain all the words given): "
           "${lesson.listWordModel.map((e) => e.word).join(", ")}",
     );
 

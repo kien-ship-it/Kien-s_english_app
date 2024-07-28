@@ -61,12 +61,31 @@ class GlobalData {
     }
   }
 
+  static void updateISFavoriteById(String lessonId) {
+    for (var i = 0; i < listPersonalLesson.length; i++) {
+      if (listPersonalLesson[i].id == lessonId) {
+        listPersonalLesson[i].isFavorite = !listPersonalLesson[i].isFavorite;
+        break;
+      }
+    }
+  }
+
   static List<LessonModel> getListPersonalLessonSortByTime() {
     List<LessonModel> result = [];
     for (var e in listPersonalLesson) {
       result.add(e);
     }
     result.sort((a, b) => b.latestOpenedDate.compareTo(a.latestOpenedDate));
+    return result;
+  }
+
+  static List<LessonModel> getListFavoriteLesson() {
+    List<LessonModel> result = [];
+    for (var e in listPersonalLesson) {
+      if (e.isFavorite) {
+        result.add(e);
+      }
+    }
     return result;
   }
 }

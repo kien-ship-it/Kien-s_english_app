@@ -6,7 +6,7 @@ class LessonModel {
   String? id;
   final String title;
   final String description;
-  final bool isFavorite;
+  bool isFavorite;
   final String color;
   final List<WordModel> listWordModel;
   String story;
@@ -50,7 +50,7 @@ class LessonModel {
       id: json['id'],
       title: json['title'],
       description: json['description'],
-      isFavorite: json['isLightning'],
+      isFavorite: json['isFavorite'],
       color: json['color'],
       listWordModel: listWordModel,
       story: json['story'],
@@ -63,7 +63,7 @@ class LessonModel {
       'id': id,
       'title': title,
       'description': description,
-      'isLightning': isFavorite,
+      'isFavorite': isFavorite,
       'color': color,
       'listWordModel': listWordModel.map((e) => e.toJson()).toList(),
       'story': story,
@@ -130,4 +130,5 @@ class LessonModel {
   void updateStory(String newStory) {
     story = newStory;
   }
+
 }

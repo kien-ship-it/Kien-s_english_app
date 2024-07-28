@@ -1,4 +1,5 @@
 import 'package:english_app/models/LessonModel.dart';
+import 'package:english_app/services/store.dart';
 import 'package:flutter/material.dart';
 
 class LessonBox extends StatefulWidget {
@@ -37,7 +38,7 @@ class _LessonBoxState extends State<LessonBox> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0),
-                  child: Container(
+                  child: SizedBox(
                     width: 260,
                     child: Text(
                       widget.lessonModel.title,
@@ -49,6 +50,7 @@ class _LessonBoxState extends State<LessonBox> {
                     ),
                   ),
                 ),
+                widget.isDefaultLesson ? const SizedBox() :
                 Container(
                   width: 40.0,
                   height: 40.0,
@@ -65,13 +67,21 @@ class _LessonBoxState extends State<LessonBox> {
                       ),
                     ],
                   ),
-                  child: Icon(
-                    widget.lessonModel.isFavorite
-                        ? Icons.favorite
-                        : Icons.favorite_border,
-                    color: widget.lessonModel.isFavorite
-                        ? const Color(0xFFEB6440)
-                        : Colors.grey,
+                  child: IconButton(
+                    icon: Icon(
+                      widget.lessonModel.isFavorite
+                          ? Icons.favorite
+                          : Icons.favorite_border,
+                      color: widget.lessonModel.isFavorite
+                          ? const Color(0xFFEB6440)
+                          : Colors.grey,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        FireStore.updateIsFavoriteById(widget.lessonModel.id ?? "");
+                        // widget.lessonModel.toggleFavorite();
+                      });
+                    },
                   )
                 ),
               ],

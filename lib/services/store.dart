@@ -127,6 +127,24 @@ class FireStore {
       showToast(e.toString());
     }
   }
+  // update isFavorite by id
+  static Future<void> updateIsFavoriteById(String lessonId) async {
+    log("lessonId: $lessonId");
+    // update local
+    GlobalData.updateISFavoriteById(lessonId);
+
+    // cloud
+    try {
+      String uid = Auth().getUserId();
+      final docRef = _users.doc(uid).collection(LIST_PERSONAL_LESSON).doc(lessonId);
+      final snapshot = await _getDoc(docRef);
+      bool isFav = snapshot['isFavorite'];
+      _setDoc(docRef, {'isFavorite': !isFav});
+    } catch (e) {
+      showToast(e.toString());
+    }
+  }
+
 
   // update lesson
   static Future<void> updateLesson(LessonModel newModel) async {
