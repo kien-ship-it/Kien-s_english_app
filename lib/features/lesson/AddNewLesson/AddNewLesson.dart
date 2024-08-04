@@ -22,7 +22,7 @@ class _AddNewLessonState extends State<AddNewLesson> {
   TextEditingController inputWordController = TextEditingController();
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
-  late LessonModel lesson;
+  LessonModel lesson = LessonModel.empty();
 
   List<WordModel> wordDefinitions = [];
   FocusNode titleFocusNode = FocusNode();
@@ -211,7 +211,7 @@ class _AddNewLessonState extends State<AddNewLesson> {
                         onSubmitted: (_) async {
                           addWord().then((value) {
                             if (value) {
-                              //
+                              showToast("Added successfully");
                             } else {
                               showToast("Please choose another word");
                             }

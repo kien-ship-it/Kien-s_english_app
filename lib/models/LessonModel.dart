@@ -41,6 +41,19 @@ class LessonModel {
         .any((element) => element.word.toLowerCase() == word.toLowerCase());
   }
 
+  LessonModel clone() {
+    return LessonModel(
+      id: id,
+      title: title,
+      description: description,
+      isFavorite: isFavorite,
+      color: color,
+      listWordModel: listWordModel,
+      story: story,
+      latestOpenedDate: latestOpenedDate,
+    );
+  }
+
   factory LessonModel.fromJson(Map<String, dynamic> json) {
     List<WordModel> listWordModel = [];
     json['listWordModel'].forEach((element) {

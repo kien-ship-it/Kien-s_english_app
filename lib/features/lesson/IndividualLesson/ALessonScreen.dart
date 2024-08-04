@@ -78,7 +78,7 @@ class _ALessonScreenState extends State<ALessonScreen> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => AddNewLesson(
-                              lessonModel: myLesson,
+                              lessonModel: myLesson.clone(),
                             )),
                   ).then((value) {
                     setState(() {
