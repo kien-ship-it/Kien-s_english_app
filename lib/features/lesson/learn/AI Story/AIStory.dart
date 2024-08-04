@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:gif_view/gif_view.dart';
 
 import '../../../../GlobalData.dart';
@@ -22,7 +25,6 @@ class _AIStoryState extends State<AIStory> {
   String selectedWord = "";
   String wordMeaning = "";
   bool isWordMenuVisible = false;
-
   @override
   void initState() {
     super.initState();
@@ -174,12 +176,31 @@ class ParagraphContainer extends StatelessWidget {
   }
 }
 
-class WordMenu extends StatelessWidget {
+class WordMenu extends StatefulWidget {
   final String selectedWord;
   final String wordMeaning;
 
   const WordMenu(
       {super.key, required this.selectedWord, required this.wordMeaning});
+
+  @override
+  State<WordMenu> createState() => _WordMenuState();
+}
+
+class _WordMenuState extends State<WordMenu> {
+  FlutterTts flutterTts = FlutterTts();
+
+  void initTts() async {
+    flutterTts = await flutterTts.setLanguage("en-US");
+    log("TTS Language set: $flutterTts");
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    initTts();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -203,20 +224,34 @@ class WordMenu extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Center(
-            child: Text(
-              selectedWord.isNotEmpty ? 'Word: $selectedWord' : '',
-              style: const TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.w400,
-                color: Colors.black87,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text(
+                widget.selectedWord.isNotEmpty
+                    ? 'Word: ${widget.selectedWord}'
+                    : '',
+                style: const TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black87,
+                ),
               ),
-            ),
+              GestureDetector(
+                onTap: () async {
+                  await flutterTts.speak(widget.selectedWord);
+                },
+                child: const Icon(
+                  Icons.speaker,
+                  size: 30,
+                ),
+              )
+            ],
           ),
           const SizedBox(height: 10.0),
-          selectedWord.isNotEmpty
+          widget.selectedWord.isNotEmpty
               ? Text(
-                  'Meaning: $wordMeaning',
+                  'Meaning: ${widget.wordMeaning}',
                   style: const TextStyle(fontSize: 16.0, color: Colors.black54),
                 )
               : Container(),
