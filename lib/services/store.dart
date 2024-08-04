@@ -40,7 +40,8 @@ class FireStore {
     String uid = Auth().getUserId();
     final docRef = _db.collection(_userPath).doc(uid);
     // push data to firebase
-    for (var e in Helper().buildDefaultLesson()) {
+    List<LessonModel> result = await Helper().buildDefaultLesson();
+    for (var e in result) {
       docRef.collection(LIST_DEFAULT_LESSON).add(e.toJson());
     }
   }
@@ -127,6 +128,7 @@ class FireStore {
       showToast(e.toString());
     }
   }
+
   // update isFavorite by id
   static Future<void> updateIsFavoriteById(String lessonId) async {
     log("lessonId: $lessonId");
@@ -136,7 +138,8 @@ class FireStore {
     // cloud
     try {
       String uid = Auth().getUserId();
-      final docRef = _users.doc(uid).collection(LIST_PERSONAL_LESSON).doc(lessonId);
+      final docRef =
+          _users.doc(uid).collection(LIST_PERSONAL_LESSON).doc(lessonId);
       final snapshot = await _getDoc(docRef);
       bool isFav = snapshot['isFavorite'];
       _setDoc(docRef, {'isFavorite': !isFav});
@@ -144,7 +147,6 @@ class FireStore {
       showToast(e.toString());
     }
   }
-
 
   // update lesson
   static Future<void> updateLesson(LessonModel newModel) async {

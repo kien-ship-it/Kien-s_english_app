@@ -23,7 +23,7 @@ class _UserScreenState extends State<UserScreen> {
         children: [
           const Positioned(
             top: 0,
-            child: const Text(
+            child: Text(
               "Profile",
               textAlign: TextAlign.left,
               style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold),

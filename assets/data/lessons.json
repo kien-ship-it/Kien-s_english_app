@@ -1,0 +1,1130 @@
+{
+  "data": [
+    {
+      "title": "SAT Histoty",
+      "description": "SAT Histoty",
+      "listWordModel": [
+        {
+          "word": "Archaeologist",
+          "wordType": "n",
+          "wordMeaning": "nhà khảo cổ học"
+        },
+        {
+          "word": "Benevolent",
+          "wordType": "adj",
+          "wordMeaning": "nhân từ, nhân ái"
+        },
+        {
+          "word": "Condone",
+          "wordType": "v",
+          "wordMeaning": "chấp nhận, tha thứ"
+        },
+        {
+          "word": "Enigmatic",
+          "wordType": "adj",
+          "wordMeaning": "bí ẩn, khó hiểu"
+        },
+        {
+          "word": "Enthroned",
+          "wordType": "adj",
+          "wordMeaning": "được kế vị, tôn làm vua"
+        },
+        {
+          "word": "Indigenous",
+          "wordType": "adj",
+          "wordMeaning": "bản địa"
+        },
+        {
+          "word": "Inevitable",
+          "wordType": "adj",
+          "wordMeaning": "không thể tránh khỏi"
+        },
+        {
+          "word": "Obsolete",
+          "wordType": "adj",
+          "wordMeaning": "lỗi thời"
+        },
+        {
+          "word": "Hierarchy",
+          "wordType": "n",
+          "wordMeaning": "hệ thống thứ bậc"
+        },
+        {
+          "word": "Prehistoric",
+          "wordType": "adj",
+          "wordMeaning": "thời tiền sử"
+        },
+        {
+          "word": "Prevail",
+          "wordType": "v",
+          "wordMeaning": "chiếm ưu thế, đánh bại"
+        },
+        {
+          "word": "Primeval",
+          "wordType": "adj",
+          "wordMeaning": "nguyên thủy"
+        },
+        {
+          "word": "Privilege",
+          "wordType": "n",
+          "wordMeaning": "đặc quyền"
+        },
+        {
+          "word": "Quaint",
+          "wordType": "adj",
+          "wordMeaning": "cổ, lạ"
+        },
+        {
+          "word": "Reminisce",
+          "wordType": "v",
+          "wordMeaning": "hồi tưởng"
+        },
+        {
+          "word": "Susceptible",
+          "wordType": "adj",
+          "wordMeaning": "dễ bị ảnh hưởng"
+        },
+        {
+          "word": "Tactic",
+          "wordType": "n",
+          "wordMeaning": "chiến thuật"
+        }
+      ]
+    },
+    {
+      "title": "SAT Humanities",
+      "description": "SAT Humanities",
+      "listWordModel": [
+        {
+          "word": "Acclaim",
+          "wordType": "n",
+          "wordMeaning": "Hoan nghênh (tác phẩm nghệ thuật, văn học)"
+        },
+        {
+          "word": "Cadence",
+          "wordType": "n",
+          "wordMeaning": "nhịp điệu"
+        },
+        {
+          "word": "Chronicle",
+          "wordType": "n",
+          "wordMeaning": "sử sách"
+        },
+        {
+          "word": "Critics",
+          "wordType": "n",
+          "wordMeaning": "nhà phê bình"
+        },
+        {
+          "word": "Erudite",
+          "wordType": "adj",
+          "wordMeaning": "thông thái, uyên bác"
+        },
+        {
+          "word": "Etymology",
+          "wordType": "n",
+          "wordMeaning": "từ nguyên học"
+        },
+        {
+          "word": "Excavate",
+          "wordType": "v",
+          "wordMeaning": "khai quật"
+        },
+        {
+          "word": "Folklore",
+          "wordType": "n",
+          "wordMeaning": "văn hóa dân gian"
+        },
+        {
+          "word": "Inspiration",
+          "wordType": "n",
+          "wordMeaning": "nguồn cảm hứng"
+        },
+        {
+          "word": "Laconic",
+          "wordType": "adj",
+          "wordMeaning": "ngắn gọn, súc tích"
+        },
+        {
+          "word": "Movement",
+          "wordType": "n",
+          "wordMeaning": "phong trào"
+        },
+        {
+          "word": "Nature",
+          "wordType": "n",
+          "wordMeaning": "bản chất"
+        },
+        {
+          "word": "Parody",
+          "wordType": "n",
+          "wordMeaning": "châm biếm tác phẩm"
+        },
+        {
+          "word": "Performance",
+          "wordType": "n",
+          "wordMeaning": "buổi biểu diễn"
+        },
+        {
+          "word": "Prescient",
+          "wordType": "adj",
+          "wordMeaning": "tiên tri"
+        },
+        {
+          "word": "Prose",
+          "wordType": "n",
+          "wordMeaning": "văn xuôi"
+        },
+        {
+          "word": "Renown",
+          "wordType": "n",
+          "wordMeaning": "danh tiếng"
+        },
+        {
+          "word": "Tome",
+          "wordType": "n",
+          "wordMeaning": "quyển sách dày"
+        },
+        {
+          "word": "Playwright",
+          "wordType": "n",
+          "wordMeaning": "Nhà viết kịch, nhà soạn kịch"
+        }
+      ]
+    },
+    {
+      "title": "SAT Society",
+      "description": "SAT Society",
+      "listWordModel": [
+        {
+          "word": "Allege",
+          "wordType": "v",
+          "wordMeaning": "cáo buộc"
+        },
+        {
+          "word": "Bureaucratic",
+          "wordType": "adj",
+          "wordMeaning": "quan liêu"
+        },
+        {
+          "word": "Coin",
+          "wordType": "v",
+          "wordMeaning": "tạo ra từ ngữ mới"
+        },
+        {
+          "word": "Consensus",
+          "wordType": "n",
+          "wordMeaning": "thỏa thuận chung"
+        },
+        {
+          "word": "Conviction",
+          "wordType": "n",
+          "wordMeaning": "sự kết án"
+        },
+        {
+          "word": "Diversity",
+          "wordType": "n",
+          "wordMeaning": "sự đa dạng"
+        },
+        {
+          "word": "Embezzle",
+          "wordType": "v",
+          "wordMeaning": "biển thủ, chiếm đoạt trái phép"
+        },
+        {
+          "word": "Exemption",
+          "wordType": "n",
+          "wordMeaning": "sự miễn (thuế)"
+        },
+        {
+          "word": "Migrate",
+          "wordType": "v",
+          "wordMeaning": "di cư, di trú"
+        },
+        {
+          "word": "Philanthropic",
+          "wordType": "adj",
+          "wordMeaning": "nhân ái"
+        },
+        {
+          "word": "Policy",
+          "wordType": "n",
+          "wordMeaning": "chính sách"
+        },
+        {
+          "word": "Progression",
+          "wordType": "n",
+          "wordMeaning": "sự tiến bộ"
+        },
+        {
+          "word": "Reclusive",
+          "wordType": "adj",
+          "wordMeaning": "tách biệt"
+        },
+        {
+          "word": "Refute",
+          "wordType": "v",
+          "wordMeaning": "bác bỏ"
+        },
+        {
+          "word": "Relegate",
+          "wordType": "v",
+          "wordMeaning": "Giao cho (ai quyết định/thi hành)"
+        },
+        {
+          "word": "Revenue",
+          "wordType": "n",
+          "wordMeaning": "doanh thu"
+        },
+        {
+          "word": "Subordinate",
+          "wordType": "adj, n",
+          "wordMeaning": "dưới quyền lực, cấp dưới"
+        },
+        {
+          "word": "Squander",
+          "wordType": "v",
+          "wordMeaning": "tiêu xài phung phí"
+        },
+        {
+          "word": "Unfounded",
+          "wordType": "adj",
+          "wordMeaning": "không có chứng cứ"
+        },
+        {
+          "word": "Urbanization",
+          "wordType": "n",
+          "wordMeaning": "đô thị hóa"
+        }
+      ]
+    },
+    {
+      "title": "SAT Natural Sciences",
+      "description": "SAT Natural Sciences",
+      "listWordModel": [
+        {
+          "word": "Aggregate",
+          "wordType": "n, adj",
+          "wordMeaning": "tổng hợp chất"
+        },
+        {
+          "word": "Analysis",
+          "wordType": "n",
+          "wordMeaning": "sự phân tích"
+        },
+        {
+          "word": "Antiseptic",
+          "wordType": "n",
+          "wordMeaning": "chất khử trùng"
+        },
+        {
+          "word": "Atmospheres",
+          "wordType": "n",
+          "wordMeaning": "bầu khí quyển"
+        },
+        {
+          "word": "Cognitive",
+          "wordType": "adj",
+          "wordMeaning": "liên quan đến nhận thức"
+        },
+        {
+          "word": "Combust",
+          "wordType": "v",
+          "wordMeaning": "đốt cháy"
+        },
+        {
+          "word": "Compound",
+          "wordType": "n",
+          "wordMeaning": "hợp chất"
+        },
+        {
+          "word": "Compound",
+          "wordType": "v",
+          "wordMeaning": "kết hợp"
+        },
+        {
+          "word": "Conventional",
+          "wordType": "adj",
+          "wordMeaning": "thông thường"
+        },
+        {
+          "word": "Erode",
+          "wordType": "v",
+          "wordMeaning": "xói mòn"
+        },
+        {
+          "word": "Fuse",
+          "wordType": "v",
+          "wordMeaning": "làm nóng chảy"
+        },
+        {
+          "word": "Hypothesis",
+          "wordType": "n",
+          "wordMeaning": "giả thuyết"
+        },
+        {
+          "word": "Perusal",
+          "wordType": "n",
+          "wordMeaning": "sự nghiên cứu cẩn thận"
+        },
+        {
+          "word": "Pragmatic",
+          "wordType": "adj",
+          "wordMeaning": "thực tế"
+        },
+        {
+          "word": "Scholar",
+          "wordType": "n",
+          "wordMeaning": "học giả"
+        },
+        {
+          "word": "Constellation",
+          "wordType": "n",
+          "wordMeaning": "chòm sao"
+        },
+        {
+          "word": "Statistics",
+          "wordType": "n",
+          "wordMeaning": "số liệu thống kê"
+        },
+        {
+          "word": "Subject",
+          "wordType": "n",
+          "wordMeaning": "chủ đề, đối tượng nghiên cứu"
+        },
+        {
+          "word": "Theoretical",
+          "wordType": "adj",
+          "wordMeaning": "mang tính lý thuyết"
+        }
+      ]
+    },
+    {
+      "title": "SAT Career",
+      "description": "SAT Career",
+      "listWordModel": [
+        {
+          "word": "Aesthetics",
+          "wordType": "n",
+          "wordMeaning": "mỹ thuật"
+        },
+        {
+          "word": "Algorithm",
+          "wordType": "n",
+          "wordMeaning": "thuật toán"
+        },
+        {
+          "word": "Archaeologist",
+          "wordType": "n",
+          "wordMeaning": "nhà khảo cổ học"
+        },
+        {
+          "word": "Artisan",
+          "wordType": "n",
+          "wordMeaning": "nghệ nhân, thợ thủ công"
+        },
+        {
+          "word": "Athletic",
+          "wordType": "adj",
+          "wordMeaning": "thuộc về thể thao"
+        },
+        {
+          "word": "Cobbler",
+          "wordType": "n",
+          "wordMeaning": "thợ sửa giày"
+        },
+        {
+          "word": "Confection",
+          "wordType": "n",
+          "wordMeaning": "thực phẩm kẹo, đồ ngọt"
+        },
+        {
+          "word": "Cosmetic",
+          "wordType": "n",
+          "wordMeaning": "mỹ phẩm"
+        },
+        {
+          "word": "Cosmetic",
+          "wordType": "adj",
+          "wordMeaning": "làm đẹp, trang điểm"
+        },
+        {
+          "word": "Cultivation",
+          "wordType": "n",
+          "wordMeaning": "canh tác"
+        },
+        {
+          "word": "Data",
+          "wordType": "n",
+          "wordMeaning": "dữ liệu"
+        },
+        {
+          "word": "Eminent",
+          "wordType": "adj",
+          "wordMeaning": "lỗi lạc"
+        },
+        {
+          "word": "Mechanization",
+          "wordType": "n",
+          "wordMeaning": "sự cơ giới hóa"
+        },
+        {
+          "word": "Patent",
+          "wordType": "n",
+          "wordMeaning": "bằng sáng chế"
+        },
+        {
+          "word": "Qualified",
+          "wordType": "adj",
+          "wordMeaning": "có đủ năng lực, được đào tạo"
+        },
+        {
+          "word": "Virtuoso",
+          "wordType": "adj",
+          "wordMeaning": "(nghệ sĩ) tài năng xuất sắc"
+        }
+      ]
+    },
+    {
+      "title": "SAT Most Common",
+      "description": "SAT Most Common",
+      "listWordModel": [
+        {
+          "word": "Abrupt",
+          "wordType": "adj",
+          "wordMeaning": "đột ngột"
+        },
+        {
+          "word": "Accessible",
+          "wordType": "adj",
+          "wordMeaning": "có thể dễ dàng tiếp cận"
+        },
+        {
+          "word": "Adhesive",
+          "wordType": "n",
+          "wordMeaning": "chất dính"
+        },
+        {
+          "word": "Ambiguous",
+          "wordType": "adj",
+          "wordMeaning": "mơ hồ"
+        },
+        {
+          "word": "Arguable",
+          "wordType": "adj",
+          "wordMeaning": "có thể tranh cãi"
+        },
+        {
+          "word": "Bargain",
+          "wordType": "n, v",
+          "wordMeaning": "mặc cả, thương lượng"
+        },
+        {
+          "word": "Confer",
+          "wordType": "v",
+          "wordMeaning": "thảo luận"
+        },
+        {
+          "word": "Consequently",
+          "wordType": "adv",
+          "wordMeaning": "do đó, kết quả là"
+        },
+        {
+          "word": "Criteria",
+          "wordType": "n",
+          "wordMeaning": "tiêu chí"
+        },
+        {
+          "word": "Depict",
+          "wordType": "v",
+          "wordMeaning": "miêu tả"
+        },
+        {
+          "word": "Disparity",
+          "wordType": "n",
+          "wordMeaning": "sự chênh lệch"
+        },
+        {
+          "word": "Distinguish",
+          "wordType": "v",
+          "wordMeaning": "phân biệt"
+        },
+        {
+          "word": "Evoke",
+          "wordType": "v",
+          "wordMeaning": "gợi lên"
+        },
+        {
+          "word": "Incorporate",
+          "wordType": "v",
+          "wordMeaning": "hợp nhất"
+        },
+        {
+          "word": "Regardless",
+          "wordType": "adj, adv",
+          "wordMeaning": "không quan trọng"
+        },
+        {
+          "word": "Mitigate",
+          "wordType": "v",
+          "wordMeaning": "làm giảm nhẹ"
+        },
+        {
+          "word": "Occur",
+          "wordType": "v",
+          "wordMeaning": "xảy ra"
+        },
+        {
+          "word": "Prevalence",
+          "wordType": "n",
+          "wordMeaning": "sự phổ biến"
+        },
+        {
+          "word": "Prominent",
+          "wordType": "adj",
+          "wordMeaning": "nổi bật"
+        },
+        {
+          "word": "Relative",
+          "wordType": "adj",
+          "wordMeaning": "tương đối"
+        },
+        {
+          "word": "Relative",
+          "wordType": "n",
+          "wordMeaning": "người thân"
+        },
+        {
+          "word": "Substantial",
+          "wordType": "adj",
+          "wordMeaning": "đáng kể, có ý nghĩa lớn lao"
+        }
+      ]
+    },
+    {
+      "title": "IELTS Most Common 1",
+      "description": "IELTS Most Common 1",
+      "listWordModel": [
+        {
+          "word": "thrifty",
+          "wordType": "adj",
+          "wordMeaning": "tiết kiệm, tằn tiện"
+        },
+        {
+          "word": "curse",
+          "wordType": "n, v",
+          "wordMeaning": "sự nguyền rủa, chửi rủa; nguyền rủa, báng bổ"
+        },
+        {
+          "word": "anonymous",
+          "wordType": "adj",
+          "wordMeaning": "giấu tên, ẩn danh, nặc danh"
+        },
+        {
+          "word": "simplify",
+          "wordType": "v",
+          "wordMeaning": "làm đơn giản, đơn giản hoá"
+        },
+        {
+          "word": "spotless",
+          "wordType": "adj",
+          "wordMeaning": "không có đốm, không một vết nhơ; sạch sẽ, tinh tươm"
+        },
+        {
+          "word": "stiff",
+          "wordType": "adj",
+          "wordMeaning": "cứng\ncứng rắn, kiên quyết"
+        },
+        {
+          "word": "observe",
+          "wordType": "v",
+          "wordMeaning": "quan sát, theo dõi\ntuân theo, tôn trọng"
+        },
+        {
+          "word": "rush",
+          "wordType": "n, v",
+          "wordMeaning": "cây bấc, cây cói; xông lên, lao vào"
+        },
+        {
+          "word": "myriad",
+          "wordType": "n, adj",
+          "wordMeaning": "vô số, lớn, nhiều vô cùng"
+        },
+        {
+          "word": "pedestrian",
+          "wordType": "n, adj",
+          "wordMeaning": "người đi bộ, khách bộ hành; bằng chân, đi bộ\nchán ngắt, tẻ nhạt"
+        },
+        {
+          "word": "handover",
+          "wordType": "n",
+          "wordMeaning": "sự bàn giao"
+        },
+        {
+          "word": "learn",
+          "wordType": "v",
+          "wordMeaning": "học tập\nnghe được, biết được"
+        },
+        {
+          "word": "formerly",
+          "wordType": "adv",
+          "wordMeaning": "trước đây, thuở xưa"
+        },
+        {
+          "word": "ask",
+          "wordType": "v",
+          "wordMeaning": "hỏi, yêu cầu"
+        },
+        {
+          "word": "alliance",
+          "wordType": "n",
+          "wordMeaning": "sự liên minh, khối liên minh"
+        },
+        {
+          "word": "bent",
+          "wordType": "n",
+          "wordMeaning": "khiếu, sở thích; xu hướng, khuynh hướng"
+        },
+        {
+          "word": "grief",
+          "wordType": "n",
+          "wordMeaning": "nỗi sầu khổ"
+        },
+        {
+          "word": "symbolize",
+          "wordType": "v",
+          "wordMeaning": "tượng trưng, biểu tượng hóa"
+        },
+        {
+          "word": "inadequate",
+          "wordType": "adj",
+          "wordMeaning": "không tương xứng, không thích đáng"
+        }
+      ]
+    },
+    {
+      "title": "IELTS Most Common 2",
+      "description": "IELTS Most Common 2",
+      "listWordModel": [
+        {
+          "word": "luxurious",
+          "wordType": "adj",
+          "wordMeaning": "sang trọng, lộng lẫy"
+        },
+        {
+          "word": "hire",
+          "wordType": "n, v",
+          "wordMeaning": "sự cho thuê; cho thuê, mướn"
+        },
+        {
+          "word": "assertive",
+          "wordType": "adj",
+          "wordMeaning": "quả quyết, quyết đoán"
+        },
+        {
+          "word": "disclose",
+          "wordType": "v",
+          "wordMeaning": "vạch trần, phơi bày"
+        },
+        {
+          "word": "defend",
+          "wordType": "v",
+          "wordMeaning": "bảo vệ, biện hộ"
+        },
+        {
+          "word": "secure",
+          "wordType": "adj, v",
+          "wordMeaning": "chắc chắn, bảo đảm; làm kiên cố"
+        },
+        {
+          "word": "away",
+          "wordType": "adj, adv",
+          "wordMeaning": "rời xa, đi xa, biến đi"
+        },
+        {
+          "word": "ingenious",
+          "wordType": "adj",
+          "wordMeaning": "khéo léo, tài tình, mưu trí"
+        },
+        {
+          "word": "direction",
+          "wordType": "n",
+          "wordMeaning": "phương hướng, chiều\nsự chỉ bảo, hướng dẫn"
+        },
+        {
+          "word": "triumph",
+          "wordType": "adj, v",
+          "wordMeaning": "sự chiến thắng, thành công lớn; chiến thắng"
+        },
+        {
+          "word": "verdict",
+          "wordType": "n",
+          "wordMeaning": "lời tuyên án, lời phán quyết"
+        },
+        {
+          "word": "sociable",
+          "wordType": "adj",
+          "wordMeaning": "dễ gần gũi, dễ chan hoà, hoà đồng"
+        },
+        {
+          "word": "balance",
+          "wordType": "n",
+          "wordMeaning": "cái cân, sự thăng bằng"
+        },
+        {
+          "word": "nuisance",
+          "wordType": "n",
+          "wordMeaning": "sự phiền hà, mối phiền toái, gây khó chịu"
+        },
+        {
+          "word": "extra",
+          "wordType": "n, adj, adv",
+          "wordMeaning": "thêm, phụ vào; thêm vào; phần phụ thêm"
+        },
+        {
+          "word": "devastate",
+          "wordType": "v",
+          "wordMeaning": "tàn phá, phá huỷ"
+        },
+        {
+          "word": "recipient",
+          "wordType": "n",
+          "wordMeaning": "người nhận, nước nhận"
+        },
+        {
+          "word": "wisecrack",
+          "wordType": "n, v",
+          "wordMeaning": "lời nói lém lỉnh; nói lém lỉnh"
+        },
+        {
+          "word": "robust",
+          "wordType": "adj",
+          "wordMeaning": "tráng kiện, cường tráng; có sức khoẻ"
+        },
+        {
+          "word": "loiter",
+          "wordType": "v",
+          "wordMeaning": "đi tha thẩn, la cà"
+        }
+      ]
+    },
+    {
+      "title": "IELTS Most Common 3",
+      "description": "IELTS Most Common 3",
+      "listWordModel": [
+        {
+          "word": "state",
+          "wordType": "n",
+          "wordMeaning": "trạng thái, tình trạng\nquốc gia, nhà nước"
+        },
+        {
+          "word": "section",
+          "wordType": "n, v",
+          "wordMeaning": "bộ phận; nhóm tách biệt nằm trong khối lớn; chia thành phần;"
+        },
+        {
+          "word": "obey",
+          "wordType": "v",
+          "wordMeaning": "vâng lời, tuân theo, tuân lệnh"
+        },
+        {
+          "word": "arrive",
+          "wordType": "v",
+          "wordMeaning": "đến nơi, đạt tới"
+        },
+        {
+          "word": "audience",
+          "wordType": "n",
+          "wordMeaning": "người nghe, thính giả, người xem, khán giả"
+        },
+        {
+          "word": "blossom",
+          "wordType": "n, v",
+          "wordMeaning": "hoa; ra hoa, trổ hoa"
+        },
+        {
+          "word": "mind",
+          "wordType": "n",
+          "wordMeaning": "tinh thần, trí tuệ, đầu óc"
+        },
+        {
+          "word": "grab",
+          "wordType": "n, v",
+          "wordMeaning": "sự chộp, túm lấy; vồ, giật"
+        },
+        {
+          "word": "mistaken",
+          "wordType": "adj",
+          "wordMeaning": "sai lầm, bị hiểu sai"
+        },
+        {
+          "word": "opposite",
+          "wordType": "n, adj, adv, prep",
+          "wordMeaning": "điều trái ngược, sự đối lập; đối ngược, trái nhau; trước mặt, đối diện"
+        },
+        {
+          "word": "barbecue",
+          "wordType": "n, v",
+          "wordMeaning": "lợn (bò, cừu) nướng (quay) cả con"
+        },
+        {
+          "word": "behalf",
+          "wordType": "n",
+          "wordMeaning": "thay mặt cho ai đó"
+        },
+        {
+          "word": "trustworthy",
+          "wordType": "adj",
+          "wordMeaning": "đáng tin cậy"
+        },
+        {
+          "word": "diverse",
+          "wordType": "adj",
+          "wordMeaning": "đa dạng, linh tinh"
+        },
+        {
+          "word": "ally",
+          "wordType": "n, v",
+          "wordMeaning": "nước đồng minh, liên kết, liên minh"
+        },
+        {
+          "word": "interesting",
+          "wordType": "adj",
+          "wordMeaning": "thú vị, gây chú ý"
+        },
+        {
+          "word": "possibility",
+          "wordType": "n",
+          "wordMeaning": "khả năng, sự có thể, triển vọng, tiềm năng"
+        },
+        {
+          "word": "irrelevant",
+          "wordType": "adj",
+          "wordMeaning": "không thích đáng, không liên quan"
+        },
+        {
+          "word": "impartial",
+          "wordType": "adj",
+          "wordMeaning": "công bằng, không thiên vị"
+        },
+        {
+          "word": "secret",
+          "wordType": "adj, n",
+          "wordMeaning": "thầm kín, bí mật; điều bí mật"
+        }
+      ]
+    },
+    {
+      "title": "IELTS Most Common 4",
+      "description": "IELTS Most Common 4",
+      "listWordModel": [
+        {
+          "word": "collision",
+          "wordType": "n",
+          "wordMeaning": "sự va đụng, xung đột"
+        },
+        {
+          "word": "penniless",
+          "wordType": "adj",
+          "wordMeaning": "không có tiền, không xu dính túi, nghèo túng"
+        },
+        {
+          "word": "traffic",
+          "wordType": "n",
+          "wordMeaning": "sự đi lại, giao thông, vận tải"
+        },
+        {
+          "word": "sector",
+          "wordType": "n",
+          "wordMeaning": "khu vực, lĩnh vực"
+        },
+        {
+          "word": "bar",
+          "wordType": "n",
+          "wordMeaning": "quầy bán rượu"
+        },
+        {
+          "word": "attractive",
+          "wordType": "adj",
+          "wordMeaning": "hút, thu hút, hấp dẫn"
+        },
+        {
+          "word": "quake",
+          "wordType": "v",
+          "wordMeaning": "sự run rẩy, động đất; rung động, run, rẩy"
+        },
+        {
+          "word": "study",
+          "wordType": "n, v",
+          "wordMeaning": "sự tìm tòi, sự nghiên cứu, sự điều tra về một vấn đề; học, nghiên cứu, xem rất cẩn thận"
+        },
+        {
+          "word": "heartless",
+          "wordType": "adj",
+          "wordMeaning": "vô tâm, nhẫn tâm"
+        },
+        {
+          "word": "gloomy",
+          "wordType": "adj",
+          "wordMeaning": "tối tăm, u ám, ảm đạm"
+        },
+        {
+          "word": "attempt",
+          "wordType": "n",
+          "wordMeaning": "sự cố gắng, sự thử"
+        },
+        {
+          "word": "commerce",
+          "wordType": "n",
+          "wordMeaning": "sự buôn bán, giao thương, thương nghiệp"
+        },
+        {
+          "word": "freezing",
+          "wordType": "adj",
+          "wordMeaning": "giá lạnh, rét mướt"
+        },
+        {
+          "word": "annoy",
+          "wordType": "v",
+          "wordMeaning": "quấy rầy, làm phiền"
+        },
+        {
+          "word": "bargain",
+          "wordType": "n",
+          "wordMeaning": "sự mặc cả, sự thoả thuận mua bán"
+        },
+        {
+          "word": "vile",
+          "wordType": "adj",
+          "wordMeaning": "ghê tởm\ntồi tệ, rẻ tiền, không có giá trị"
+        },
+        {
+          "word": "ultrasound",
+          "wordType": "n",
+          "wordMeaning": "siêu âm, sóng siêu âm"
+        },
+        {
+          "word": "avenge",
+          "wordType": "v",
+          "wordMeaning": "trả thù, báo thù"
+        },
+        {
+          "word": "ordinary",
+          "wordType": "adj",
+          "wordMeaning": "bình thường, thông thường; điều bình thường, thông thường"
+        },
+        {
+          "word": "waiver",
+          "wordType": "n",
+          "wordMeaning": "sự bỏ, sự từ bỏ, sự khước từ; giấy từ bỏ, giấy khước từ"
+        }
+      ]
+    },
+    {
+      "title": "IELTS Most Common 5",
+      "description": "IELTS Most Common 5",
+      "listWordModel": [
+        {
+          "word": "differ",
+          "wordType": "v",
+          "wordMeaning": "không tán thành, không giống"
+        },
+        {
+          "word": "overjoyed",
+          "wordType": "adj",
+          "wordMeaning": "vui mừng khôn xiết"
+        },
+        {
+          "word": "permit",
+          "wordType": "n, v",
+          "wordMeaning": "giấy phép, sự cho phép; cho phép, cho cơ hội"
+        },
+        {
+          "word": "repulsive",
+          "wordType": "adj",
+          "wordMeaning": "ghê tởm, đáng ghét, kinh tởm"
+        },
+        {
+          "word": "garish",
+          "wordType": "adj",
+          "wordMeaning": "lòe loẹt, sặc sỡ"
+        },
+        {
+          "word": "glare",
+          "wordType": "v, n",
+          "wordMeaning": "nhìn trừng trừng; cái nhìn, ánh nhìn giận dữ;\nánh sáng; chiếu sáng"
+        },
+        {
+          "word": "blasé",
+          "wordType": "adj",
+          "wordMeaning": "dửng dưng, quá quen rồi"
+        },
+        {
+          "word": "comment",
+          "wordType": "n, v",
+          "wordMeaning": "lời bình luận; bình luận, chỉ trích"
+        },
+        {
+          "word": "racket",
+          "wordType": "n",
+          "wordMeaning": "tiếng ồn, cảnh nhộn nhịp, huyên náo"
+        },
+        {
+          "word": "hazard",
+          "wordType": "n",
+          "wordMeaning": "sự may rủi, mối nguy; phó thác cho may rủi, đánh bạo"
+        },
+        {
+          "word": "scribble",
+          "wordType": "v, n",
+          "wordMeaning": "viết nguệch ngoạc, chữ viết cẩu thả"
+        },
+        {
+          "word": "warlike",
+          "wordType": "adj",
+          "wordMeaning": "(thuộc) chiến tranh, thích gây sự, hiếu chiến"
+        },
+        {
+          "word": "feasible",
+          "wordType": "adj",
+          "wordMeaning": "khả thi, có thể thực hiện được"
+        },
+        {
+          "word": "mighty",
+          "wordType": "adj",
+          "wordMeaning": "mạnh, hùng cường, hùng mạnh, to lớn, vĩ đại, hùng vĩ"
+        },
+        {
+          "word": "bare",
+          "wordType": "adj",
+          "wordMeaning": "trần, trần truồng, trọc, trần trụi"
+        },
+        {
+          "word": "overlook",
+          "wordType": "v",
+          "wordMeaning": "trông nom, quan sát, xem xét\nbỏ qua, tha thứ"
+        },
+        {
+          "word": "elevate",
+          "wordType": "v",
+          "wordMeaning": "nâng lên, đưa lên, nâng cao"
+        },
+        {
+          "word": "beautiful",
+          "wordType": "adj",
+          "wordMeaning": "xinh đẹp, tuyệt vời"
+        },
+        {
+          "word": "valiant",
+          "wordType": "adj",
+          "wordMeaning": "anh dũng, anh hùng"
+        },
+        {
+          "word": "broad",
+          "wordType": "adj",
+          "wordMeaning": "rộng, bao la, mênh mông"
+        }
+      ]
+    }
+  ]
+}

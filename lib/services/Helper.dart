@@ -1,38 +1,17 @@
-import 'package:english_app/models/WordModel.dart';
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
 
 import '../models/LessonModel.dart';
 
 class Helper {
-  List<LessonModel> buildDefaultLesson() {
+  Future<List<LessonModel>> buildDefaultLesson() async {
     List<LessonModel> result = [];
-    result = [
-      LessonModel(
-          title: "Default Lesson 1",
-          description: "This is a default lesson",
-          isFavorite: false,
-          color: "",
-          listWordModel: [
-            WordModel(
-              word: "Hello",
-              wordType: "wordType",
-              wordMeaning: "Xin chao",
-            ),
-          ],
-          story: ""),
-      LessonModel(
-          title: "Default Lesson 2",
-          description: "This is a default lesson",
-          isFavorite: false,
-          color: "",
-          listWordModel: [
-            WordModel(
-              word: "Hello",
-              wordType: "wordType",
-              wordMeaning: "Xin chao",
-            ),
-          ],
-          story: "")
-    ];
+    String jsonString = await rootBundle.loadString('assets/data/lessons.json');
+    final jsonData = jsonDecode(jsonString);
+    for (var e in jsonData["data"]) {
+      result.add(LessonModel.fromJson(e));
+    }
     return result;
   }
 }

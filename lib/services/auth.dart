@@ -34,7 +34,7 @@ class Auth {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException {
       showToast("Please try again");
       result = false;
     }

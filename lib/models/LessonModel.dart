@@ -47,14 +47,15 @@ class LessonModel {
       listWordModel.add(WordModel.fromJson(element));
     });
     return LessonModel(
-      id: json['id'],
+      id: json['id'] ?? const Uuid().v4(),
       title: json['title'],
       description: json['description'],
-      isFavorite: json['isFavorite'],
-      color: json['color'],
+      isFavorite: json['isFavorite'] ?? false,
+      color: json['color'] ?? "",
       listWordModel: listWordModel,
-      story: json['story'],
-      latestOpenedDate: json['latestOpenedDate'],
+      story: json['story'] ?? "",
+      latestOpenedDate:
+          json['latestOpenedDate'] ?? DateTime.now().toIso8601String(),
     );
   }
 
@@ -130,5 +131,4 @@ class LessonModel {
   void updateStory(String newStory) {
     story = newStory;
   }
-
 }
