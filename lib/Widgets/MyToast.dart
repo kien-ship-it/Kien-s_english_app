@@ -15,9 +15,18 @@ Future showToast(String message) {
 Future showLoadingAnim(BuildContext context) async {
   return showDialog(
       context: context,
+      barrierDismissible: false, // Disable all buttons
       builder: (context) {
-        return Center(
-          child: GifView.asset("assets/images/loading_anim.gif"),
+        return Stack(
+          children: [
+            const Opacity(
+              opacity: 0.6,
+              child: ModalBarrier(dismissible: false, color: Colors.black45), // Darken screen
+            ),
+            Center(
+              child: GifView.asset("assets/images/loading_anim.gif"),
+            ),
+          ],
         );
       });
 }

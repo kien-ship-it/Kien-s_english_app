@@ -5,10 +5,10 @@ import '../../../models/LessonModel.dart';
 
 class LessonBoxList extends StatefulWidget {
   final List<LessonModel> lessons;
-  bool isDefaultLesson;
+  final bool isDefaultLesson;
   final Function(LessonModel) onTapLesson;
 
-  LessonBoxList({
+  const LessonBoxList({
     super.key,
     required this.lessons,
     this.isDefaultLesson = false,

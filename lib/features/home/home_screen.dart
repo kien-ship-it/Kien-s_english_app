@@ -225,10 +225,13 @@ Widget homeLessonWidget(String title, VoidCallback onTap) {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          title,
-          overflow: TextOverflow.ellipsis,
-          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+        Container(
+          padding: EdgeInsets.all(10),
+          child: Text(
+            title,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+          ),
         ),
         GestureDetector(
           onTap: onTap,
@@ -240,15 +243,12 @@ Widget homeLessonWidget(String title, VoidCallback onTap) {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(100),
                 // add border
-                border: Border.all(color: const Color(0xFFEB6440), width: 2.5),
+                border: Border.all(color: const Color(0xFFEB6440), width: 2),
               ),
-              child: const Text(
-                textAlign: TextAlign.center,
-                ">",
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFFEB6440)),
+              child: const Icon(
+                Icons.chevron_right,
+                size: 40,
+                color: Color(0xFFEB6440),
               )),
         )
       ],

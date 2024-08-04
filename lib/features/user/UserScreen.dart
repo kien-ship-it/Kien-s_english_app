@@ -17,7 +17,7 @@ class _UserScreenState extends State<UserScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all( 20),
       color: const Color(0xFFEFF5F5),
       child: Stack(
         children: [

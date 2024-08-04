@@ -46,34 +46,34 @@ class _LessonScreenState extends State<LessonScreen> {
       child: Stack(
         children: [
           Positioned(
-            child: Container(
-              color: const Color(0xFFEFF5F5),
-              alignment: Alignment.center,
-              child: Column(
-                children: [
-                  const SizedBox(height: 30),
-                  topController(width),
-                  const SizedBox(height: 10),
-                  Expanded(
-                    child: LessonBoxList(
-                      lessons: isChooseMyLesson
-                          ? GlobalData.listPersonalLesson
-                          : GlobalData.listDefaultLesson,
-                      isDefaultLesson: !isChooseMyLesson,
-                      onTapLesson: (LessonModel lesson) async {
-                        if (!isChooseMyLesson) {
-                          // Call API to add lesson
-                          bool success = await FireStore.addLesson(lesson);
-                          if (success) {
-                            showToast("Success");
-                          } else {
-                            showToast("Failed");
-                          }
-                        } else {
-                          // Navigate to ALessonScreen with lessonModel
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
+                child: Container(
+                  color: const Color(0xFFEFF5F5),
+                  alignment: Alignment.center,
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 30),
+                      topController(width),
+                      const SizedBox(height: 10),
+                      Expanded(
+                        child: LessonBoxList(
+                          lessons: isChooseMyLesson
+                              ? GlobalData.listPersonalLesson
+                              : GlobalData.listDefaultLesson,
+                          isDefaultLesson: !isChooseMyLesson,
+                          onTapLesson: (LessonModel lesson) async {
+                            if (!isChooseMyLesson) {
+                              // Call API to add lesson
+                              bool success = await FireStore.addLesson(lesson);
+                              if (success) {
+                                showToast("Success");
+                              } else {
+                                showToast("Failed");
+                              }
+                            } else {
+                              // Navigate to ALessonScreen with lessonModel
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
                               builder: (context) =>
                                   ALessonScreen(lessonModel: lesson),
                             ),
@@ -103,7 +103,8 @@ class _LessonScreenState extends State<LessonScreen> {
                   setState(() {});
                 });
               },
-              color: const Color(0xFFEB6440),
+              color: Colors.white,
+              iconColor: const Color(0xFFEB6440),
               icon: Icons.add,
             ),
           ),

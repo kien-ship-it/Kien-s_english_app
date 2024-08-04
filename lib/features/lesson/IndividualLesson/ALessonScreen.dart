@@ -55,7 +55,7 @@ class _ALessonScreenState extends State<ALessonScreen> {
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "Number of words: ${myLesson.listWordModel.length}",
+                    "Number of words: ${myLesson.listWordModel.length} / $MAX_WORDS",
                     textAlign: TextAlign.left,
                   ),
                 ),

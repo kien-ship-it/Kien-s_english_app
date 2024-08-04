@@ -7,6 +7,7 @@ import 'package:english_app/models/WordModel.dart';
 import 'package:english_app/services/DictionaryService.dart';
 import 'package:flutter/material.dart';
 
+
 class AddNewLesson extends StatefulWidget {
   final LessonModel? lessonModel;
 
@@ -34,12 +35,15 @@ class _AddNewLessonState extends State<AddNewLesson> {
     // upper case 1st character
     if (word.isNotEmpty) {
       try {
+        showLoadingAnim(context);
         final wordModel = await DictionaryService.getWord(word);
+        Navigator.pop(context);
         setState(() {
           inputWordController.clear();
         });
         return lesson.addNewWord(wordModel);
       } catch (e) {
+        Navigator.pop(context);
         // Handle error, show toast or snackbar
         log("Error fetching word definition: $e");
       }
@@ -195,23 +199,25 @@ class _AddNewLessonState extends State<AddNewLesson> {
                             offset: const Offset(0, 2),
                           )
                         ]),
-                    child: TextField(
-                      textAlignVertical: TextAlignVertical.center,
-                      controller: inputWordController,
-                      decoration: const InputDecoration(
-                        hintText: "Add",
-                        border: InputBorder.none,
-                        prefixIcon: Icon(Icons.add),
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                      child: TextField(
+                        textAlignVertical: TextAlignVertical.center,
+                        controller: inputWordController,
+                        decoration: const InputDecoration(
+                          hintText: "Add Word",
+                          hintStyle: TextStyle(fontSize: 17),
+                          border: InputBorder.none,),
+                        onSubmitted: (_) async {
+                          addWord().then((value) {
+                            if (value) {
+                              //
+                            } else {
+                              showToast("Please choose another word");
+                            }
+                          });
+                        },
                       ),
-                      onSubmitted: (_) async {
-                        addWord().then((value) {
-                          if (value) {
-                            //
-                          } else {
-                            showToast("Please choose another word");
-                          }
-                        });
-                      },
                     ),
                   ),
                 ),
