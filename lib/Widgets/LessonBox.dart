@@ -108,10 +108,10 @@ class _LessonBoxState extends State<LessonBox> {
                   widget.onTapLesson(widget.lessonModel);
                 },
                 style: ButtonStyle(
-                  backgroundColor: WidgetStateProperty.all<Color>(
+                  backgroundColor: MaterialStateProperty.all<Color>(
                     const Color(0xFFEB6440),
                   ),
-                  fixedSize: WidgetStateProperty.all<Size>(
+                  fixedSize: MaterialStateProperty.all<Size>(
                     const Size(200.0, 45.0),
                   ),
                 ),

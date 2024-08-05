@@ -18,9 +18,9 @@ Widget myCustomBtn(
     ),
     child: ElevatedButton(
       style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.all(color),
-        fixedSize: WidgetStateProperty.all(const Size(60, 60)),
-        padding: WidgetStateProperty.all<EdgeInsets>(const EdgeInsets.all(0)),
+        backgroundColor: MaterialStateProperty.all(color),
+        fixedSize: MaterialStateProperty.all(const Size(60, 60)),
+        padding: MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.all(0)),
       ),
       onPressed: () {
         onTap();
