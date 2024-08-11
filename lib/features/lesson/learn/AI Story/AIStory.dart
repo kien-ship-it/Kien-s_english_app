@@ -191,7 +191,6 @@ class _WordMenuState extends State<WordMenu> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     initTts();
   }
