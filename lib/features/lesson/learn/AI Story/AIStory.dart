@@ -120,7 +120,7 @@ class _AIStoryState extends State<AIStory> {
               top: 165.0,
               left: 0.0,
               right: 0.0,
-              bottom: 100.0,
+              bottom: 0,
               child: isLoading
                   ? GifView.asset("assets/images/loading_anim.gif")
                   : ParagraphContainer(
@@ -130,22 +130,16 @@ class _AIStoryState extends State<AIStory> {
                       ),
                     ),
             ),
-            Positioned(
-              bottom: 0.0,
-              left: 0.0,
-              right: 0.0,
-              child: AnimatedOpacity(
-                opacity: isWordMenuVisible ? 1.0 : 0.0,
-                duration: const Duration(milliseconds: 300),
-                child: Visibility(
-                  visible: isWordMenuVisible,
-                  child: WordMenu(
-                    selectedWord: selectedWord,
-                    wordMeaning: wordMeaning,
-                  ),
+            if (!isLoading)
+              Positioned(
+                bottom: 0.0,
+                left: 0.0,
+                right: 0.0,
+                child: WordMenu(
+                  selectedWord: selectedWord,
+                  wordMeaning: wordMeaning,
                 ),
               ),
-            ),
           ],
         ),
       ),
@@ -168,7 +162,7 @@ class ParagraphContainer extends StatelessWidget {
           topRight: Radius.circular(40.0),
         ),
       ),
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.only(left: 25, right: 25, top: 30, bottom: 150),
       child: SingleChildScrollView(
         child: child,
       ),

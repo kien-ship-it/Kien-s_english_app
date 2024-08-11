@@ -9,9 +9,9 @@ class WordMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0, bottom: 30.0),
+      padding: const EdgeInsets.all(16.0),
       decoration: const BoxDecoration(
-        color: Color(0xFFF9F9F9),
+        color: Color(0xFFFFFFFF), // Set the bottom portion to white
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(35.0),
           topRight: Radius.circular(35.0),
@@ -28,50 +28,23 @@ class WordMenu extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Center(
+          Center(
             child: Text(
-              'Words',
-              style: TextStyle(
+              selectedWord.isNotEmpty
+                  ? 'Word: ${selectedWord}'
+                  : 'Click a word to view definition', // Default text
+              style: const TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.w400,
                 color: Colors.black87,
               ),
             ),
           ),
-          const SizedBox(height: 10.0),
-          selectedWord.isNotEmpty
-              ? Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                selectedWord,
-                      style: const TextStyle(
-                        fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
-              ),
-              const SizedBox(height: 5.0),
-              Text(
-                wordMeaning,
-                      style: const TextStyle(
-                        fontSize: 14.0,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.black54,
-                ),
-              ),
-            ],
-          )
-              : const Center(
-                  child: Text(
-              'Tap a word to see its meaning',
-              style: TextStyle(
-                fontSize: 14.0,
-                fontWeight: FontWeight.w400,
-                color: Colors.black54,
-              ),
+          if (selectedWord.isNotEmpty)
+            Text(
+              'Meaning: ${wordMeaning}',
+              style: const TextStyle(fontSize: 16.0, color: Colors.black54),
             ),
-          ),
         ],
       ),
     );

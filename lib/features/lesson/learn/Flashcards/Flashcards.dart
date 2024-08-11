@@ -101,6 +101,7 @@ class _FlashcardsState extends State<Flashcards> {
                             ),
                             child: Text(
                               widget.listWordModel[index].wordMeaning,
+                              textAlign: TextAlign.center,
                               style: const TextStyle(
                                 fontSize: 35.0,
                                 fontWeight: FontWeight.bold,
