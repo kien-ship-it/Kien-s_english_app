@@ -43,6 +43,7 @@ class WordMenu extends StatelessWidget {
           if (selectedWord.isNotEmpty)
             Text(
               'Meaning: ${wordMeaning}',
+              textAlign: TextAlign.justify,
               style: const TextStyle(fontSize: 16.0, color: Colors.black54),
             ),
         ],

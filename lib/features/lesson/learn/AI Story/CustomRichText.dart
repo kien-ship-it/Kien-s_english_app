@@ -7,8 +7,14 @@ import '../../../../models/WordModel.dart';
 class KeywordText extends StatefulWidget {
   final LessonModel lessonModel;
   final ValueChanged<String> onKeywordTap;
+  final ValueChanged<double> onLayoutChange;
 
-  const KeywordText({super.key, required this.lessonModel, required this.onKeywordTap});
+  const KeywordText({
+    super.key,
+    required this.onLayoutChange,
+    required this.lessonModel,
+    required this.onKeywordTap
+  });
 
   @override
   State<KeywordText> createState() => _KeywordTextState();
@@ -17,6 +23,7 @@ class KeywordText extends StatefulWidget {
 class _KeywordTextState extends State<KeywordText> {
   Map<String, String> keywordInfo = {};
   String text = "";
+
 
   @override
   void initState() {
@@ -27,6 +34,10 @@ class _KeywordTextState extends State<KeywordText> {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final wordBoxHeight = context.size?.height ?? 0;
+      widget.onLayoutChange(wordBoxHeight); // Notify the parent about the height
+    });
     List<TextSpan> textSpans = [];
 
     text.splitMapJoin(

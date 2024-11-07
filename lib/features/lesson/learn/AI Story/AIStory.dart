@@ -25,6 +25,7 @@ class _AIStoryState extends State<AIStory> {
   String selectedWord = "";
   String wordMeaning = "";
   bool isWordMenuVisible = false;
+
   @override
   void initState() {
     super.initState();
@@ -64,6 +65,14 @@ class _AIStoryState extends State<AIStory> {
       isWordMenuVisible = true;
     });
   }
+
+  void _updateParagraphPadding(double wordBoxHeight) {
+    setState(() {
+      _paragraphPaddingBottom = wordBoxHeight;
+    });
+  }
+
+  double _paragraphPaddingBottom = 150.0;
 
   @override
   Widget build(BuildContext context) {
@@ -124,9 +133,11 @@ class _AIStoryState extends State<AIStory> {
               child: isLoading
                   ? GifView.asset("assets/images/loading_anim.gif")
                   : ParagraphContainer(
+                      paddingBottom: _paragraphPaddingBottom,
                       child: KeywordText(
                         lessonModel: widget.lessonModel,
                         onKeywordTap: onKeywordTap,
+                        onLayoutChange: _updateParagraphPadding,
                       ),
                     ),
             ),
@@ -149,8 +160,13 @@ class _AIStoryState extends State<AIStory> {
 
 class ParagraphContainer extends StatelessWidget {
   final Widget child;
+  final double paddingBottom;
 
-  const ParagraphContainer({super.key, required this.child});
+  const ParagraphContainer({
+    super.key,
+    required this.child,
+    required this.paddingBottom,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -162,7 +178,7 @@ class ParagraphContainer extends StatelessWidget {
           topRight: Radius.circular(40.0),
         ),
       ),
-      padding: const EdgeInsets.only(left: 25, right: 25, top: 30, bottom: 150),
+      padding: EdgeInsets.only(left: 25, right: 25, top: 30, bottom: 150),
       child: SingleChildScrollView(
         child: child,
       ),
@@ -223,30 +239,34 @@ class _WordMenuState extends State<WordMenu> {
               Text(
                 widget.selectedWord.isNotEmpty
                     ? 'Word: ${widget.selectedWord}'
-                    : '',
+                    : 'Choose a word to see its meaning',
                 style: const TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.w400,
                   color: Colors.black87,
                 ),
               ),
-              GestureDetector(
-                onTap: () async {
-                  await flutterTts.speak(widget.selectedWord);
-                },
-                child: const Icon(
-                  Icons.speaker,
-                  size: 30,
-                ),
-              )
+              // GestureDetector(
+              //   onTap: () async {
+              //     await flutterTts.speak(widget.selectedWord);
+              //   },
+              //   child: const Icon(
+              //     Icons.speaker,
+              //     size: 30,
+              //   ),
+              // )
             ],
           ),
           const SizedBox(height: 10.0),
           widget.selectedWord.isNotEmpty
-              ? Text(
-                  'Meaning: ${widget.wordMeaning}',
-                  style: const TextStyle(fontSize: 16.0, color: Colors.black54),
-                )
+              ? Container(
+                alignment: Alignment.center,
+                child: Text(
+                    'Meaning: ${widget.wordMeaning}',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 16.0, color: Colors.black54),
+                  ),
+              )
               : Container(),
         ],
       ),
